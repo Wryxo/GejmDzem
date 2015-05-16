@@ -19,6 +19,12 @@ public class MasterScript : MonoBehaviour {
     private float _leftBound;
     private int _sanityLeft;
     private int _sanityRight;
+
+    public float GetHorzExtent()
+    {
+        return Camera.main.orthographicSize * Screen.width / Screen.height;
+    }
+
     private Transform _playerTransform;
 
     //powerup stuff
@@ -38,6 +44,13 @@ public class MasterScript : MonoBehaviour {
 
     private int origRange;
     private int origCount;
+    private float origSpeed;
+
+    private Text _scoreText;
+    private Text _diffText;
+    private int _score;
+    private List<int> _combo = new List<int>();
+    private float _diffInc = 0.0f;
 
     void testCd()
     {
@@ -61,14 +74,26 @@ public class MasterScript : MonoBehaviour {
             hpCd = 0.0f;
             //todo
         }
-        //TODO HERE
+        if ((speedCheck) && (speedCd <= 0.0f))
+        {
+            speedCheck = false;
+            speedCd = 0.0f;
+            speed = origSpeed;
+        }
+        if ((slowCheck) && (slowCd <= 0.0f))
+        {
+            slowCheck = false;
+            slowCd = 0.0f;
+            speed = origSpeed;
+        }
+        if ((poopCheck) && (poopCd <= 0.0f))
+        {
+            poopCheck = false;
+            poopCd = 0.0f;
+            //todo
+        }
     }
 
-    private Text _scoreText; 
-    private Text _diffText; 
-    private int _score;
-    private List<int> _combo = new List<int>();
-    private float _diffInc = 0.0f;
 
     // Use this for initialization
     void Start () {
@@ -99,7 +124,7 @@ public class MasterScript : MonoBehaviour {
 
     void setupCubes()
     {
-        horzExtent = Camera.main.orthographicSize * Screen.width / Screen.height;
+        horzExtent = GetHorzExtent();
         cubeSize=horzExtent*2.0f/numCubes;
         queue.Clear();
         _cubeCount = numCubes + 4;
