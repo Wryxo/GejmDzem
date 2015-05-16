@@ -15,7 +15,7 @@ public class SquareScript : MonoBehaviour {
     public SquareScript ancestor;
     public SpriteRenderer childLeft;
     public SpriteRenderer childRight;
-    public int set = -1;
+    public int set = 0;
     public bool walkable = false;
     public bool zamok = false;
 
@@ -24,7 +24,7 @@ public class SquareScript : MonoBehaviour {
         _transform = GetComponent<Transform>();
         _masterScript = (GameObject.FindGameObjectWithTag("GameController")).GetComponent<MasterScript>();
 
-        set = UnityEngine.Random.Range(0, colorsLeft.Length);
+        set = 0;
 
         childLeft.color = _masterScript.colors[colorsLeft[set]];
         childRight.color = _masterScript.colors[colorsRight[set]];
@@ -61,8 +61,8 @@ public class SquareScript : MonoBehaviour {
             {
                 if (Input.GetMouseButtonDown(0))
                 {
-                    set = UnityEngine.Random.Range(0, colorsLeft.Length);
-
+                    set++;
+                    set = set % colorsLeft.Length;
                     childLeft.color = _masterScript.colors[colorsLeft[set]];
                     childRight.color = _masterScript.colors[colorsRight[set]];
 
@@ -108,7 +108,7 @@ public class SquareScript : MonoBehaviour {
     public int getColor(bool direction)
     {
         // false = lavy, true = pravy
-        return direction ? colorsLeft[set] : colorsRight[set];
+        return direction ? colorsRight[set] : colorsLeft[set];
     }
 
     public void createLife()

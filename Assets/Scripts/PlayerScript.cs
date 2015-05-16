@@ -38,7 +38,6 @@ public class PlayerScript : MonoBehaviour
     {
         if (!_masterScript.pause)
         {
-            Debug.Log("Collide");
             var ss = other.gameObject.GetComponent<SquareScript>();
             if (ss != null)
             {
