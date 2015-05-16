@@ -1,10 +1,25 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 public class SquareScript : MonoBehaviour {
 
+    struct myGradient{
+        public int left;
+        public int right;
+        public Sprite sprite;
+
+        public myGradient(int l, int r, Sprite s)
+        {
+            left = l;
+            right = r;
+            sprite = s;
+        }
+    }
+
     private SpriteRenderer _spriteRenderer;
-    private Color[] _colors = new Color[] { Color.red, Color.blue, Color.green, Color.cyan, Color.magenta };
+    
+    private List<myGradient> _gradients = new List<myGradient>();
     private int _currentColor = 0;
     private Transform _transform;
     private float _speed = 1.0f;
@@ -15,8 +30,19 @@ public class SquareScript : MonoBehaviour {
     void Start () {
         _spriteRenderer = GetComponent<SpriteRenderer>();
         _transform = GetComponent<Transform>();
-        _spriteRenderer.color = _colors[0];
-	}
+
+        Sprite tmps = (Sprite)Resources.Load("Sprites/s1", typeof(Sprite));
+        _gradients.Add(new myGradient(1, 2, tmps));
+        tmps = (Sprite)Resources.Load("Sprites/s2", typeof(Sprite));
+        _gradients.Add(new myGradient(2, 3, tmps));
+        tmps = (Sprite)Resources.Load("Sprites/s3", typeof(Sprite));
+        _gradients.Add(new myGradient(3, 4, tmps));
+        tmps = (Sprite)Resources.Load("Sprites/s4", typeof(Sprite));
+        _gradients.Add(new myGradient(4, 5, tmps));
+        tmps = (Sprite)Resources.Load("Sprites/s5", typeof(Sprite));
+        _gradients.Add(new myGradient(5, 1, tmps));
+
+    }
 	
 	// Update is called once per frame
 	void Update () {
@@ -36,7 +62,7 @@ public class SquareScript : MonoBehaviour {
 
         if (rand != _currentColor)
         {
-            _spriteRenderer.color = _colors[_currentColor];
+            _spriteRenderer.sprite = _gradients[_currentColor].sprite;
             _currentColor = rand;
         }
     }
