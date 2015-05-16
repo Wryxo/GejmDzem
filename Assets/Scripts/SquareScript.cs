@@ -9,7 +9,6 @@ public class SquareScript : MonoBehaviour {
     private Color[] _colors = new Color[] { Color.red, Color.blue, Color.green, Color.magenta, Color.cyan };
     private Transform _transform;
     private MasterScript _masterScript;
-    private float _speed = 3.0f;
 
     public SquareScript predecessor;
     public SquareScript ancestor;
@@ -23,7 +22,7 @@ public class SquareScript : MonoBehaviour {
     // Use this for initialization
     void Start () {
         _transform = GetComponent<Transform>();
-        _masterScript = (GameObject.FindGameObjectsWithTag("GameController"))[0].GetComponent<MasterScript>();
+        _masterScript = (GameObject.FindGameObjectWithTag("GameController")).GetComponent<MasterScript>();
 
         left = UnityEngine.Random.Range(0, 5);
         right = UnityEngine.Random.Range(0, 5);
@@ -44,32 +43,47 @@ public class SquareScript : MonoBehaviour {
         if (!_masterScript.pause) { 
             if (!walkable)
             {
-                childLeft.transform.localScale = new Vector2(0.5f, 0.5f);
-                childRight.transform.localScale = new Vector2(0.5f, 0.5f);
+                childLeft.transform.localScale = new Vector2(1.0f, 3.0f);
+                childRight.transform.localScale = new Vector2(1.0f, 3.0f);
             } else
             {
                 childLeft.transform.localScale = new Vector2(1.0f, 1.0f);
                 childRight.transform.localScale = new Vector2(1.0f, 1.0f);
             }
         }
-        _transform.position += new Vector3(-_speed * Time.deltaTime, 0.0f);
+        _transform.position += new Vector3(-_masterScript.speed * Time.deltaTime, 0.0f);
     }
 
-    void OnMouseDown()
+    void OnMouseOver()
     {
         if (!_masterScript.pause)
         {
-            Debug.Log("Click " + zamok);
             if (!zamok)
             {
-                left = UnityEngine.Random.Range(0, 5);
-                right = UnityEngine.Random.Range(0, 5);
+                if (Input.GetMouseButtonDown(0))
+                {
+                    left = UnityEngine.Random.Range(0, 5);
+                    right = UnityEngine.Random.Range(0, 5);
 
-                childLeft.color = _colors[left];
-                childRight.color = _colors[right];
+                    childLeft.color = _colors[left];
+                    childRight.color = _colors[right];
 
-                checkWalkable();
-                ancestor.checkWalkable();
+                    checkWalkable();
+                    ancestor.checkWalkable();
+                }
+                if (Input.GetMouseButtonDown(1))
+                {
+                    var tmp = left;
+                    left = right;
+                    right = tmp;
+
+                    var tmpc = childLeft.color;
+                    childLeft.color = childRight.color;
+                    childRight.color = tmpc;
+
+                    checkWalkable();
+                    ancestor.checkWalkable();
+                }
             }
         }
     }
@@ -97,5 +111,11 @@ public class SquareScript : MonoBehaviour {
     {
         // false = lavy, true = pravy
         return direction ? right : left;
+    }
+
+    public void createLife()
+    {
+        childLeft.color = new Color(1.0f, 0.5f, 0.0f);
+        childRight.color = new Color(1.0f, 0.5f, 0.0f);
     }
 }

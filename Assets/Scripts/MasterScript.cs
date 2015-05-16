@@ -8,9 +8,9 @@ public class MasterScript : MonoBehaviour {
     public bool active = false;
     public int numCubes = 50;
     public float cubeSize;
-    public float speed = 1.0f;
     public float horzExtent;
     public bool pause = false;
+    public float speed;
 
     private int _cubeCount;
     private float _leftBound;
@@ -18,6 +18,7 @@ public class MasterScript : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
         setupCubes();
+        speed = 1.5f;
 	    //pregen. enough cubes
 	}
 	

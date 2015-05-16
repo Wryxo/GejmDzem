@@ -5,7 +5,6 @@ using UnityEditor;
 public class PlayerScript : MonoBehaviour
 {
     private Transform _transform;
-    private float _speed = 3.0f;
     private float _cd = 0.0f;
     private bool _stuck = false;
     private MasterScript _masterScript;
@@ -14,7 +13,7 @@ public class PlayerScript : MonoBehaviour
 	void Start () {
         Debug.Log("start panacik");
         _transform = GetComponent<Transform>();
-        _masterScript = (GameObject.FindGameObjectsWithTag("GameController"))[0].GetComponent<MasterScript>();
+        _masterScript = (GameObject.FindGameObjectWithTag("GameController")).GetComponent<MasterScript>();
 
     }
 
@@ -33,7 +32,7 @@ public class PlayerScript : MonoBehaviour
                 _masterScript.pause = true;
             }
             if (_stuck)
-                _transform.position += new Vector3(-_speed * Time.deltaTime, 0.0f, 0.0f);
+                _transform.position += new Vector3(-_masterScript.speed * Time.deltaTime, 0.0f, 0.0f);
         }
     }
 
@@ -55,7 +54,7 @@ public class PlayerScript : MonoBehaviour
                     {
                         _cd += Time.deltaTime;
                     }
-                    if (_cd > 0.5f)
+                    if (_cd > 0.3f)
                     {
                         _stuck = false;
                         ss.zamok = true;
@@ -64,5 +63,11 @@ public class PlayerScript : MonoBehaviour
                 }
             }
         }
+    }
+
+    void OnTriggerExit2D(Collider2D other) {
+        var ss = other.gameObject.GetComponent<SquareScript>();
+        if (ss != null)
+            ss.createLife();
     }
 }
