@@ -46,42 +46,44 @@ public class SquareScript : MonoBehaviour {
         tmps = (Sprite)Resources.Load("Sprites/s5", typeof(Sprite));
         _gradients.Add(new myGradient(5, 1, tmps));
 
+        int rand = UnityEngine.Random.Range(0, 5);
+
+        if (rand != _currentColor)
+        {
+            _currentColor = rand;
+            _spriteRenderer.sprite = _gradients[_currentColor].sprite;
+        }
     }
 	
 	// Update is called once per frame
 	void Update () {
-        if (Input.GetMouseButtonDown(0))
-        {
-            checkCorrect();
-        }
+        
     }
 
-    private void checkCorrect()
+    public bool checkCorrect()
     {
-        int p = _gradients[_currentColor].left;
-        if (predecessor != null)
-            predecessor.getColor(true);
-        int a = _gradients[_currentColor].right;
-        if (ancestor != null)
-            ancestor.getColor(false);
+        int p = -1;
+        if (predecessor != null) { 
+            p = predecessor.getColor(true);
+        }
+        int a = -1;
+        if (ancestor != null) { 
+            a = ancestor.getColor(false);
+        }
 
-        if (p == _gradients[_currentColor].left && a == _gradients[_currentColor].right)
-            correct = true;
-        correct = false;
-        Debug.Log(correct);
+        if (p == _gradients[_currentColor].left && a == _gradients[_currentColor].right) {
+            Debug.Log(_gradients[_currentColor].left + " " + p + " -- " + _gradients[_currentColor].right + " " + a);
+
+            return true;
+        }
+
+        return false;
     }
 
     void FixedUpdate()
     {
         _transform.position += new Vector3(-_speed * Time.deltaTime, 0.0f);
-        if (correct)
-        {
-            _transform.localScale = new Vector2(1.0f, 1.0f);
-        }
-        else
-        {
-            _transform.localScale = new Vector2(0.5f, 0.5f);
-        }
+        
     }
 
     void OnMouseDown()
@@ -95,6 +97,19 @@ public class SquareScript : MonoBehaviour {
             _spriteRenderer.sprite = _gradients[_currentColor].sprite;
             _currentColor = rand;
         }
+
+        if (checkCorrect())
+        {
+            _transform.localScale = new Vector2(1.0f, 1.0f);
+        }
+        else
+        {
+            _transform.localScale = new Vector2(0.5f, 0.5f);
+        }
+        if (predecessor != null)
+            predecessor.checkCorrect();
+        if (ancestor != null)
+            ancestor.checkCorrect();
     }
 
     int getColor(bool direction)
