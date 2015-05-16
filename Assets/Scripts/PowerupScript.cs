@@ -7,6 +7,7 @@ public class PowerupScript : MonoBehaviour
 {
     private Transform _transform;
     private MasterScript _masterScript;
+    private GameObject _master,_retard;
 
     public bool isEvil = true;
 
@@ -28,49 +29,55 @@ public class PowerupScript : MonoBehaviour
     // Use this for initialization
     void Start()
     {
-        isEvil = false;
+        float powerRange = Random.Range(0.0f, 1.0f);
+        if (powerRange < 0.2f)
+        {
+            power = PowerType.SpeedUp;
+            isEvil = true;
+        }
+        else if (powerRange < 0.4f)
+        {
+            power = PowerType.SpeedDown;
+            isEvil = false;
+        }
+        else if (powerRange < 0.6f)
+        {
+            power = PowerType.Hp;
+            isEvil = false;
+        }
+        else if (powerRange < 0.8f)
+        {
+            power = PowerType.EndlessPoop;
+            isEvil = false;
+        }
+        else if (powerRange < 0.9f)
+        {
+            power = PowerType.ColorRetard;
+            isEvil = false;
+        }
+        else
+        {
+            power = PowerType.ColorChaos;
+            isEvil = true;
+        }
         _transform = GetComponent<Transform>();
-        GameObject master = GameObject.FindGameObjectWithTag("GameController");
-        _masterScript = master.GetComponent<MasterScript>();
+        _master = GameObject.FindGameObjectWithTag("GameController");
+        _retard = GameObject.FindGameObjectWithTag("Retard");
+        _masterScript = _master.GetComponent<MasterScript>();
         if (isEvil)
         {
             _float_speed = 0.5f;
-            _transform.position = master.GetComponent<Transform>().position +
+            _transform.position = _master.GetComponent<Transform>().position +
                                   new Vector3(0.0f, Random.Range(0.6f, 2.0f), 0.0f);
         }
         else
         {
             _throw_speed = 0.0f;
-            _transform.position = master.GetComponent<Transform>().position +
+            _transform.position = _master.GetComponent<Transform>().position +
                                   new Vector3(0.0f, Random.Range(0.7f, 0.8f), 0.0f);
         }
-        float powerRange = Random.Range(0.0f, 1.0f);
-        if (powerRange < 0.2f)
-        {
-            power = PowerType.SpeedUp;
-        }
-        else if (powerRange < 0.4f)
-        {
-            power = PowerType.SpeedDown;
-        }
-        else if (powerRange < 0.6f)
-        {
-            power = PowerType.Hp;
-        }
-        else if (powerRange < 0.8f)
-        {
-            power = PowerType.EndlessPoop;
-        }
-        else if (powerRange < 0.9f)
-        {
-            power = PowerType.ColorRetard;
-        }
-        else
-        {
-            power = PowerType.ColorChaos;
-        }
         //nastavit initial platform
-        _platform_id = 0;
+        _platform_id = _masterScript.queue.Count-1;
         updateCurrentPlatform();
         transform.position = new Vector3(_masterScript.queue[_platform_id].GetComponent<Transform>().position.x, transform.position.y, transform.position.z);
     }
@@ -79,29 +86,28 @@ public class PowerupScript : MonoBehaviour
     void Update()
     {
         updateCurrentPlatform();
-        GameObject master = GameObject.FindGameObjectWithTag("Retard");
-        MasterScript ms = master.GetComponent<MasterScript>();
-        if (Mathf.Abs(master.GetComponent<Transform>().position.x - transform.position.x) < 1.0f)
+
+        if (Mathf.Abs(_retard.GetComponent<Transform>().position.x - transform.position.x) < 1.0f)
         {
             switch (power)
             {
                 case PowerType.SpeedUp:
-                    ms.powerSpeed(4.0f);
+                    _masterScript.powerSpeed(4.0f);
                     break;
                 case PowerType.SpeedDown:
-                    ms.powerSlow(4.0f);
+                    _masterScript.powerSlow(4.0f);
                     break;
                 case PowerType.Hp:
-                    ms.powerHp(5.0f);
+                    _masterScript.powerHp(5.0f);
                     break;
                 case PowerType.EndlessPoop:
-                    ms.powerPoop(5.0f);
+                    _masterScript.powerPoop(5.0f);
                     break;
                 case PowerType.ColorRetard:
-                    ms.powerRetard(6.0f);
+                    _masterScript.powerRetard(6.0f);
                     break;
                 case PowerType.ColorChaos:
-                    ms.powerChaos(6.0f);
+                    _masterScript.powerChaos(6.0f);
                     break;
             }
             Destroy(gameObject);
@@ -131,21 +137,32 @@ public class PowerupScript : MonoBehaviour
         }
     }
 
+    public void checkPlatform()
+    {
+        if (_transform.position.y < 1.0f)
+        {
+            //todo evaporate anim
+            Destroy(gameObject);
+        }
+    }
+
     void updateCurrentPlatform()
     {
         //if null pointers its from this
-        int i = _platform_id + 1;
+        int i = _platform_id -1;
         Transform nextTrans = _masterScript.queue[i].GetComponent<Transform>();
         Transform currentTrans = _masterScript.queue[_platform_id].GetComponent<Transform>();
+        _masterScript.queue[_platform_id].GetComponent<SquareScript>().power = null;
         while (Mathf.Abs(nextTrans.position.x - transform.position.x) < Mathf.Abs(currentTrans.position.x - transform.position.x))
         {
             //if null pointers its from this
-            Debug.Log(i);
+            _masterScript.queue[_platform_id].GetComponent<SquareScript>().power = null;
             _platform_id = i;
-            i++;
+            i--;
             currentTrans = nextTrans;
             nextTrans = _masterScript.queue[i].GetComponent<Transform>();
         }
+        _masterScript.queue[_platform_id].GetComponent<SquareScript>().power = GetComponent<PowerupScript>();
         _platform_vert_dist = Mathf.Abs(_transform.position.y - currentTrans.position.y);
     }
 }

@@ -28,6 +28,7 @@ public class MasterScript : MonoBehaviour {
     private Transform _playerTransform;
 
     //powerup stuff
+    private float powerCd = 0.0f;
     private float retardCd = 0.0f;
     private float chaosCd = 0.0f;
     private float hpCd = 0.0f;
@@ -54,7 +55,9 @@ public class MasterScript : MonoBehaviour {
     private float _diffInc = 0.0f;
 
     // Use this for initialization
-    void Start () {
+    void Start ()
+    {
+        powerCd = Random.Range(10.0f,15.0f);
         _playerTransform = (GameObject.FindGameObjectWithTag("Retard")).GetComponent<Transform>();
         _scoreText = (GameObject.FindGameObjectWithTag("Score")).GetComponent<Text>();
         _diffText = (GameObject.FindGameObjectWithTag("Difficulty")).GetComponent<Text>();
@@ -78,6 +81,12 @@ public class MasterScript : MonoBehaviour {
                 _diffText.text = diffRange.ToString();
             }
         }
+    }
+
+    void Update()
+    {
+        testCd();
+
     }
 
     void setupCubes()
@@ -199,6 +208,39 @@ public class MasterScript : MonoBehaviour {
 
     void testCd()
     {
+        if (retardCd > 0.0f)
+        {
+            retardCd -= Time.deltaTime;
+        }
+        if (chaosCd > 0.0f)
+        {
+            chaosCd -= Time.deltaTime;
+        }
+        if (poopCd > 0.0f)
+        {
+            poopCd -= Time.deltaTime;
+        }
+        if (slowCd > 0.0f)
+        {
+            slowCd -= Time.deltaTime;
+        }
+        if (speedCd > 0.0f)
+        {
+            speedCd -= Time.deltaTime;
+        }
+        if (hpCd > 0.0f)
+        {
+            hpCd -= Time.deltaTime;
+        }
+        if (powerCd > 0.0f)
+        {
+            powerCd -= Time.deltaTime;
+        }
+        if (powerCd <= 0.0f)
+        {
+            Instantiate(Resources.Load("Prefabs/GenericPowerup", typeof(GameObject)));
+            powerCd = Random.Range(15.0f, 20.0f);
+        }
         if ((retardCheck) && (retardCd <= 0.0f))
         {
             retardCheck = false;
@@ -283,8 +325,8 @@ public class MasterScript : MonoBehaviour {
     {
         origRange = diffRange;
         origCount = diffCount;
-        diffRange = 3;
-        diffCount = 3;
+        diffRange = 6;
+        diffCount = 6;
         retardCd = t;
         retardCheck = true;
     }

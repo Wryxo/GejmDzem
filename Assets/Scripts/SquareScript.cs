@@ -19,6 +19,7 @@ public class SquareScript : MonoBehaviour {
     public int set = 0;
     public bool walkable = false;
     public bool zamok = false;
+    public PowerupScript power;
 
     // Use this for initialization
     void Start () {
@@ -79,6 +80,11 @@ public class SquareScript : MonoBehaviour {
 
                     checkWalkable();
                     ancestor.checkWalkable();
+
+                    if (power != null)
+                    {
+                        power.checkPlatform();
+                    }
                 }
                 if (Input.GetMouseButtonDown(1))
                 {
@@ -92,6 +98,11 @@ public class SquareScript : MonoBehaviour {
 
                     checkWalkable();
                     ancestor.checkWalkable();
+
+                    if (power != null)
+                    {
+                        power.checkPlatform();
+                    }
                 }
             }
         }
