@@ -26,8 +26,8 @@ public class MasterScript : MonoBehaviour {
 	    if (active)
 	    {
 	        Vector3 pos = queue[0].GetComponent<Transform>().position;
-            Debug.Log(pos);
-            Debug.Log(_leftBound);
+            //Debug.Log(pos);
+            //Debug.Log(_leftBound);
             if (pos.x < _leftBound)
             {
                 Destroy(queue[0]);
@@ -41,7 +41,7 @@ public class MasterScript : MonoBehaviour {
     {
         horzExtent = Camera.main.orthographicSize * Screen.width / Screen.height;
         cubeSize=horzExtent*2.0f/numCubes;
-        Debug.Log(cubeSize);
+        //Debug.Log(cubeSize);
         queue.Clear();
         _cubeCount = numCubes + 4;
         _leftBound = -horzExtent-2;
@@ -62,6 +62,8 @@ public class MasterScript : MonoBehaviour {
         GameObject cube = (GameObject) Instantiate(Resources.Load("Prefabs/Square", typeof (GameObject)));
         cube.GetComponent<Transform>().localScale = new Vector3(cubeSize, cubeSize, 0);
         cube.GetComponent<Transform>().position = new Vector3(prevPos.x + cube.GetComponent<Renderer>().bounds.size.x, 0, 0);
+        cube.GetComponent<SquareScript>().predecessor = queue[queue.Count - 1].GetComponent<SquareScript>();
+        queue[queue.Count - 1].GetComponent<SquareScript>().ancestor = cube.GetComponent<SquareScript>();
         queue.Add(cube);
     }
 

@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using System;
 
 public class SquareScript : MonoBehaviour {
 
@@ -18,12 +19,15 @@ public class SquareScript : MonoBehaviour {
     }
 
     private SpriteRenderer _spriteRenderer;
-    
     private List<myGradient> _gradients = new List<myGradient>();
     private int _currentColor = 0;
     private Transform _transform;
     private float _speed = 1.0f;
+
     public int Id = -1;
+    public SquareScript predecessor;
+    public SquareScript ancestor;
+    public bool correct = false;
 
 
     // Use this for initialization
@@ -46,24 +50,56 @@ public class SquareScript : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+        if (Input.GetMouseButtonDown(0))
+        {
+            checkCorrect();
+        }
+    }
 
+    private void checkCorrect()
+    {
+        int p = _gradients[_currentColor].left;
+        if (predecessor != null)
+            predecessor.getColor(true);
+        int a = _gradients[_currentColor].right;
+        if (ancestor != null)
+            ancestor.getColor(false);
+
+        if (p == _gradients[_currentColor].left && a == _gradients[_currentColor].right)
+            correct = true;
+        correct = false;
+        Debug.Log(correct);
     }
 
     void FixedUpdate()
     {
         _transform.position += new Vector3(-_speed * Time.deltaTime, 0.0f);
+        if (correct)
+        {
+            _transform.localScale = new Vector2(1.0f, 1.0f);
+        }
+        else
+        {
+            _transform.localScale = new Vector2(0.5f, 0.5f);
+        }
     }
 
     void OnMouseDown()
     {
         Debug.Log("Click");
 
-        int rand = Random.Range(0, 5);
+        int rand = UnityEngine.Random.Range(0, 5);
 
         if (rand != _currentColor)
         {
             _spriteRenderer.sprite = _gradients[_currentColor].sprite;
             _currentColor = rand;
         }
+    }
+
+    int getColor(bool direction)
+    {
+        // false = lavy, true = pravy
+        return !direction ? _gradients[_currentColor].left : _gradients[_currentColor].right;
     }
 }
