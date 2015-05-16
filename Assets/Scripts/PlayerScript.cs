@@ -14,6 +14,7 @@ public class PlayerScript : MonoBehaviour
         Debug.Log("start panacik");
         _transform = GetComponent<Transform>();
         _masterScript = (GameObject.FindGameObjectWithTag("GameController")).GetComponent<MasterScript>();
+
     }
 
     // Update is called once per frame
@@ -39,7 +40,6 @@ public class PlayerScript : MonoBehaviour
     {
         if (!_masterScript.pause)
         {
-            Debug.Log("Collide");
             var ss = other.gameObject.GetComponent<SquareScript>();
             if (ss != null)
             {

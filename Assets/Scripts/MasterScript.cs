@@ -32,6 +32,7 @@ public class MasterScript : MonoBehaviour {
                 Destroy(queue[0]);
                 queue.RemoveAt(0);
                 addNextCube();
+                Instantiate(Resources.Load("Prefabs/GenericPowerup", typeof(GameObject)));
             }
 	    }
 	}
