@@ -13,7 +13,6 @@ public class PlayerScript : MonoBehaviour
 	void Start () {
         _transform = GetComponent<Transform>();
         _masterScript = (GameObject.FindGameObjectWithTag("GameController")).GetComponent<MasterScript>();
-
     }
 
     // Update is called once per frame
