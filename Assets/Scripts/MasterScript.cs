@@ -19,27 +19,22 @@ public class MasterScript : MonoBehaviour {
     private float _leftBound;
     private int _sanityLeft;
     private int _sanityRight;
+    private Transform _playerTransform;
 
 
     // Use this for initialization
     void Start () {
+        _playerTransform = (GameObject.FindGameObjectWithTag("Retard")).GetComponent<Transform>();
+        if (_playerTransform == null)
+            Debug.Log("wtf?");
+
         setupCubes();
         //pregen. enough cubes
     }
 	
 	// Update is called once per frame
 	void Update () {
-	    if (active)
-	    {
-	        Vector3 pos = queue[0].GetComponent<Transform>().position;
-            if (pos.x < _leftBound)
-            {
-                Destroy(queue[0]);
-                queue.RemoveAt(0);
-                addNextCube();
-            }
-	    }
-	}
+    }
 
     void setupCubes()
     {
@@ -66,7 +61,16 @@ public class MasterScript : MonoBehaviour {
         ssc.colorsRight = new int[size];
         left.CopyTo(ssc.colorsLeft, 0);
         right.CopyTo(ssc.colorsRight, 0);
-        cube.GetComponent<Transform>().position=new Vector3(1,0,0);
+        cube.GetComponent<Transform>().position=new Vector3(1.5f,0,0);
+        cube.GetComponent<Transform>().localScale = new Vector3(cubeSize, cubeSize, 0);
+        queue.Add(cube);
+        cube = (GameObject)Instantiate(Resources.Load("Prefabs/Square", typeof(GameObject)));
+        ssc = cube.GetComponent<SquareScript>();
+        ssc.colorsLeft = new int[size];
+        ssc.colorsRight = new int[size];
+        left.CopyTo(ssc.colorsLeft, 0);
+        right.CopyTo(ssc.colorsRight, 0);
+        cube.GetComponent<Transform>().position = new Vector3(1.5f + (2 * ssc.childLeft.bounds.size.x), 0, 0);
         cube.GetComponent<Transform>().localScale = new Vector3(cubeSize, cubeSize, 0);
         queue.Add(cube);
         for (int i = 0; i < _cubeCount / 2; i++)
@@ -75,7 +79,7 @@ public class MasterScript : MonoBehaviour {
         }
     }
 
-    void addNextCube()
+    public void addNextCube()
     {
         GameObject previousCube = queue[queue.Count - 1];
         Vector3 prevPos = previousCube.GetComponent<Transform>().position;
@@ -117,11 +121,19 @@ public class MasterScript : MonoBehaviour {
         left.CopyTo(ssc.colorsLeft, 0);
         right.CopyTo(ssc.colorsRight, 0);
         cube.GetComponent<Transform>().localScale = new Vector3(cubeSize, cubeSize, 0);
-        cube.GetComponent<Transform>().position = new Vector3(prevPos.x + (2*ssc.childLeft.bounds.size.x), 0, 0);
+        cube.GetComponent<Transform>().position = new Vector3(prevPos.x + (2*ssc.childLeft.bounds.size.x), 0);
         SquareScript ssq = previousCube.GetComponent<SquareScript>();
         ssc.predecessor = ssq;
         ssq.ancestor = ssc;
         queue.Add(cube);
+    }
+
+    public void Shoot() {
+        GameObject zivot = (GameObject)Instantiate(Resources.Load("Prefabs/zivot", typeof(GameObject)));
+        Transform trans = zivot.GetComponent<Transform>();
+        trans.position = new Vector3(_playerTransform.position.x, _playerTransform.position.y + 0.6f);
+        Rigidbody2D test = zivot.GetComponent<Rigidbody2D>();
+        test.AddForce(new Vector2(-4.0f, 8.0f), ForceMode2D.Impulse);
     }
 
 }
