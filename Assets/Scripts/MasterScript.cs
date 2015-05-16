@@ -21,6 +21,48 @@ public class MasterScript : MonoBehaviour {
     private int _sanityRight;
     private Transform _playerTransform;
 
+    //powerup stuff
+    private float retardCd = 0.0f;
+    private float chaosCd = 0.0f;
+    private float hpCd = 0.0f;
+    private float speedCd = 0.0f;
+    private float slowCd = 0.0f;
+    private float poopCd = 0.0f;
+
+    private bool retardCheck = false;
+    private bool chaosCheck = false;
+    private bool hpCheck = false;
+    private bool speedCheck = false;
+    private bool slowCheck = false;
+    private bool poopCheck = false;
+
+    private int origRange;
+    private int origCount;
+
+    void testCd()
+    {
+        if ((retardCheck)&&(retardCd <= 0.0f))
+        {
+            retardCheck = false;
+            retardCd = 0.0f;
+            diffRange = origRange;
+            diffCount = origCount;
+        }
+        if ((chaosCheck)&&(chaosCd <= 0.0f))
+        {
+            chaosCheck = false;
+            chaosCd = 0.0f;
+            diffRange = origRange;
+            diffCount = origCount;
+        }
+        if ((hpCheck) && (hpCd <= 0.0f))
+        {
+            hpCheck = false;
+            hpCd = 0.0f;
+            //TODO
+        }
+        //TODO HERE
+    }
 
     // Use this for initialization
     void Start () {
