@@ -39,54 +39,13 @@ public class MasterScript : MonoBehaviour {
     private int origRange;
     private int origCount;
     private float origSpeed;
+    public float healingSpeed=0.0f;
 
     private Text _scoreText;
     private Text _diffText;
     private int _score;
     private List<int> _combo = new List<int>();
     private float _diffInc = 0.0f;
-
-    void testCd()
-    {
-        if ((retardCheck)&&(retardCd <= 0.0f))
-        {
-            retardCheck = false;
-            retardCd = 0.0f;
-            diffRange = origRange;
-            diffCount = origCount;
-        }
-        if ((chaosCheck)&&(chaosCd <= 0.0f))
-        {
-            chaosCheck = false;
-            chaosCd = 0.0f;
-            diffRange = origRange;
-            diffCount = origCount;
-        }
-        if ((hpCheck) && (hpCd <= 0.0f))
-        {
-            hpCheck = false;
-            hpCd = 0.0f;
-            //todo
-        }
-        if ((speedCheck) && (speedCd <= 0.0f))
-        {
-            speedCheck = false;
-            speedCd = 0.0f;
-            speed = origSpeed;
-        }
-        if ((slowCheck) && (slowCd <= 0.0f))
-        {
-            slowCheck = false;
-            slowCd = 0.0f;
-            speed = origSpeed;
-        }
-        if ((poopCheck) && (poopCd <= 0.0f))
-        {
-            poopCheck = false;
-            poopCd = 0.0f;
-            //todo
-        }
-    }
 
     // Use this for initialization
     void Start () {
@@ -230,5 +189,97 @@ public class MasterScript : MonoBehaviour {
         }
         _combo.Add(left);
         _combo.Add(right);
+    }
+
+    void testCd()
+    {
+        if ((retardCheck) && (retardCd <= 0.0f))
+        {
+            retardCheck = false;
+            retardCd = 0.0f;
+            diffRange = origRange;
+            diffCount = origCount;
+        }
+        if ((chaosCheck) && (chaosCd <= 0.0f))
+        {
+            chaosCheck = false;
+            chaosCd = 0.0f;
+            diffRange = origRange;
+            diffCount = origCount;
+        }
+        if ((hpCheck) && (hpCd <= 0.0f))
+        {
+            hpCheck = false;
+            hpCd = 0.0f;
+            healingSpeed = 0.0f;
+        }
+        if ((speedCheck) && (speedCd <= 0.0f))
+        {
+            speedCheck = false;
+            speedCd = 0.0f;
+            speed = origSpeed;
+        }
+        if ((slowCheck) && (slowCd <= 0.0f))
+        {
+            slowCheck = false;
+            slowCd = 0.0f;
+            speed = origSpeed;
+        }
+        if ((poopCheck) && (poopCd <= 0.0f))
+        {
+            poopCheck = false;
+            poopCd = 0.0f;
+            //todo
+        }
+    }
+
+    //block of powers
+
+    public void powerSpeed(float t)
+    {
+        origSpeed = speed;
+        speed = 4.0f;
+        speedCd = t;
+        speedCheck = true;
+    }
+
+    public void powerSlow(float t)
+    {
+        origSpeed = speed;
+        speed = 0.8f;
+        slowCd = t;
+        slowCheck = true;
+    }
+
+    public void powerHp(float t)
+    {
+        healingSpeed = 1.0f;
+        hpCd = t;
+        hpCheck = true;
+    }
+
+    public void powerPoop(float t)
+    {
+        //todo shoot poop
+    }
+
+    public void powerRetard(float t)
+    {
+        origRange = diffRange;
+        origCount = diffCount;
+        diffRange = 3;
+        diffCount = 3;
+        retardCd = t;
+        retardCheck = true;
+    }
+
+    public void powerChaos(float t)
+    {
+        origRange = diffRange;
+        origCount = diffCount;
+        diffRange = 3;
+        diffCount = 3;
+        retardCd = t;
+        retardCheck = true;
     }
 }

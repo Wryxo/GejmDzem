@@ -79,14 +79,30 @@ public class PowerupScript : MonoBehaviour
     void Update()
     {
         updateCurrentPlatform();
-        if (Mathf.Abs(GameObject.FindGameObjectWithTag("Retard").GetComponent<Transform>().position.x - transform.position.x) < 1.0f)
+        GameObject master = GameObject.FindGameObjectWithTag("Retard");
+        MasterScript ms = master.GetComponent<MasterScript>();
+        if (Mathf.Abs(master.GetComponent<Transform>().position.x - transform.position.x) < 1.0f)
         {
             switch (power)
             {
                 case PowerType.SpeedUp:
-                    int pes = 47;
+                    ms.powerSpeed(4.0f);
                     break;
-
+                case PowerType.SpeedDown:
+                    ms.powerSlow(4.0f);
+                    break;
+                case PowerType.Hp:
+                    ms.powerHp(5.0f);
+                    break;
+                case PowerType.EndlessPoop:
+                    ms.powerPoop(5.0f);
+                    break;
+                case PowerType.ColorRetard:
+                    ms.powerRetard(6.0f);
+                    break;
+                case PowerType.ColorChaos:
+                    ms.powerChaos(6.0f);
+                    break;
             }
             Destroy(gameObject);
         }
