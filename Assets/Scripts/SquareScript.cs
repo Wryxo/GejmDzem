@@ -7,6 +7,7 @@ public class SquareScript : MonoBehaviour {
 
     private SpriteRenderer _spriteRenderer;
     private Transform _transform;
+    private Transform _playerTransform;
     private MasterScript _masterScript;
 
     public int[] colorsLeft;
@@ -23,6 +24,7 @@ public class SquareScript : MonoBehaviour {
     void Start () {
         _transform = GetComponent<Transform>();
         _masterScript = (GameObject.FindGameObjectWithTag("GameController")).GetComponent<MasterScript>();
+        _playerTransform = (GameObject.FindGameObjectWithTag("Player")).GetComponent<Transform>();
 
         set = 0;
 
@@ -42,15 +44,24 @@ public class SquareScript : MonoBehaviour {
         if (!_masterScript.pause) { 
             if (!walkable)
             {
-                childLeft.transform.localScale = new Vector2(1.0f, 3.0f);
-                childRight.transform.localScale = new Vector2(1.0f, 3.0f);
-            } else
+                childLeft.transform.localScale = new Vector2(0.7f, 1.0f);
+                childRight.transform.localScale = new Vector2(0.7f, 1.0f);
+            }
+            else
             {
                 childLeft.transform.localScale = new Vector2(1.0f, 1.0f);
                 childRight.transform.localScale = new Vector2(1.0f, 1.0f);
             }
         }
         _transform.position += new Vector3(-_masterScript.speed * Time.deltaTime, 0.0f);
+        if (childLeft.transform.position.x < _playerTransform.position.x)
+        {
+            childLeft.color = new Color(1.0f, 0.5f, 0.0f);
+        }
+        if (childRight.transform.position.x < _playerTransform.position.x)
+        {
+            childRight.color = new Color(1.0f, 0.5f, 0.0f);
+        }
     }
 
     void OnMouseOver()
@@ -113,7 +124,6 @@ public class SquareScript : MonoBehaviour {
 
     public void createLife()
     {
-        childLeft.color = new Color(1.0f, 0.5f, 0.0f);
-        childRight.color = new Color(1.0f, 0.5f, 0.0f);
+        
     }
 }
