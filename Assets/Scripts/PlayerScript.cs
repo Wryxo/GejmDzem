@@ -8,11 +8,13 @@ public class PlayerScript : MonoBehaviour
     private float _cd = 0.0f;
     private bool _stuck = false;
     private MasterScript _masterScript;
+    private Animator _animator;
 
 	// Use this for initialization
 	void Start () {
         _transform = GetComponent<Transform>();
         _masterScript = (GameObject.FindGameObjectWithTag("GameController")).GetComponent<MasterScript>();
+        _animator = GetComponent<Animator>();
     }
 
     // Update is called once per frame
@@ -30,7 +32,13 @@ public class PlayerScript : MonoBehaviour
                 _masterScript.pause = true;
             }
             if (_stuck)
+            {
                 _transform.position += new Vector3(-_masterScript.speed * Time.deltaTime, 0.0f, 0.0f);
+                _animator.SetInteger("anim_state",2);
+            } else
+            {
+                _animator.SetInteger("anim_state", 0);
+            }
         }
     }
 
