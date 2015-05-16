@@ -74,9 +74,11 @@ public class PlayerScript : MonoBehaviour
     {
         var ss = other.gameObject.GetComponent<SquareScript>();
         if (ss != null) {
+            _masterScript.addCombo(ss.colorsLeft[ss.set], ss.colorsRight[ss.set]);
+            _masterScript.queue.Remove(ss.gameObject);
             Destroy(ss.gameObject);
             _masterScript.Shoot();
-            _masterScript.addNextCube(); ;
+            _masterScript.addNextCube();
         }
     }
 }

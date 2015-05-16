@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
-using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.UI;
 
 public class MasterScript : MonoBehaviour {
 
@@ -20,20 +20,37 @@ public class MasterScript : MonoBehaviour {
     private int _sanityLeft;
     private int _sanityRight;
     private Transform _playerTransform;
-
+    private Text _scoreText; 
+    private Text _diffText; 
+    private int _score;
+    private List<int> _combo = new List<int>();
+    private float _diffInc = 0.0f;
 
     // Use this for initialization
     void Start () {
         _playerTransform = (GameObject.FindGameObjectWithTag("Retard")).GetComponent<Transform>();
-        if (_playerTransform == null)
-            Debug.Log("wtf?");
+        _scoreText = (GameObject.FindGameObjectWithTag("Score")).GetComponent<Text>();
+        _diffText = (GameObject.FindGameObjectWithTag("Difficulty")).GetComponent<Text>();
 
         setupCubes();
+        _diffText.text = diffRange.ToString();
         //pregen. enough cubes
     }
-	
-	// Update is called once per frame
-	void Update () {
+
+    // Update is called once per frame
+    void FixedUpdate () {
+        if (!pause)
+        {
+            _diffInc += Time.deltaTime;
+            if (_diffInc > 10.0f)
+            {
+                _diffInc = 0.0f;
+                diffRange++;
+                if (diffRange > colors.Length)
+                    diffRange = colors.Length;
+                _diffText.text = diffRange.ToString();
+            }
+        }
     }
 
     void setupCubes()
@@ -134,6 +151,22 @@ public class MasterScript : MonoBehaviour {
         trans.position = new Vector3(_playerTransform.position.x, _playerTransform.position.y + 0.6f);
         Rigidbody2D test = zivot.GetComponent<Rigidbody2D>();
         test.AddForce(new Vector2(-4.0f, 8.0f), ForceMode2D.Impulse);
+        _score += evaluateCombo();
+        _scoreText.text = _score.ToString();
     }
 
+    private int evaluateCombo()
+    {
+        return 1;
+    }
+
+    public void addCombo(int left, int right)
+    {
+        if (_combo.Count > 8) { 
+            _combo.RemoveAt(0);
+            _combo.RemoveAt(1);
+        }
+        _combo.Add(left);
+        _combo.Add(right);
+    }
 }
