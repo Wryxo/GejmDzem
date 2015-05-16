@@ -26,8 +26,6 @@ public class MasterScript : MonoBehaviour {
 	    if (active)
 	    {
 	        Vector3 pos = queue[0].GetComponent<Transform>().position;
-            //Debug.Log(pos);
-            //Debug.Log(_leftBound);
             if (pos.x < _leftBound)
             {
                 Destroy(queue[0]);
@@ -41,15 +39,14 @@ public class MasterScript : MonoBehaviour {
     {
         horzExtent = Camera.main.orthographicSize * Screen.width / Screen.height;
         cubeSize=horzExtent*2.0f/numCubes;
-        //Debug.Log(cubeSize);
         queue.Clear();
         _cubeCount = numCubes + 4;
         _leftBound = -horzExtent-2;
         GameObject cube = (GameObject) Instantiate(Resources.Load("Prefabs/Square", typeof (GameObject)));
-        cube.GetComponent<Transform>().position=new Vector3(_leftBound,0,0);
+        cube.GetComponent<Transform>().position=new Vector3(1,0,0);
         cube.GetComponent<Transform>().localScale = new Vector3(cubeSize, cubeSize, 0);
         queue.Add(cube);
-        for (int i = 0; i < _cubeCount; i++)
+        for (int i = 0; i < _cubeCount / 2; i++)
         {
             addNextCube();
         }
@@ -61,9 +58,11 @@ public class MasterScript : MonoBehaviour {
         Vector3 prevPos = previousCube.GetComponent<Transform>().position;
         GameObject cube = (GameObject) Instantiate(Resources.Load("Prefabs/Square", typeof (GameObject)));
         cube.GetComponent<Transform>().localScale = new Vector3(cubeSize, cubeSize, 0);
-        cube.GetComponent<Transform>().position = new Vector3(prevPos.x + cube.GetComponent<Renderer>().bounds.size.x, 0, 0);
-        cube.GetComponent<SquareScript>().predecessor = queue[queue.Count - 1].GetComponent<SquareScript>();
-        queue[queue.Count - 1].GetComponent<SquareScript>().ancestor = cube.GetComponent<SquareScript>();
+        cube.GetComponent<Transform>().position = new Vector3(prevPos.x + 2, 0, 0);
+        SquareScript ssc = cube.GetComponent<SquareScript>();
+        SquareScript ssq = queue[queue.Count - 1].GetComponent<SquareScript>();
+        ssc.predecessor = ssq;
+        ssq.ancestor = ssc;
         queue.Add(cube);
     }
 
