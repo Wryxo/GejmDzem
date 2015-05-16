@@ -11,7 +11,6 @@ public class PlayerScript : MonoBehaviour
 
 	// Use this for initialization
 	void Start () {
-        Debug.Log("start panacik");
         _transform = GetComponent<Transform>();
         _masterScript = (GameObject.FindGameObjectWithTag("GameController")).GetComponent<MasterScript>();
 

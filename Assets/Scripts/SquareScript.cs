@@ -6,16 +6,16 @@ using System;
 public class SquareScript : MonoBehaviour {
 
     private SpriteRenderer _spriteRenderer;
-    private Color[] _colors = new Color[] { Color.red, Color.blue, Color.green, Color.magenta, Color.cyan };
     private Transform _transform;
     private MasterScript _masterScript;
 
+    public int[] colorsLeft;
+    public int[] colorsRight;
     public SquareScript predecessor;
     public SquareScript ancestor;
     public SpriteRenderer childLeft;
     public SpriteRenderer childRight;
-    public int left = -1;
-    public int right = -1;
+    public int set = -1;
     public bool walkable = false;
     public bool zamok = false;
 
@@ -24,17 +24,16 @@ public class SquareScript : MonoBehaviour {
         _transform = GetComponent<Transform>();
         _masterScript = (GameObject.FindGameObjectWithTag("GameController")).GetComponent<MasterScript>();
 
-        left = UnityEngine.Random.Range(0, 5);
-        right = UnityEngine.Random.Range(0, 5);
+        set = UnityEngine.Random.Range(0, colorsLeft.Length);
 
-        childLeft.color = _colors[left];
-        childRight.color = _colors[right];
+        childLeft.color = _masterScript.colors[colorsLeft[set]];
+        childRight.color = _masterScript.colors[colorsRight[set]];
 
         checkWalkable();
     }
-	
-	// Update is called once per frame
-	void Update () {
+
+    // Update is called once per frame
+    void Update () {
         
     }
 
@@ -62,20 +61,19 @@ public class SquareScript : MonoBehaviour {
             {
                 if (Input.GetMouseButtonDown(0))
                 {
-                    left = UnityEngine.Random.Range(0, 5);
-                    right = UnityEngine.Random.Range(0, 5);
+                    set = UnityEngine.Random.Range(0, colorsLeft.Length);
 
-                    childLeft.color = _colors[left];
-                    childRight.color = _colors[right];
+                    childLeft.color = _masterScript.colors[colorsLeft[set]];
+                    childRight.color = _masterScript.colors[colorsRight[set]];
 
                     checkWalkable();
                     ancestor.checkWalkable();
                 }
                 if (Input.GetMouseButtonDown(1))
                 {
-                    var tmp = left;
-                    left = right;
-                    right = tmp;
+                    var tmp = colorsLeft[set];
+                    colorsLeft[set] = colorsRight[set];
+                    colorsRight[set] = tmp;
 
                     var tmpc = childLeft.color;
                     childLeft.color = childRight.color;
@@ -92,7 +90,7 @@ public class SquareScript : MonoBehaviour {
     {
         if (predecessor != null)
         {
-            if (predecessor.getColor(true) == left)
+            if (predecessor.getColor(true) == colorsLeft[set])
             {
                 walkable = true;
             }
@@ -110,7 +108,7 @@ public class SquareScript : MonoBehaviour {
     public int getColor(bool direction)
     {
         // false = lavy, true = pravy
-        return direction ? right : left;
+        return direction ? colorsLeft[set] : colorsRight[set];
     }
 
     public void createLife()
