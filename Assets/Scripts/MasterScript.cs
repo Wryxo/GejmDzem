@@ -12,8 +12,8 @@ public class MasterScript : MonoBehaviour {
     public bool pause = false;
     public float speed = 1.0f;
     public Color[] colors = new Color[] { Color.red, Color.green, Color.blue, Color.magenta, Color.yellow, Color.cyan };
-    public int diffRange = 3;
-    public int diffCount = 10;
+    public int diffRange = 6;
+    public int diffCount = 20;
 
     private int _cubeCount;
     private float _leftBound;
