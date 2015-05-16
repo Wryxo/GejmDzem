@@ -9,8 +9,8 @@ public class MasterScript : MonoBehaviour {
     public int numCubes = 50;
     public float cubeSize;
     public float speed = 1.0f;
-
     public float horzExtent;
+    public bool pause = false;
 
     private int _cubeCount;
     private float _leftBound;
@@ -57,10 +57,10 @@ public class MasterScript : MonoBehaviour {
         GameObject previousCube = queue[queue.Count - 1];
         Vector3 prevPos = previousCube.GetComponent<Transform>().position;
         GameObject cube = (GameObject) Instantiate(Resources.Load("Prefabs/Square", typeof (GameObject)));
-        cube.GetComponent<Transform>().localScale = new Vector3(cubeSize, cubeSize, 0);
-        cube.GetComponent<Transform>().position = new Vector3(prevPos.x + 2, 0, 0);
         SquareScript ssc = cube.GetComponent<SquareScript>();
-        SquareScript ssq = queue[queue.Count - 1].GetComponent<SquareScript>();
+        cube.GetComponent<Transform>().localScale = new Vector3(cubeSize, cubeSize, 0);
+        cube.GetComponent<Transform>().position = new Vector3(prevPos.x + (2*ssc.childLeft.bounds.size.x), 0, 0);
+        SquareScript ssq = previousCube.GetComponent<SquareScript>();
         ssc.predecessor = ssq;
         ssq.ancestor = ssc;
         queue.Add(cube);

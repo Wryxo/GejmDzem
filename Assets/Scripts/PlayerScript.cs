@@ -4,36 +4,64 @@ using UnityEditor;
 
 public class PlayerScript : MonoBehaviour
 {
-
     private Transform _transform;
-    private float _speed = 1.0f; 
+    private float _speed = 3.0f;
+    private float _cd = 0.0f;
+    private bool _stuck = false;
+    private MasterScript _masterScript;
 
 	// Use this for initialization
 	void Start () {
         Debug.Log("start panacik");
         _transform = GetComponent<Transform>();
-	}
-	
-	// Update is called once per frame
-	void Update () {
-	
+        _masterScript = (GameObject.FindGameObjectsWithTag("GameController"))[0].GetComponent<MasterScript>();
+
+    }
+
+    // Update is called once per frame
+    void Update () {
 	}
 
     private void FixedUpdate()
     {
+        if (!_masterScript.pause)
+        {
+            var horzExtent = Camera.main.orthographicSize * Screen.width / Screen.height;
+            var _leftBound = -horzExtent + 1;
+            if (_transform.position.x < _leftBound)
+            {
+                _masterScript.pause = true;
+            }
+            if (_stuck)
+                _transform.position += new Vector3(-_speed * Time.deltaTime, 0.0f, 0.0f);
+        }
     }
 
     void OnTriggerStay2D(Collider2D other)
     {
-        Debug.Log("Collide");
-        var ss = other.gameObject.GetComponent<SquareScript>();
-        if (ss != null)
+        if (!_masterScript.pause)
         {
-            Debug.Log("not null");
-            if (!ss.walkable)
+            Debug.Log("Collide");
+            var ss = other.gameObject.GetComponent<SquareScript>();
+            if (ss != null)
             {
-                Debug.Log("walkable");
-                _transform.position += new Vector3(-_speed * Time.deltaTime, 0.0f, 0.0f);
+                if (!ss.walkable)
+                {
+                    _stuck = true;
+                }
+                else
+                {
+                    if (!ss.zamok)
+                    {
+                        _cd += Time.deltaTime;
+                    }
+                    if (_cd > 0.5f)
+                    {
+                        _stuck = false;
+                        ss.zamok = true;
+                        _cd = 0.0f;
+                    }
+                }
             }
         }
     }
