@@ -20,6 +20,11 @@ public class MasterScript : MonoBehaviour {
     private int _sanityLeft;
     private int _sanityRight;
 
+    public float GetHorzExtent()
+    {
+        return Camera.main.orthographicSize * Screen.width / Screen.height;
+    }
+
 
     // Use this for initialization
     void Start () {
@@ -44,7 +49,7 @@ public class MasterScript : MonoBehaviour {
 
     void setupCubes()
     {
-        horzExtent = Camera.main.orthographicSize * Screen.width / Screen.height;
+        horzExtent = GetHorzExtent();
         cubeSize=horzExtent*2.0f/numCubes;
         queue.Clear();
         _cubeCount = numCubes + 4;
