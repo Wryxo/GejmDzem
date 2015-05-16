@@ -6,7 +6,7 @@ public class MasterScript : MonoBehaviour {
 
     List<GameObject> queue=new List<GameObject>();
     public bool active = false;
-    public int numCubes = 30;
+    public int numCubes = 50;
     public float cubeSize;
     public float speed = 0.0f;
 
@@ -25,10 +25,13 @@ public class MasterScript : MonoBehaviour {
 	void Update () {
 	    if (active)
 	    {
-	        Vector3 pos = queue[queue.Count-1].GetComponent<Transform>().position;
+	        Vector3 pos = queue[0].GetComponent<Transform>().position;
+            Debug.Log(pos);
+            Debug.Log(_leftBound);
             if (pos.x < _leftBound)
             {
-                Destroy(queue[queue.Count-1]);
+                Destroy(queue[0]);
+                queue.RemoveAt(0);
                 addNextCube();
             }
 	    }
@@ -38,6 +41,7 @@ public class MasterScript : MonoBehaviour {
     {
         horzExtent = Camera.main.orthographicSize * Screen.width / Screen.height;
         cubeSize=horzExtent*2.0f/numCubes;
+        Debug.Log(cubeSize);
         queue.Clear();
         _cubeCount = numCubes + 4;
         _leftBound = -horzExtent-2;
@@ -56,8 +60,8 @@ public class MasterScript : MonoBehaviour {
         GameObject previousCube = queue[queue.Count - 1];
         Vector3 prevPos = previousCube.GetComponent<Transform>().position;
         GameObject cube = (GameObject) Instantiate(Resources.Load("Prefabs/Square", typeof (GameObject)));
-        cube.GetComponent<Transform>().position=new Vector3(prevPos.x+cubeSize,0,0);
         cube.GetComponent<Transform>().localScale = new Vector3(cubeSize, cubeSize, 0);
+        cube.GetComponent<Transform>().position = new Vector3(prevPos.x + cube.GetComponent<Renderer>().bounds.size.x, 0, 0);
         queue.Add(cube);
     }
 
