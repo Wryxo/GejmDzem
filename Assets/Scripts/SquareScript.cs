@@ -24,7 +24,6 @@ public class SquareScript : MonoBehaviour {
     void Start () {
         _transform = GetComponent<Transform>();
         _masterScript = (GameObject.FindGameObjectWithTag("GameController")).GetComponent<MasterScript>();
-        _playerTransform = (GameObject.FindGameObjectWithTag("Player")).GetComponent<Transform>();
 
         set = 0;
 
@@ -54,14 +53,15 @@ public class SquareScript : MonoBehaviour {
             }
         }
         _transform.position += new Vector3(-_masterScript.speed * Time.deltaTime, 0.0f);
+        /*_playerTransform = (GameObject.FindGameObjectWithTag("Player")).GetComponent<Transform>();
         if (childLeft.transform.position.x < _playerTransform.position.x)
         {
             childLeft.color = new Color(1.0f, 0.5f, 0.0f);
         }
-        if (childRight.transform.position.x < _playerTransform.position.x)
+        if ((childRight.transform.position.x + childRight.bounds.size.x) < _playerTransform.position.x)
         {
             childRight.color = new Color(1.0f, 0.5f, 0.0f);
-        }
+        }*/
     }
 
     void OnMouseOver()
@@ -120,10 +120,5 @@ public class SquareScript : MonoBehaviour {
     {
         // false = lavy, true = pravy
         return direction ? colorsRight[set] : colorsLeft[set];
-    }
-
-    public void createLife()
-    {
-        
     }
 }

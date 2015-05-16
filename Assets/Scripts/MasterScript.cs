@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
-using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.UI;
 
 public class MasterScript : MonoBehaviour {
 
@@ -25,27 +25,40 @@ public class MasterScript : MonoBehaviour {
         return Camera.main.orthographicSize * Screen.width / Screen.height;
     }
 
+    private Transform _playerTransform;
+    private Text _scoreText; 
+    private Text _diffText; 
+    private int _score;
+    private List<int> _combo = new List<int>();
+    private float _diffInc = 0.0f;
+
 
     // Use this for initialization
     void Start () {
+        _playerTransform = (GameObject.FindGameObjectWithTag("Retard")).GetComponent<Transform>();
+        _scoreText = (GameObject.FindGameObjectWithTag("Score")).GetComponent<Text>();
+        _diffText = (GameObject.FindGameObjectWithTag("Difficulty")).GetComponent<Text>();
+
         setupCubes();
+        _diffText.text = diffRange.ToString();
         //pregen. enough cubes
     }
-	
-	// Update is called once per frame
-	void Update () {
-	    if (active)
-	    {
-	        Vector3 pos = queue[0].GetComponent<Transform>().position;
-            if (pos.x < _leftBound)
+
+    // Update is called once per frame
+    void FixedUpdate () {
+        if (!pause)
+        {
+            _diffInc += Time.deltaTime;
+            if (_diffInc > 10.0f)
             {
-                Destroy(queue[0]);
-                queue.RemoveAt(0);
-                addNextCube();
-                Instantiate(Resources.Load("Prefabs/GenericPowerup", typeof(GameObject)));
+                _diffInc = 0.0f;
+                diffRange++;
+                if (diffRange > colors.Length)
+                    diffRange = colors.Length;
+                _diffText.text = diffRange.ToString();
             }
-	    }
-	}
+        }
+    }
 
     void setupCubes()
     {
@@ -72,7 +85,16 @@ public class MasterScript : MonoBehaviour {
         ssc.colorsRight = new int[size];
         left.CopyTo(ssc.colorsLeft, 0);
         right.CopyTo(ssc.colorsRight, 0);
-        cube.GetComponent<Transform>().position=new Vector3(1,0,0);
+        cube.GetComponent<Transform>().position=new Vector3(1.5f,0,0);
+        cube.GetComponent<Transform>().localScale = new Vector3(cubeSize, cubeSize, 0);
+        queue.Add(cube);
+        cube = (GameObject)Instantiate(Resources.Load("Prefabs/Square", typeof(GameObject)));
+        ssc = cube.GetComponent<SquareScript>();
+        ssc.colorsLeft = new int[size];
+        ssc.colorsRight = new int[size];
+        left.CopyTo(ssc.colorsLeft, 0);
+        right.CopyTo(ssc.colorsRight, 0);
+        cube.GetComponent<Transform>().position = new Vector3(1.5f + (2 * ssc.childLeft.bounds.size.x), 0, 0);
         cube.GetComponent<Transform>().localScale = new Vector3(cubeSize, cubeSize, 0);
         queue.Add(cube);
         for (int i = 0; i < _cubeCount / 2; i++)
@@ -81,7 +103,7 @@ public class MasterScript : MonoBehaviour {
         }
     }
 
-    void addNextCube()
+    public void addNextCube()
     {
         GameObject previousCube = queue[queue.Count - 1];
         Vector3 prevPos = previousCube.GetComponent<Transform>().position;
@@ -123,11 +145,35 @@ public class MasterScript : MonoBehaviour {
         left.CopyTo(ssc.colorsLeft, 0);
         right.CopyTo(ssc.colorsRight, 0);
         cube.GetComponent<Transform>().localScale = new Vector3(cubeSize, cubeSize, 0);
-        cube.GetComponent<Transform>().position = new Vector3(prevPos.x + (2*ssc.childLeft.bounds.size.x), 0, 0);
+        cube.GetComponent<Transform>().position = new Vector3(prevPos.x + (2*ssc.childLeft.bounds.size.x), 0);
         SquareScript ssq = previousCube.GetComponent<SquareScript>();
         ssc.predecessor = ssq;
         ssq.ancestor = ssc;
         queue.Add(cube);
     }
 
+    public void Shoot() {
+        GameObject zivot = (GameObject)Instantiate(Resources.Load("Prefabs/zivot", typeof(GameObject)));
+        Transform trans = zivot.GetComponent<Transform>();
+        trans.position = new Vector3(_playerTransform.position.x, _playerTransform.position.y + 0.6f);
+        Rigidbody2D test = zivot.GetComponent<Rigidbody2D>();
+        test.AddForce(new Vector2(-4.0f, 8.0f), ForceMode2D.Impulse);
+        _score += evaluateCombo();
+        _scoreText.text = _score.ToString();
+    }
+
+    private int evaluateCombo()
+    {
+        return 1;
+    }
+
+    public void addCombo(int left, int right)
+    {
+        if (_combo.Count > 8) { 
+            _combo.RemoveAt(0);
+            _combo.RemoveAt(1);
+        }
+        _combo.Add(left);
+        _combo.Add(right);
+    }
 }
