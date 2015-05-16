@@ -25,7 +25,7 @@ public class SquareScript : MonoBehaviour {
 
     void FixedUpdate()
     {
-        _transform.position += new Vector3(_speed * Time.deltaTime, 0.0f);
+        _transform.position += new Vector3(-_speed * Time.deltaTime, 0.0f);
     }
 
     void OnMouseDown()

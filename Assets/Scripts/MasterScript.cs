@@ -41,8 +41,9 @@ public class MasterScript : MonoBehaviour {
         queue.Clear();
         _cubeCount = numCubes + 4;
         _leftBound = -horzExtent-2;
-        GameObject cube = (GameObject) Instantiate(Resources.Load("Prefabs/_testsquare", typeof (GameObject)));
+        GameObject cube = (GameObject) Instantiate(Resources.Load("Prefabs/Square", typeof (GameObject)));
         cube.GetComponent<Transform>().position=new Vector3(_leftBound,0,0);
+        cube.GetComponent<Transform>().localScale = new Vector3(cubeSize, cubeSize, 0);
         queue.Add(cube);
         for (int i = 0; i < _cubeCount; i++)
         {
@@ -54,8 +55,9 @@ public class MasterScript : MonoBehaviour {
     {
         GameObject previousCube = queue[queue.Count - 1];
         Vector3 prevPos = previousCube.GetComponent<Transform>().position;
-        GameObject cube = (GameObject) Instantiate(Resources.Load("Prefabs/_testsquare", typeof (GameObject)));
+        GameObject cube = (GameObject) Instantiate(Resources.Load("Prefabs/Square", typeof (GameObject)));
         cube.GetComponent<Transform>().position=new Vector3(prevPos.x+cubeSize,0,0);
+        cube.GetComponent<Transform>().localScale = new Vector3(cubeSize, cubeSize, 0);
         queue.Add(cube);
     }
 
