@@ -77,7 +77,7 @@ public class PlayerScript : MonoBehaviour
             _masterScript.addCombo(ss.colorsLeft[ss.set], ss.colorsRight[ss.set]);
             _masterScript.queue.Remove(ss.gameObject);
             Destroy(ss.gameObject);
-            _masterScript.Shoot();
+            //_masterScript.Shoot();
             _masterScript.addNextCube();
         }
     }
