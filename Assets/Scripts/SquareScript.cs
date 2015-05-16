@@ -62,21 +62,22 @@ public class SquareScript : MonoBehaviour {
 
     public bool checkCorrect()
     {
-        int p = -1;
+        int p = _gradients[_currentColor].left;
         if (predecessor != null) { 
             p = predecessor.getColor(true);
         }
-        int a = -1;
+        int a = _gradients[_currentColor].right;
         if (ancestor != null) { 
             a = ancestor.getColor(false);
         }
 
+        Debug.Log(_gradients[_currentColor].left + " " + p + " -- " + _gradients[_currentColor].right + " " + a);
         if (p == _gradients[_currentColor].left && a == _gradients[_currentColor].right) {
-            Debug.Log(_gradients[_currentColor].left + " " + p + " -- " + _gradients[_currentColor].right + " " + a);
-
+            _transform.localScale = new Vector2(1.0f, 1.0f);
             return true;
         }
 
+        _transform.localScale = new Vector2(0.5f, 0.5f);
         return false;
     }
 
@@ -98,14 +99,7 @@ public class SquareScript : MonoBehaviour {
             _currentColor = rand;
         }
 
-        if (checkCorrect())
-        {
-            _transform.localScale = new Vector2(1.0f, 1.0f);
-        }
-        else
-        {
-            _transform.localScale = new Vector2(0.5f, 0.5f);
-        }
+        checkCorrect();
         if (predecessor != null)
             predecessor.checkCorrect();
         if (ancestor != null)
