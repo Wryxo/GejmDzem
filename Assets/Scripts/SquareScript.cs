@@ -73,7 +73,7 @@ public class SquareScript : MonoBehaviour {
 
     void FixedUpdate()
     {
-        _transform.position += new Vector3(-_speed * Time.deltaTime, 0.0f);
+        _transform.position += new Vector3(-_speed, 0.0f);
         if (correct)
         {
             _transform.localScale = new Vector2(1.0f, 1.0f);
