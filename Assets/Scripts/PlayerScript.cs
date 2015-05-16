@@ -69,4 +69,14 @@ public class PlayerScript : MonoBehaviour
             }
         }
     }
+
+    void OnTriggerExit2D(Collider2D other)
+    {
+        var ss = other.gameObject.GetComponent<SquareScript>();
+        if (ss != null) {
+            Destroy(ss.gameObject);
+            _masterScript.Shoot();
+            _masterScript.addNextCube(); ;
+        }
+    }
 }
