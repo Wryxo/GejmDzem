@@ -84,9 +84,9 @@ public class PowerupScript : MonoBehaviour
             switch (power)
             {
                 case PowerType.SpeedUp:
-                {
                     int pes = 47;
-                }
+                    break;
+
             }
             Destroy(gameObject);
         }

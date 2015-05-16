@@ -59,7 +59,7 @@ public class MasterScript : MonoBehaviour {
         {
             hpCheck = false;
             hpCd = 0.0f;
-            //TODO
+            //todo
         }
         //TODO HERE
     }
