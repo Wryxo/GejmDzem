@@ -19,6 +19,12 @@ public class MasterScript : MonoBehaviour {
     private float _leftBound;
     private int _sanityLeft;
     private int _sanityRight;
+
+    public float GetHorzExtent()
+    {
+        return Camera.main.orthographicSize * Screen.width / Screen.height;
+    }
+
     private Transform _playerTransform;
 
     //powerup stuff
@@ -76,7 +82,7 @@ public class MasterScript : MonoBehaviour {
 
     void setupCubes()
     {
-        horzExtent = Camera.main.orthographicSize * Screen.width / Screen.height;
+        horzExtent = GetHorzExtent();
         cubeSize=horzExtent*2.0f/numCubes;
         queue.Clear();
         _cubeCount = numCubes + 4;
