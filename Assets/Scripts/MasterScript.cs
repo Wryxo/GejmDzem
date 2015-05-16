@@ -121,8 +121,8 @@ public class MasterScript : MonoBehaviour {
         ssc = cube.GetComponent<SquareScript>();
         ssc.colorsLeft = new int[size];
         ssc.colorsRight = new int[size];
-        left.CopyTo(ssc.colorsLeft, 0);
-        right.CopyTo(ssc.colorsRight, 0);
+        right.CopyTo(ssc.colorsLeft, 0);
+        left.CopyTo(ssc.colorsRight, 0);
         cube.GetComponent<Transform>().position = new Vector3(1.5f + (2 * ssc.childLeft.bounds.size.x), 0, 0);
         cube.GetComponent<Transform>().localScale = new Vector3(cubeSize, cubeSize, 0);
         queue.Add(cube);
