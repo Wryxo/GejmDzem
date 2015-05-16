@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 public class MasterScript : MonoBehaviour {
 
-    List<GameObject> queue=new List<GameObject>();
+    public List<GameObject> queue=new List<GameObject>();
     public bool active = false;
     public int numCubes = 50;
     public float cubeSize;

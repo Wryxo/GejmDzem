@@ -14,7 +14,6 @@ public class PlayerScript : MonoBehaviour
         Debug.Log("start panacik");
         _transform = GetComponent<Transform>();
         _masterScript = (GameObject.FindGameObjectWithTag("GameController")).GetComponent<MasterScript>();
-
     }
 
     // Update is called once per frame
