@@ -8,7 +8,7 @@ public class MasterScript : MonoBehaviour {
     public bool active = false;
     public int numCubes = 50;
     public float cubeSize;
-    public float speed = 0.0f;
+    public float speed = 1.0f;
 
     public float horzExtent;
 

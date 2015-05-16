@@ -83,8 +83,20 @@ public class SquareScript : MonoBehaviour {
 
     void FixedUpdate()
     {
+<<<<<<< HEAD
+        _transform.position += new Vector3(-_speed, 0.0f);
+        if (correct)
+        {
+            _transform.localScale = new Vector2(1.0f, 1.0f);
+        }
+        else
+        {
+            _transform.localScale = new Vector2(0.5f, 0.5f);
+        }
+=======
         _transform.position += new Vector3(-_speed * Time.deltaTime, 0.0f);
         
+>>>>>>> 17bbdacd18003570350f6e7fd99144cfea1ae999
     }
 
     void OnMouseDown()
