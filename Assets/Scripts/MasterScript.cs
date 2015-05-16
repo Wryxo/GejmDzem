@@ -26,11 +26,73 @@ public class MasterScript : MonoBehaviour {
     }
 
     private Transform _playerTransform;
-    private Text _scoreText; 
-    private Text _diffText; 
+
+    //powerup stuff
+    private float retardCd = 0.0f;
+    private float chaosCd = 0.0f;
+    private float hpCd = 0.0f;
+    private float speedCd = 0.0f;
+    private float slowCd = 0.0f;
+    private float poopCd = 0.0f;
+
+    private bool retardCheck = false;
+    private bool chaosCheck = false;
+    private bool hpCheck = false;
+    private bool speedCheck = false;
+    private bool slowCheck = false;
+    private bool poopCheck = false;
+
+    private int origRange;
+    private int origCount;
+    private float origSpeed;
+
+    private Text _scoreText;
+    private Text _diffText;
     private int _score;
     private List<int> _combo = new List<int>();
     private float _diffInc = 0.0f;
+
+    void testCd()
+    {
+        if ((retardCheck)&&(retardCd <= 0.0f))
+        {
+            retardCheck = false;
+            retardCd = 0.0f;
+            diffRange = origRange;
+            diffCount = origCount;
+        }
+        if ((chaosCheck)&&(chaosCd <= 0.0f))
+        {
+            chaosCheck = false;
+            chaosCd = 0.0f;
+            diffRange = origRange;
+            diffCount = origCount;
+        }
+        if ((hpCheck) && (hpCd <= 0.0f))
+        {
+            hpCheck = false;
+            hpCd = 0.0f;
+            //todo
+        }
+        if ((speedCheck) && (speedCd <= 0.0f))
+        {
+            speedCheck = false;
+            speedCd = 0.0f;
+            speed = origSpeed;
+        }
+        if ((slowCheck) && (slowCd <= 0.0f))
+        {
+            slowCheck = false;
+            slowCd = 0.0f;
+            speed = origSpeed;
+        }
+        if ((poopCheck) && (poopCd <= 0.0f))
+        {
+            poopCheck = false;
+            poopCd = 0.0f;
+            //todo
+        }
+    }
 
 
     // Use this for initialization
