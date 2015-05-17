@@ -78,6 +78,8 @@ public class MasterScript : MonoBehaviour {
     bool combo3Done = false;
     bool combo4Done = false;
     bool combo5Done = false;
+    private Sprite[] _animalsSprites;
+
 
     // Use this for initialization
     void Start ()
@@ -86,6 +88,8 @@ public class MasterScript : MonoBehaviour {
         tierCd = 30.0f;
         _playerTransform = (GameObject.FindGameObjectWithTag("Retard")).GetComponent<Transform>();
         _scoreText = (GameObject.FindGameObjectWithTag("Score")).GetComponent<Text>();
+
+        _animalsSprites = Resources.LoadAll<Sprite>("Sprites/animals");
 
         GameObject[] tmp = (GameObject.FindGameObjectsWithTag("3combo"));
         _combo3Img = new Image[tmp.Length];
@@ -230,6 +234,7 @@ public class MasterScript : MonoBehaviour {
 
     public void Shoot() {
         GameObject zivot = (GameObject)Instantiate(Resources.Load("Prefabs/zivot", typeof(GameObject)));
+        zivot.GetComponent<SpriteRenderer>().sprite = _animalsSprites[Random.Range(0, _animalsSprites.Length)];
         Transform trans = zivot.GetComponent<Transform>();
         trans.position = new Vector3(_playerTransform.position.x, _playerTransform.position.y + 0.6f);
         Rigidbody2D test = zivot.GetComponent<Rigidbody2D>();
