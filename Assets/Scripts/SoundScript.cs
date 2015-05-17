@@ -22,7 +22,7 @@ public class SoundScript : MonoBehaviour
 	    else
 	    {
             DontDestroyOnLoad(this);
-            music = (AudioClip)Resources.Load("Sounds/menu", typeof(AudioClip));
+            music = (AudioClip)Resources.Load("Sounds/game2", typeof(AudioClip));
             AudioSource tmp = (GameObject.Find("SoundController")).GetComponent<AudioSource>();
             tmp.clip = music;
             tmp.loop = true;

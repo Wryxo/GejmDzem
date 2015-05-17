@@ -1,12 +1,13 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.EventSystems;
 
 public class LoadScript : MonoBehaviour {
 
     public string Scene;
 
-	// Use this for initialization
-	void Start () {
+    // Use this for initialization
+    void Start () {
         Debug.Log("Start");
 	}
 	
@@ -16,7 +17,7 @@ public class LoadScript : MonoBehaviour {
 
     }
 
-	void OnMouseDown()
+    void OnMouseDown()
     {
         Debug.Log(Scene);
         Application.LoadLevel(Scene);

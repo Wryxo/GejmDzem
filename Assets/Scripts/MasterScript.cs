@@ -81,6 +81,12 @@ public class MasterScript : MonoBehaviour {
     bool combo5Done = false;
     private Sprite[] _animalsSprites;
 
+    public void LoadScene(string scene)
+    {
+        AudioSource _tmp = GameObject.Find("Click").GetComponent<AudioSource>();
+        _tmp.Play();
+        Application.LoadLevel(scene);
+    }
 
     // Use this for initialization
     void Start ()
