@@ -53,12 +53,12 @@ public class PowerupScript : MonoBehaviour
                 power = PowerType.Hp;
                 isEvil = false;
             }
-            else if (powerRange < 0.8f)
+            /*else if (powerRange < 0.8f)
             {
                 power = PowerType.EndlessPoop;
                 isEvil = false;
-            }
-            else if (powerRange < 0.9f)
+            }*/
+            else if (powerRange < 0.8f)
             {
                 power = PowerType.ColorRetard;
                 isEvil = false;

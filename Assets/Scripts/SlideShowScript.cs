@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 using System.Collections;
 using System.Collections.Generic;
 
@@ -8,19 +9,6 @@ public class SlideShowScript : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
         _slides = GameObject.FindGameObjectsWithTag("introPanel");
-        Debug.Log("hello");
-        ShowActivePanel();
-    }
-
-    void OnMouseDown()
-    {
-        
-        activeSlide++;
-        if (activeSlide > _slides.Length)
-        {
-            Application.LoadLevel("MenuScene");
-            return;
-        }
         ShowActivePanel();
     }
 
@@ -28,13 +16,20 @@ public class SlideShowScript : MonoBehaviour {
     {
         foreach (var slide in _slides)
         {
-            Debug.Log(slide.name);
             slide.SetActive(slide.name.Contains("" + activeSlide));
         }
     }
 	
 	// Update is called once per frame
-	void Update () {
-	
-	}
+	void FixedUpdate () {
+        if (Input.GetMouseButtonDown(0)) { 
+            activeSlide++;
+            if (activeSlide > _slides.Length)
+            {
+                Application.LoadLevel("MenuScene");
+                return;
+            }
+            ShowActivePanel();
+        }
+    }
 }
