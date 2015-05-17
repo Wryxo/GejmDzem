@@ -95,10 +95,10 @@ public class SquareScript : MonoBehaviour {
             checkWalkable();
             ancestor.checkWalkable();
 
-            if (power != null)
+            /*if (power != null)
             {
                 power.checkPlatform();
-            }
+            }*/
         }
     }
 
@@ -130,7 +130,6 @@ public class SquareScript : MonoBehaviour {
                 }
                 if (Input.GetMouseButtonDown(1))
                 {
-                    Debug.Log("Right");
                     var tmp = colorsLeft[set];
                     colorsLeft[set] = colorsRight[set];
                     colorsRight[set] = tmp;
@@ -142,10 +141,10 @@ public class SquareScript : MonoBehaviour {
                     checkWalkable();
                     ancestor.checkWalkable();
 
-                    if (power != null)
+                    /*if (power != null)
                     {
                         power.checkPlatform();
-                    }
+                    }*/
                 }
             }
         }

@@ -30,7 +30,9 @@ public class PlayerScript : MonoBehaviour
             {
                 _masterScript.pause = true;
                 Text tmp = (GameObject.FindGameObjectWithTag("GG")).GetComponent<Text>();
-                tmp.text = "GG" + System.Environment.NewLine + "Restart?";
+                tmp.text = "Game Over";
+                tmp = (GameObject.Find("Restart")).GetComponent<Text>();
+                tmp.text = "Click to restart";
             }
             if (_stuck)
             {
