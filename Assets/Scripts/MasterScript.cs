@@ -35,6 +35,7 @@ public class MasterScript : MonoBehaviour {
 
     //powerup stuff
     private float powerCd = 0.0f;
+    private float tierCd = 0.0f;
     private float retardCd = 0.0f;
     private float chaosCd = 0.0f;
     private float hpCd = 0.0f;
@@ -80,6 +81,7 @@ public class MasterScript : MonoBehaviour {
     void Start ()
     {
         powerCd = Random.Range(10.0f,15.0f);
+        tierCd = 30.0f;
         _playerTransform = (GameObject.FindGameObjectWithTag("Retard")).GetComponent<Transform>();
         _scoreText = (GameObject.FindGameObjectWithTag("Score")).GetComponent<Text>();
         _diffText = (GameObject.FindGameObjectWithTag("Difficulty")).GetComponent<Text>();
@@ -116,9 +118,9 @@ public class MasterScript : MonoBehaviour {
         setupCubes();
         _diffText.text = diffRange.ToString();
 
-        setCombo3();
-        setCombo4();
-        setCombo5();
+        //setCombo3();
+        //setCombo4();
+        //setCombo5();
         //pregen. enough cubes
     }
 
@@ -895,10 +897,41 @@ public class MasterScript : MonoBehaviour {
         {
             powerCd -= Time.deltaTime;
         }
+        if (tierCd > 0.0f)
+        {
+            tierCd -= Time.deltaTime;
+        }
         if (powerCd <= 0.0f)
         {
             Instantiate(Resources.Load("Prefabs/GenericPowerup", typeof(GameObject)));
             powerCd = Random.Range(15.0f, 20.0f);
+        }
+        else if ((powerCd > 5.0f)&&(tierCd<=0.0f))
+        {
+            if (!_combo3Active)
+            {
+                GameObject gp = (GameObject)Instantiate(Resources.Load("Prefabs/GenericPowerup", typeof(GameObject)));
+                gp.GetComponent<PowerupScript>().power = PowerupScript.PowerType.TierOne;
+                tierCd =30.0f;
+            }
+            else if (!_combo4Active)
+            {
+                GameObject gp = (GameObject)Instantiate(Resources.Load("Prefabs/GenericPowerup", typeof(GameObject)));
+                gp.GetComponent<PowerupScript>().power = PowerupScript.PowerType.TierTwo;
+                tierCd =50.0f;
+            }
+            else if (!_combo5Active)
+            {
+                GameObject gp = (GameObject)Instantiate(Resources.Load("Prefabs/GenericPowerup", typeof(GameObject)));
+                gp.GetComponent<PowerupScript>().power = PowerupScript.PowerType.TierThree;
+                tierCd =80.0f;
+            }
+            else
+            {
+                //don't bother too much
+                tierCd = 474747.0f;
+            }
+            
         }
         if ((retardCheck) && (retardCd <= 0.0f))
         {
