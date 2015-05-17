@@ -6,10 +6,14 @@ public class BackgroundScript : MonoBehaviour {
     private MasterScript _masterScript;
     private float _horzExtent;
 
-	// Use this for initialization
-	void Start () {
-        _masterScript = (GameObject.FindGameObjectWithTag("GameController")).GetComponent<MasterScript>();
-        _horzExtent = _masterScript.GetHorzExtent();
+    // Use this for initialization
+    public float GetHorzExtent()
+    {
+        return Camera.main.orthographicSize * Screen.width / Screen.height;
+    }
+
+    void Start () {        
+        _horzExtent = GetHorzExtent();
     }
 	void FixedUpdate()
     {
