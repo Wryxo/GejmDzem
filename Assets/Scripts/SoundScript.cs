@@ -22,7 +22,7 @@ public class SoundScript : MonoBehaviour
 	    else
 	    {
             DontDestroyOnLoad(transform.gameObject);
-            music = (AudioClip)Resources.Load("Sounds/menu", typeof(AudioClip));
+            music = (AudioClip)Resources.Load("Sounds/game2", typeof(AudioClip));
             pop = (AudioClip)Resources.Load("Sounds/pop", typeof(AudioClip));
 	    }
 	}
