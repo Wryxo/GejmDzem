@@ -95,7 +95,7 @@ public class PowerupScript : MonoBehaviour
         //nastavit initial platform
         _platform_id = _masterScript.queue.Count-1;
         updateCurrentPlatform();
-        transform.position = new Vector3(_masterScript.queue[_platform_id].GetComponent<Transform>().position.x, transform.position.y, transform.position.z);
+        transform.position = new Vector3(_masterScript.queue[_platform_id].GetComponent<Transform>().position.x+1, transform.position.y, transform.position.z);
     }
 
     // Update is called once per frame
