@@ -17,48 +17,55 @@ public class PowerupScript : MonoBehaviour
     private float _float_speed = 0.1f;
     private float _throw_speed = 2.0f;
 
-    private enum PowerType
+    public enum PowerType
     {
-        SpeedUp, SpeedDown, Hp, EndlessPoop, ColorRetard, ColorChaos
+        SpeedUp, SpeedDown, Hp, EndlessPoop, ColorRetard, ColorChaos, TierOne, TierTwo, TierThree,Unset
     }
 
     //distrib SpeedUp=0.2, slow=0.2,Hp=0.2,Poop=0.2,c=0.1
 
-    private PowerType power;
+    public PowerType power=PowerType.Unset;
 
     // Use this for initialization
     void Start()
     {
-        float powerRange = Random.Range(0.0f, 1.0f);
-        if (powerRange < 0.2f)
+        if (power != PowerType.Unset)
         {
-            power = PowerType.SpeedUp;
-            isEvil = true;
-        }
-        else if (powerRange < 0.4f)
-        {
-            power = PowerType.SpeedDown;
-            isEvil = false;
-        }
-        else if (powerRange < 0.6f)
-        {
-            power = PowerType.Hp;
-            isEvil = false;
-        }
-        else if (powerRange < 0.8f)
-        {
-            power = PowerType.EndlessPoop;
-            isEvil = false;
-        }
-        else if (powerRange < 0.9f)
-        {
-            power = PowerType.ColorRetard;
             isEvil = false;
         }
         else
         {
-            power = PowerType.ColorChaos;
-            isEvil = true;
+            float powerRange = Random.Range(0.0f, 1.0f);
+            if (powerRange < 0.2f)
+            {
+                power = PowerType.SpeedUp;
+                isEvil = true;
+            }
+            else if (powerRange < 0.4f)
+            {
+                power = PowerType.SpeedDown;
+                isEvil = false;
+            }
+            else if (powerRange < 0.6f)
+            {
+                power = PowerType.Hp;
+                isEvil = false;
+            }
+            else if (powerRange < 0.8f)
+            {
+                power = PowerType.EndlessPoop;
+                isEvil = false;
+            }
+            else if (powerRange < 0.9f)
+            {
+                power = PowerType.ColorRetard;
+                isEvil = false;
+            }
+            else
+            {
+                power = PowerType.ColorChaos;
+                isEvil = true;
+            }
         }
         _transform = GetComponent<Transform>();
         _master = GameObject.FindGameObjectWithTag("GameController");
@@ -107,6 +114,15 @@ public class PowerupScript : MonoBehaviour
                     break;
                 case PowerType.ColorChaos:
                     _masterScript.powerChaos(6.0f);
+                    break;
+                case PowerType.TierOne:
+                    _masterScript.setCombo3();
+                    break;
+                case PowerType.TierTwo:
+                    _masterScript.setCombo4();
+                    break;
+                case PowerType.TierThree:
+                    _masterScript.setCombo5();
                     break;
             }
             Destroy(gameObject);
