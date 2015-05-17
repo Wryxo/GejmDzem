@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using UnityEditor;
+using UnityEngine.UI;
 
 public class PlayerScript : MonoBehaviour
 {
@@ -30,6 +31,8 @@ public class PlayerScript : MonoBehaviour
             if (_transform.position.x < _leftBound)
             {
                 _masterScript.pause = true;
+                Text tmp = (GameObject.FindGameObjectWithTag("GG")).GetComponent<Text>();
+                tmp.text = "GG";
             }
             if (_stuck)
             {
@@ -76,14 +79,18 @@ public class PlayerScript : MonoBehaviour
 
     void OnTriggerExit2D(Collider2D other)
     {
-        var ss = other.gameObject.GetComponent<SquareScript>();
-        if (ss != null) {
-            _masterScript.addCombo(ss.colorsLeft[ss.set], ss.colorsRight[ss.set]);
-            _masterScript.queue.Remove(ss.gameObject);
-            Destroy(ss.gameObject);
-            _masterScript.score += 1;
-            //_masterScript.Shoot();
-            _masterScript.addNextCube();
+        if (!_masterScript.pause)
+        {
+            var ss = other.gameObject.GetComponent<SquareScript>();
+            if (ss != null)
+            {
+                _masterScript.addCombo(ss.colorsLeft[ss.set], ss.colorsRight[ss.set]);
+                _masterScript.queue.Remove(ss.gameObject);
+                Destroy(ss.gameObject);
+                _masterScript.score += 1;
+                //_masterScript.Shoot();
+                _masterScript.addNextCube();
+            } 
         }
     }
 }

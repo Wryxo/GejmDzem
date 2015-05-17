@@ -92,45 +92,48 @@ public class PowerupScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        updateCurrentPlatform();
-        if (Mathf.Abs(_retard.GetComponent<Transform>().position.x - transform.position.x) < 1.0f)
+        if (!_masterScript.pause)
         {
-            switch (power)
+            updateCurrentPlatform();
+            if (Mathf.Abs(_retard.GetComponent<Transform>().position.x - transform.position.x) < 1.0f)
             {
-                case PowerType.SpeedUp:
-                    _masterScript.powerSpeed(4.0f);
-                    break;
-                case PowerType.SpeedDown:
-                    _masterScript.powerSlow(4.0f);
-                    break;
-                case PowerType.Hp:
-                    _masterScript.powerHp(5.0f);
-                    break;
-                case PowerType.EndlessPoop:
-                    _masterScript.powerPoop(5.0f);
-                    break;
-                case PowerType.ColorRetard:
-                    _masterScript.powerRetard(6.0f);
-                    break;
-                case PowerType.ColorChaos:
-                    _masterScript.powerChaos(6.0f);
-                    break;
-                case PowerType.TierOne:
-                    _masterScript.setCombo3();
-                    break;
-                case PowerType.TierTwo:
-                    _masterScript.setCombo4();
-                    break;
-                case PowerType.TierThree:
-                    _masterScript.setCombo5();
-                    break;
-            }
-            Destroy(gameObject);
+                switch (power)
+                {
+                    case PowerType.SpeedUp:
+                        _masterScript.powerSpeed(4.0f);
+                        break;
+                    case PowerType.SpeedDown:
+                        _masterScript.powerSlow(4.0f);
+                        break;
+                    case PowerType.Hp:
+                        _masterScript.powerHp(5.0f);
+                        break;
+                    case PowerType.EndlessPoop:
+                        _masterScript.powerPoop(5.0f);
+                        break;
+                    case PowerType.ColorRetard:
+                        _masterScript.powerRetard(6.0f);
+                        break;
+                    case PowerType.ColorChaos:
+                        _masterScript.powerChaos(6.0f);
+                        break;
+                    case PowerType.TierOne:
+                        _masterScript.setCombo3();
+                        break;
+                    case PowerType.TierTwo:
+                        _masterScript.setCombo4();
+                        break;
+                    case PowerType.TierThree:
+                        _masterScript.setCombo5();
+                        break;
+                }
+                Destroy(gameObject);
+            } 
         }
     }
 
     void FixedUpdate()
-    {
+    { 
         if (isEvil)
         {
             //mumbojumbo
@@ -140,28 +143,34 @@ public class PowerupScript : MonoBehaviour
         {
             if ((_transform.position.y > 1.0f) || (_transform.position.y < 0.5f)) _float_speed *= -1;
         }
-        _transform.position += new Vector3(-(_masterScript.speed + _throw_speed) * Time.deltaTime, _float_speed * Time.deltaTime, 0.0f);
+        _transform.position += new Vector3(-(_masterScript.speed + _throw_speed) * Time.deltaTime, _float_speed * Time.deltaTime, 0.0f); 
     }
 
     void OnTriggerEnter2D(Collider2D other)
     {
-        var ss = other.gameObject.GetComponent<SquareScript>();
-        if ((ss != null) && (isEvil))
+        if (!_masterScript.pause)
         {
-            _float_speed = Random.Range(1.0f, 2.0f);
+            var ss = other.gameObject.GetComponent<SquareScript>();
+            if ((ss != null) && (isEvil))
+            {
+                _float_speed = Random.Range(1.0f, 2.0f);
+            } 
         }
     }
 
     public void checkPlatform()
     {
-        if (_transform.position.y < 1.0f)
+        if (!_masterScript.pause)
         {
-            //todo evaporate anim
-            if (isEvil)
+            if (_transform.position.y < 1.0f)
             {
-                _masterScript.score += 10;
-            }
-            Destroy(gameObject);
+                //todo evaporate anim
+                if (isEvil)
+                {
+                    _masterScript.score += 10;
+                }
+                Destroy(gameObject);
+            } 
         }
     }
 
@@ -180,7 +189,8 @@ public class PowerupScript : MonoBehaviour
             _platform_id = i;
             i--;
             currentTrans = nextTrans;
-            nextTrans = _masterScript.queue[i].GetComponent<Transform>();
+            if (i >= 0)
+                nextTrans = _masterScript.queue[i].GetComponent<Transform>();
         }
         _masterScript.queue[_platform_id].GetComponent<SquareScript>().power = GetComponent<PowerupScript>();
         _platform_vert_dist = Mathf.Abs(_transform.position.y - currentTrans.position.y);

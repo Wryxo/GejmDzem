@@ -61,7 +61,6 @@ public class MasterScript : MonoBehaviour {
     public float healingSpeed=0.0f;
 
     private Text _scoreText;
-    private Text _diffText;
     private List<int> _combo = new List<int>();
 
     private bool _combo3Active = false;
@@ -87,7 +86,6 @@ public class MasterScript : MonoBehaviour {
         tierCd = 30.0f;
         _playerTransform = (GameObject.FindGameObjectWithTag("Retard")).GetComponent<Transform>();
         _scoreText = (GameObject.FindGameObjectWithTag("Score")).GetComponent<Text>();
-        _diffText = (GameObject.FindGameObjectWithTag("Difficulty")).GetComponent<Text>();
 
         GameObject[] tmp = (GameObject.FindGameObjectsWithTag("3combo"));
         _combo3Img = new Image[tmp.Length];
@@ -119,11 +117,6 @@ public class MasterScript : MonoBehaviour {
         }
 
         setupCubes();
-        _diffText.text = diffRange.ToString();
-
-        //setCombo3();
-        //setCombo4();
-        //setCombo5();
         //pregen. enough cubes
     }
 
@@ -140,7 +133,6 @@ public class MasterScript : MonoBehaviour {
     void Update()
     {
         testCd();
-
     }
 
     void setupCubes()
@@ -977,7 +969,8 @@ public class MasterScript : MonoBehaviour {
         }
         if (countCd <= 0.0f)
         {
-            diffCount = (diffCount + 1)%(diffRange*diffRange);
+            if (diffRange*diffRange != 0)
+                diffCount = (diffCount + 1)%(diffRange*diffRange);
             countCd = 5.0f;
         }
         if (rangeCd <= 0.0f)
