@@ -37,6 +37,10 @@ public class PlayerScript : MonoBehaviour
                 _animator.SetInteger("anim_state", 2);
             } else
             {
+                if (transform.position.x < 0.0f)
+                {
+                    _transform.position += new Vector3(_masterScript.healingSpeed*Time.deltaTime, 0.0f, 0.0f);
+                }
                 _animator.SetInteger("anim_state", 0);
             }
         }

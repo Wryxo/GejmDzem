@@ -34,6 +34,7 @@ public class MasterScript : MonoBehaviour {
     private Transform _playerTransform;
 
     //powerup stuff
+    private float powerCd = 0.0f;
     private float retardCd = 0.0f;
     private float chaosCd = 0.0f;
     private float hpCd = 0.0f;
@@ -51,6 +52,7 @@ public class MasterScript : MonoBehaviour {
     private int origRange;
     private int origCount;
     private float origSpeed;
+    public float healingSpeed=0.0f;
 
     private Text _scoreText;
     private Text _diffText;
@@ -74,51 +76,10 @@ public class MasterScript : MonoBehaviour {
     bool combo4Done = false;
     bool combo5Done = false;
 
-    void testCd()
-    {
-        if ((retardCheck)&&(retardCd <= 0.0f))
-        {
-            retardCheck = false;
-            retardCd = 0.0f;
-            diffRange = origRange;
-            diffCount = origCount;
-        }
-        if ((chaosCheck)&&(chaosCd <= 0.0f))
-        {
-            chaosCheck = false;
-            chaosCd = 0.0f;
-            diffRange = origRange;
-            diffCount = origCount;
-        }
-        if ((hpCheck) && (hpCd <= 0.0f))
-        {
-            hpCheck = false;
-            hpCd = 0.0f;
-            //todo
-        }
-        if ((speedCheck) && (speedCd <= 0.0f))
-        {
-            speedCheck = false;
-            speedCd = 0.0f;
-            speed = origSpeed;
-        }
-        if ((slowCheck) && (slowCd <= 0.0f))
-        {
-            slowCheck = false;
-            slowCd = 0.0f;
-            speed = origSpeed;
-        }
-        if ((poopCheck) && (poopCd <= 0.0f))
-        {
-            poopCheck = false;
-            poopCd = 0.0f;
-            //todo
-        }
-    }
-
-
     // Use this for initialization
-    void Start () {
+    void Start ()
+    {
+        powerCd = Random.Range(10.0f,15.0f);
         _playerTransform = (GameObject.FindGameObjectWithTag("Retard")).GetComponent<Transform>();
         _scoreText = (GameObject.FindGameObjectWithTag("Score")).GetComponent<Text>();
         _diffText = (GameObject.FindGameObjectWithTag("Difficulty")).GetComponent<Text>();
@@ -178,6 +139,12 @@ public class MasterScript : MonoBehaviour {
         }
     }
 
+    void Update()
+    {
+        testCd();
+
+    }
+
     void setupCubes()
     {
         horzExtent = GetHorzExtent();
@@ -210,8 +177,8 @@ public class MasterScript : MonoBehaviour {
         ssc = cube.GetComponent<SquareScript>();
         ssc.colorsLeft = new int[size];
         ssc.colorsRight = new int[size];
-        left.CopyTo(ssc.colorsLeft, 0);
-        right.CopyTo(ssc.colorsRight, 0);
+        right.CopyTo(ssc.colorsLeft, 0);
+        left.CopyTo(ssc.colorsRight, 0);
         cube.GetComponent<Transform>().position = new Vector3(1.5f + (2 * ssc.childLeft.bounds.size.x), 0, 0);
         cube.GetComponent<Transform>().localScale = new Vector3(cubeSize, cubeSize, 0);
         queue.Add(cube);
@@ -896,5 +863,130 @@ public class MasterScript : MonoBehaviour {
             tmpc = _combo5Img[3].color;
             _combo5Img[3].color = new Color(tmpc.r, tmpc.g, tmpc.b, 0.2f);
         }
+    }
+
+    void testCd()
+    {
+        if (retardCd > 0.0f)
+        {
+            retardCd -= Time.deltaTime;
+        }
+        if (chaosCd > 0.0f)
+        {
+            chaosCd -= Time.deltaTime;
+        }
+        if (poopCd > 0.0f)
+        {
+            poopCd -= Time.deltaTime;
+        }
+        if (slowCd > 0.0f)
+        {
+            slowCd -= Time.deltaTime;
+        }
+        if (speedCd > 0.0f)
+        {
+            speedCd -= Time.deltaTime;
+        }
+        if (hpCd > 0.0f)
+        {
+            hpCd -= Time.deltaTime;
+        }
+        if (powerCd > 0.0f)
+        {
+            powerCd -= Time.deltaTime;
+        }
+        if (powerCd <= 0.0f)
+        {
+            Instantiate(Resources.Load("Prefabs/GenericPowerup", typeof(GameObject)));
+            powerCd = Random.Range(15.0f, 20.0f);
+        }
+        if ((retardCheck) && (retardCd <= 0.0f))
+        {
+            retardCheck = false;
+            retardCd = 0.0f;
+            diffRange = origRange;
+            diffCount = origCount;
+        }
+        if ((chaosCheck) && (chaosCd <= 0.0f))
+        {
+            chaosCheck = false;
+            chaosCd = 0.0f;
+            diffRange = origRange;
+            diffCount = origCount;
+        }
+        if ((hpCheck) && (hpCd <= 0.0f))
+        {
+            hpCheck = false;
+            hpCd = 0.0f;
+            healingSpeed = 0.0f;
+        }
+        if ((speedCheck) && (speedCd <= 0.0f))
+        {
+            speedCheck = false;
+            speedCd = 0.0f;
+            speed = origSpeed;
+        }
+        if ((slowCheck) && (slowCd <= 0.0f))
+        {
+            slowCheck = false;
+            slowCd = 0.0f;
+            speed = origSpeed;
+        }
+        if ((poopCheck) && (poopCd <= 0.0f))
+        {
+            poopCheck = false;
+            poopCd = 0.0f;
+            //todo
+        }
+    }
+
+    //block of powers
+
+    public void powerSpeed(float t)
+    {
+        origSpeed = speed;
+        speed = 4.0f;
+        speedCd = t;
+        speedCheck = true;
+    }
+
+    public void powerSlow(float t)
+    {
+        origSpeed = speed;
+        speed = 0.8f;
+        slowCd = t;
+        slowCheck = true;
+    }
+
+    public void powerHp(float t)
+    {
+        healingSpeed = 1.0f;
+        hpCd = t;
+        hpCheck = true;
+    }
+
+    public void powerPoop(float t)
+    {
+        //todo shoot poop
+    }
+
+    public void powerRetard(float t)
+    {
+        origRange = diffRange;
+        origCount = diffCount;
+        diffRange = 3;
+        diffCount = 3;
+        retardCd = t;
+        retardCheck = true;
+    }
+
+    public void powerChaos(float t)
+    {
+        origRange = diffRange;
+        origCount = diffCount;
+        diffRange = 6;
+        diffCount = 6;
+        retardCd = t;
+        retardCheck = true;
     }
 }
