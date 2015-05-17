@@ -32,6 +32,7 @@ public class PowerupScript : MonoBehaviour
         if (power != PowerType.Unset)
         {
             isEvil = false;
+            GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>("Sprites/tier_power");
         }
         else
         {
@@ -66,6 +67,14 @@ public class PowerupScript : MonoBehaviour
                 power = PowerType.ColorChaos;
                 isEvil = true;
             }
+            if (isEvil)
+            {
+                GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>("Sprites/evil_power");
+            }
+            else
+            {
+                GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>("Sprites/good_power");
+            }
         }
         _transform = GetComponent<Transform>();
         _master = GameObject.FindGameObjectWithTag("GameController");
@@ -75,7 +84,7 @@ public class PowerupScript : MonoBehaviour
         {
             _float_speed = 0.5f;
             _transform.position = _master.GetComponent<Transform>().position +
-                                  new Vector3(0.0f, Random.Range(0.6f, 2.0f), 0.0f);
+                                  new Vector3(0.0f, Random.Range(0.6f, 1.0f), 0.0f);
         }
         else
         {
