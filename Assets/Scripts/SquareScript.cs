@@ -21,6 +21,8 @@ public class SquareScript : MonoBehaviour {
     public bool zamok = false;
     public PowerupScript power;
 
+    private bool clicked;
+
     // Use this for initialization
     void Start () {
         _transform = GetComponent<Transform>();
@@ -49,6 +51,7 @@ public class SquareScript : MonoBehaviour {
     void FixedUpdate()
     {
         if (!_masterScript.pause) {
+            
             if (_transtime < 1.0f)
             {
                 _transtime += 2*Time.deltaTime;
@@ -77,15 +80,37 @@ public class SquareScript : MonoBehaviour {
         }*/
     }
 
+    void OnMouseExit()
+    {
+        if (clicked) {
+            clicked = false;
+            var tmp = colorsLeft[set];
+            colorsLeft[set] = colorsRight[set];
+            colorsRight[set] = tmp;
+
+            var tmpc = childLeft.color;
+            childLeft.color = childRight.color;
+            childRight.color = tmpc;
+
+            checkWalkable();
+            ancestor.checkWalkable();
+
+            if (power != null)
+            {
+                power.checkPlatform();
+            }
+        }
+    }
+
     void OnMouseOver()
     {
         if (!_masterScript.pause)
         {
             if (!zamok)
             {
-                if (Input.GetMouseButtonDown(0))
+                if (Input.GetMouseButtonUp(0))
                 {
-                    Debug.Log("Left");
+                    clicked = false;
                     set++;
                     set = set % colorsLeft.Length;
                     childLeft.color = _masterScript.colors[colorsLeft[set]];
@@ -98,6 +123,10 @@ public class SquareScript : MonoBehaviour {
                     {
                         power.checkPlatform();
                     }
+                }
+                if (Input.GetMouseButtonDown(0))
+                {
+                    clicked = true;
                 }
                 if (Input.GetMouseButtonDown(1))
                 {
