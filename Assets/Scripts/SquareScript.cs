@@ -7,6 +7,7 @@ public class SquareScript : MonoBehaviour {
 
     private Transform _transform;
     private MasterScript _masterScript;
+    private float _transtime=1.0f;
 
     public int[] colorsLeft;
     public int[] colorsRight;
