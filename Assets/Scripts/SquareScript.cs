@@ -40,16 +40,21 @@ public class SquareScript : MonoBehaviour {
 
     void FixedUpdate()
     {
-        if (!_masterScript.pause) { 
+        if (!_masterScript.pause) {
+            if (_transtime < 1.0f)
+            {
+                _transtime += 2*Time.deltaTime;
+                Mathf.Clamp(_transtime, 0.0f, 1.0f);
+            }
             if (!walkable)
             {
-                childLeft.transform.localScale = new Vector2(0.7f, 1.0f);
-                childRight.transform.localScale = new Vector2(0.7f, 1.0f);
+                childLeft.transform.localScale = Vector2.Lerp(new Vector2(1.0f, 1.0f), new Vector2(0.7f, 1.0f), _transtime);
+                childRight.transform.localScale = Vector2.Lerp(new Vector2(1.0f, 1.0f), new Vector2(0.7f, 1.0f), _transtime);
             }
             else
             {
-                childLeft.transform.localScale = new Vector2(1.0f, 1.0f);
-                childRight.transform.localScale = new Vector2(1.0f, 1.0f);
+                childLeft.transform.localScale = Vector2.Lerp(new Vector2(0.7f, 1.0f), new Vector2(1.0f, 1.0f),_transtime);
+                childRight.transform.localScale = Vector2.Lerp(new Vector2(0.7f, 1.0f), new Vector2(1.0f, 1.0f),_transtime);
             }
         }
         _transform.position += new Vector3(-_masterScript.speed * Time.deltaTime, 0.0f);
@@ -111,6 +116,7 @@ public class SquareScript : MonoBehaviour {
 
     public void checkWalkable()
     {
+        bool orig = walkable;
         if (predecessor != null)
         {
             if (predecessor.getColor(true) == colorsLeft[set])
@@ -126,6 +132,7 @@ public class SquareScript : MonoBehaviour {
         {
             walkable = true;
         }
+        if (orig != walkable) _transtime = 0f;
     }
 
     public int getColor(bool direction)
