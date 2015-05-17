@@ -3,11 +3,11 @@ using System.Collections;
 
 public class LoadScript : MonoBehaviour {
 
-    public string Scene = "GameScene";
+    public string Scene;
 
 	// Use this for initialization
 	void Start () {
-	    
+        Debug.Log("Start");
 	}
 	
 	// Update is called once per frame
@@ -16,8 +16,9 @@ public class LoadScript : MonoBehaviour {
 
     }
 
-	void OnMouseUp()
+	void OnMouseDown()
     {
+        Debug.Log(Scene);
         Application.LoadLevel(Scene);
     }
 }

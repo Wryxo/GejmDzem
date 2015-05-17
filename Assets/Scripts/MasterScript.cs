@@ -4,6 +4,7 @@ using UnityEngine;
 using System.Collections.Generic;
 using UnityEngine.UI;
 using Random = UnityEngine.Random;
+using UnityEditor;
 
 public class MasterScript : MonoBehaviour {
 
@@ -132,6 +133,10 @@ public class MasterScript : MonoBehaviour {
 
     // Update is called once per frame
     void FixedUpdate () {
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            Application.LoadLevel("MenuScene");
+        }
         if (!pause)
         {
             speed += 0.01f*Time.deltaTime;
@@ -139,7 +144,7 @@ public class MasterScript : MonoBehaviour {
             _scoreText.text = score.ToString();
         } else
         {
-            if(Input.GetMouseButtonUp(0))
+            if(Input.GetMouseButtonUp(0) && EditorApplication.currentScene == "GameScene")
             {
                 Application.LoadLevel("GameScene");
             }
