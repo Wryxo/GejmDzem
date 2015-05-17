@@ -916,19 +916,19 @@ public class MasterScript : MonoBehaviour {
             {
                 GameObject gp = (GameObject) Instantiate(Resources.Load("Prefabs/GenericPowerup", typeof (GameObject)));
                 gp.GetComponent<PowerupScript>().power = PowerupScript.PowerType.TierOne;
-                tierCd = 30.0f;
+                tierCd = 20.0f;
             }
             else if (!_combo4Active)
             {
                 GameObject gp = (GameObject) Instantiate(Resources.Load("Prefabs/GenericPowerup", typeof (GameObject)));
                 gp.GetComponent<PowerupScript>().power = PowerupScript.PowerType.TierTwo;
-                tierCd = 50.0f;
+                tierCd = 40.0f;
             }
             else if (!_combo5Active)
             {
                 GameObject gp = (GameObject) Instantiate(Resources.Load("Prefabs/GenericPowerup", typeof (GameObject)));
                 gp.GetComponent<PowerupScript>().power = PowerupScript.PowerType.TierThree;
-                tierCd = 80.0f;
+                tierCd = 60.0f;
             }
             else
             {
@@ -994,18 +994,16 @@ public class MasterScript : MonoBehaviour {
         if (countCd <= 0.0f)
         {
             diffCount = (diffCount + 1);
-            if (diffCount > (diffRange * diffRange))
-                diffCount = diffRange * diffRange;
+            if (diffCount > (diffRange * diffRange)+2)
+                diffCount = (diffRange * diffRange)+2;
             countCd = 5.0f;
-            tmp.text = "";
         }
         if (rangeCd <= 0.0f)
         {
             diffRange++;
             if (diffRange > 6)
                 diffRange = 6;
-            rangeCd = 20.0f;
-            tmp.text = "";
+            rangeCd = 15.0f;
         }
     }
 
