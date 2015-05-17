@@ -143,6 +143,15 @@ public class PowerupScript : MonoBehaviour
                         _masterScript.setCombo5();
                         break;
                 }
+                if (isEvil)
+                {
+                    AudioSource astmp = GameObject.Find("PowerDown").GetComponent<AudioSource>();
+                    astmp.Play();
+                } else
+                {
+                    AudioSource astmp = GameObject.Find("PowerUp").GetComponent<AudioSource>();
+                    astmp.Play();
+                }
                 Destroy(gameObject);
             } 
         }
@@ -184,6 +193,16 @@ public class PowerupScript : MonoBehaviour
                 if (isEvil)
                 {
                     _masterScript.score += 10;
+                }
+                if (isEvil)
+                {
+                    AudioSource astmp = GameObject.Find("PowerDown").GetComponent<AudioSource>();
+                    astmp.Play();
+                }
+                else
+                {
+                    AudioSource astmp = GameObject.Find("PowerUp").GetComponent<AudioSource>();
+                    astmp.Play();
                 }
                 Destroy(gameObject);
             } 

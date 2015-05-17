@@ -15,20 +15,13 @@ public class SoundScript : MonoBehaviour
 
 	// Use this for initialization
 	void Start () {
-	    if (inMenu)
-	    {
-            music = (AudioClip)Resources.Load("Sounds/menu", typeof(AudioClip));
-	    }
-	    else
-	    {
-            DontDestroyOnLoad(this);
-            music = (AudioClip)Resources.Load("Sounds/game2", typeof(AudioClip));
-            AudioSource tmp = (GameObject.Find("SoundController")).GetComponent<AudioSource>();
-            tmp.clip = music;
-            tmp.loop = true;
-            if (!tmp.isPlaying)
-                tmp.Play();
-        }
+        DontDestroyOnLoad(this);
+        music = (AudioClip)Resources.Load("Sounds/game2", typeof(AudioClip));
+        AudioSource tmp = (GameObject.Find("SoundController")).GetComponent<AudioSource>();
+        tmp.clip = music;
+        tmp.loop = true;
+        if (!tmp.isPlaying)
+            tmp.Play();
 	}
 	
 	// Update is called once per frame

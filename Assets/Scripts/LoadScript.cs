@@ -19,7 +19,6 @@ public class LoadScript : MonoBehaviour {
 
     void OnMouseDown()
     {
-        Debug.Log(Scene);
         Application.LoadLevel(Scene);
     }
 }

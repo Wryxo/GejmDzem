@@ -12,16 +12,18 @@ Platform assembly: D:\osobne\GejmDzem\bss_Data\Managed\Assembly-CSharp.dll (this
 Loading D:\osobne\GejmDzem\bss_Data\Managed\Assembly-CSharp.dll into Unity Child Domain
 Platform assembly: D:\osobne\GejmDzem\bss_Data\Managed\UnityEngine.UI.dll (this message is harmless)
 Loading D:\osobne\GejmDzem\bss_Data\Managed\UnityEngine.UI.dll into Unity Child Domain
-- Completed reload, in  0.049 seconds
+- Completed reload, in  0.077 seconds
 desktop: 1920x1080 60Hz; virtual: 1920x1080 at 0,0
 <RI> Initializing input.
 <RI> Input initialized.
 <RI> Initialized touch support.
 Platform assembly: D:\osobne\GejmDzem\bss_Data\Managed\System.Core.dll (this message is harmless)
 Platform assembly: D:\osobne\GejmDzem\bss_Data\Managed\System.dll (this message is harmless)
-Unloading 4 Unused Serialized files (Serialized files now loaded: 0)
-UnloadTime: 2.543825 ms
+Start
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebug.gen.cpp Line: 56)
 
-Unloading 14 unused Assets to reduce memory usage. Loaded Objects now: 303.
-Total: 0.222456 ms (FindLiveObjects: 0.042278 ms CreateObjectMapping: 0.014224 ms MarkObjects: 0.151728 ms  DeleteObjects: 0.013039 ms)
+Start
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebug.gen.cpp Line: 56)
 

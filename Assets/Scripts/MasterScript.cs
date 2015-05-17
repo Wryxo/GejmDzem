@@ -4,7 +4,6 @@ using UnityEngine;
 using System.Collections.Generic;
 using UnityEngine.UI;
 using Random = UnityEngine.Random;
-using UnityEditor;
 
 public class MasterScript : MonoBehaviour {
 
@@ -141,6 +140,9 @@ public class MasterScript : MonoBehaviour {
     void FixedUpdate () {
         if (Input.GetKeyDown(KeyCode.Escape))
         {
+            AudioSource tmp = (GameObject.Find("SoundController")).GetComponent<AudioSource>();
+            if (tmp.isPlaying)
+                tmp.Stop();
             Application.LoadLevel("MenuScene");
         }
         if (!pause)
@@ -150,7 +152,7 @@ public class MasterScript : MonoBehaviour {
             _scoreText.text = score.ToString();
         } else
         {
-            if(Input.GetMouseButtonUp(0) && EditorApplication.currentScene == "GameScene")
+            if(Input.GetMouseButtonUp(0))
             {
                 Application.LoadLevel("GameScene");
             }
