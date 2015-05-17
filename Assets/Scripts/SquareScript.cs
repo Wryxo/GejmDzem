@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System;
+using System.Linq;
 
 public class SquareScript : MonoBehaviour {
 
@@ -37,7 +38,14 @@ public class SquareScript : MonoBehaviour {
 
     // Update is called once per frame
     void Update () {
-        
+        /*if (colorsLeft.Length < 3)
+        {
+            Debug.Log(colorsLeft.Length);
+        }
+        if (colorsRight.Length < 3)
+        {
+            Debug.Log(colorsRight.Length);
+        }*/
     }
 
     void FixedUpdate()
