@@ -5,9 +5,7 @@ using System;
 
 public class SquareScript : MonoBehaviour {
 
-    private SpriteRenderer _spriteRenderer;
     private Transform _transform;
-    private Transform _playerTransform;
     private MasterScript _masterScript;
     private float _transtime=1.0f;
 
