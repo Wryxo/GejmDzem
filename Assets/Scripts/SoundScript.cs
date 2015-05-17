@@ -21,12 +21,6 @@ public class SoundScript : MonoBehaviour
 	    }
 	    else
 	    {
-<<<<<<< HEAD
-            DontDestroyOnLoad(transform.gameObject);
-            music = (AudioClip)Resources.Load("Sounds/game2", typeof(AudioClip));
-            pop = (AudioClip)Resources.Load("Sounds/pop", typeof(AudioClip));
-	    }
-=======
             DontDestroyOnLoad(this);
             music = (AudioClip)Resources.Load("Sounds/menu", typeof(AudioClip));
             AudioSource tmp = (GameObject.Find("SoundController")).GetComponent<AudioSource>();
@@ -35,7 +29,6 @@ public class SoundScript : MonoBehaviour
             if (!tmp.isPlaying)
                 tmp.Play();
         }
->>>>>>> 5de002ec612be8ecbd956be1b237c21f039959d3
 	}
 	
 	// Update is called once per frame
