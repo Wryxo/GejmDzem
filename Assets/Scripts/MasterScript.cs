@@ -1014,7 +1014,7 @@ public class MasterScript : MonoBehaviour {
     public void powerSpeed(float t)
     {
         origSpeed = speed;
-        speed = speed * 1.2f;
+        speed = speed * 1.7f;
         speedCd = t;
         speedCheck = true;
     }
@@ -1022,7 +1022,7 @@ public class MasterScript : MonoBehaviour {
     public void powerSlow(float t)
     {
         origSpeed = speed;
-        speed = speed * 0.8f;
+        speed = speed * 0.6f;
         slowCd = t;
         slowCheck = true;
     }
