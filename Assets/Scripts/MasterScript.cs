@@ -273,11 +273,11 @@ public class MasterScript : MonoBehaviour {
         _combo3[2] = rand;
 
         Color tmpc = colors[_combo3[0]];
-        _combo3Img[0].color = new Color(tmpc.r, tmpc.g, tmpc.b, 0.2f);
+        _combo3Img[0].color = new Color(tmpc.r, tmpc.g, tmpc.b, 0.4f);
         tmpc = colors[_combo3[1]];
-        _combo3Img[1].color = new Color(tmpc.r, tmpc.g, tmpc.b, 0.2f);
+        _combo3Img[1].color = new Color(tmpc.r, tmpc.g, tmpc.b, 0.4f);
         tmpc = colors[_combo3[2]];
-        _combo3Img[2].color = new Color(tmpc.r, tmpc.g, tmpc.b, 0.2f);
+        _combo3Img[2].color = new Color(tmpc.r, tmpc.g, tmpc.b, 0.4f);
         _combo3Active = true;
     }
 
@@ -294,13 +294,13 @@ public class MasterScript : MonoBehaviour {
         _combo4[3] = rand;
 
         Color tmpc = colors[_combo4[0]];
-        _combo4Img[0].color = new Color(tmpc.r, tmpc.g, tmpc.b, 0.2f);
+        _combo4Img[0].color = new Color(tmpc.r, tmpc.g, tmpc.b, 0.4f);
         tmpc = colors[_combo4[1]];
-        _combo4Img[1].color = new Color(tmpc.r, tmpc.g, tmpc.b, 0.2f);
+        _combo4Img[1].color = new Color(tmpc.r, tmpc.g, tmpc.b, 0.4f);
         tmpc = colors[_combo4[2]];
-        _combo4Img[2].color = new Color(tmpc.r, tmpc.g, tmpc.b, 0.2f);
+        _combo4Img[2].color = new Color(tmpc.r, tmpc.g, tmpc.b, 0.4f);
         tmpc = colors[_combo4[3]];
-        _combo4Img[3].color = new Color(tmpc.r, tmpc.g, tmpc.b, 0.2f);
+        _combo4Img[3].color = new Color(tmpc.r, tmpc.g, tmpc.b, 0.4f);
         _combo4Active = true;
     }
 
@@ -319,15 +319,15 @@ public class MasterScript : MonoBehaviour {
         _combo5[4] = rand;
 
         Color tmpc = colors[_combo5[0]];
-        _combo5Img[0].color = new Color(tmpc.r, tmpc.g, tmpc.b, 0.2f);
+        _combo5Img[0].color = new Color(tmpc.r, tmpc.g, tmpc.b, 0.4f);
         tmpc = colors[_combo5[1]];
-        _combo5Img[1].color = new Color(tmpc.r, tmpc.g, tmpc.b, 0.2f);
+        _combo5Img[1].color = new Color(tmpc.r, tmpc.g, tmpc.b, 0.4f);
         tmpc = colors[_combo5[2]];
-        _combo5Img[2].color = new Color(tmpc.r, tmpc.g, tmpc.b, 0.2f);
+        _combo5Img[2].color = new Color(tmpc.r, tmpc.g, tmpc.b, 0.4f);
         tmpc = colors[_combo5[3]];
-        _combo5Img[3].color = new Color(tmpc.r, tmpc.g, tmpc.b, 0.2f);
+        _combo5Img[3].color = new Color(tmpc.r, tmpc.g, tmpc.b, 0.4f);
         tmpc = colors[_combo5[3]];
-        _combo5Img[4].color = new Color(tmpc.r, tmpc.g, tmpc.b, 0.2f);
+        _combo5Img[4].color = new Color(tmpc.r, tmpc.g, tmpc.b, 0.4f);
         _combo5Active = true;
     }
 
@@ -369,19 +369,19 @@ public class MasterScript : MonoBehaviour {
                     _scoreText.text = score.ToString();
                     Shoot(0);
                     tmpc = _combo3Img[0].color;
-                    _combo3Img[0].color = new Color(tmpc.r, tmpc.g, tmpc.b, 0.2f);
+                    _combo3Img[0].color = new Color(tmpc.r, tmpc.g, tmpc.b, 0.4f);
                     tmpc = _combo3Img[1].color;
-                    _combo3Img[1].color = new Color(tmpc.r, tmpc.g, tmpc.b, 0.2f);
+                    _combo3Img[1].color = new Color(tmpc.r, tmpc.g, tmpc.b, 0.4f);
                     tmpc = _combo3Img[2].color;
-                    _combo3Img[2].color = new Color(tmpc.r, tmpc.g, tmpc.b, 0.2f);
+                    _combo3Img[2].color = new Color(tmpc.r, tmpc.g, tmpc.b, 0.4f);
                 }
 
                 tmpc = _combo3Img[0].color;
-                _combo3Img[0].color = new Color(tmpc.r, tmpc.g, tmpc.b, 0.2f);
+                _combo3Img[0].color = new Color(tmpc.r, tmpc.g, tmpc.b, 0.4f);
                 tmpc = _combo3Img[1].color;
-                _combo3Img[1].color = new Color(tmpc.r, tmpc.g, tmpc.b, 0.2f);
+                _combo3Img[1].color = new Color(tmpc.r, tmpc.g, tmpc.b, 0.4f);
                 tmpc = _combo3Img[2].color;
-                _combo3Img[2].color = new Color(tmpc.r, tmpc.g, tmpc.b, 0.2f);
+                _combo3Img[2].color = new Color(tmpc.r, tmpc.g, tmpc.b, 0.4f);
             }
             if (_combo[4] == _combo3[1] && _combo[3] == _combo3[0])
             {
@@ -405,16 +405,16 @@ public class MasterScript : MonoBehaviour {
                     _scoreText.text = score.ToString();
                     Shoot(0);
                     tmpc = _combo3Img[0].color;
-                    _combo3Img[0].color = new Color(tmpc.r, tmpc.g, tmpc.b, 0.2f);
+                    _combo3Img[0].color = new Color(tmpc.r, tmpc.g, tmpc.b, 0.4f);
                     tmpc = _combo3Img[1].color;
-                    _combo3Img[1].color = new Color(tmpc.r, tmpc.g, tmpc.b, 0.2f);
+                    _combo3Img[1].color = new Color(tmpc.r, tmpc.g, tmpc.b, 0.4f);
                     tmpc = _combo3Img[2].color;
-                    _combo3Img[2].color = new Color(tmpc.r, tmpc.g, tmpc.b, 0.2f);
+                    _combo3Img[2].color = new Color(tmpc.r, tmpc.g, tmpc.b, 0.4f);
                 }
                 tmpc = _combo3Img[1].color;
-                _combo3Img[1].color = new Color(tmpc.r, tmpc.g, tmpc.b, 0.2f);
+                _combo3Img[1].color = new Color(tmpc.r, tmpc.g, tmpc.b, 0.4f);
                 tmpc = _combo3Img[2].color;
-                _combo3Img[2].color = new Color(tmpc.r, tmpc.g, tmpc.b, 0.2f);
+                _combo3Img[2].color = new Color(tmpc.r, tmpc.g, tmpc.b, 0.4f);
             }
             if (_combo[4] == _combo3[2] && _combo[3] == _combo3[1] && _combo[2] == _combo3[0])
             {
@@ -441,14 +441,14 @@ public class MasterScript : MonoBehaviour {
                     _scoreText.text = score.ToString();
                     Shoot(0);
                     tmpc = _combo3Img[0].color;
-                    _combo3Img[0].color = new Color(tmpc.r, tmpc.g, tmpc.b, 0.2f);
+                    _combo3Img[0].color = new Color(tmpc.r, tmpc.g, tmpc.b, 0.4f);
                     tmpc = _combo3Img[1].color;
-                    _combo3Img[1].color = new Color(tmpc.r, tmpc.g, tmpc.b, 0.2f);
+                    _combo3Img[1].color = new Color(tmpc.r, tmpc.g, tmpc.b, 0.4f);
                     tmpc = _combo3Img[2].color;
-                    _combo3Img[2].color = new Color(tmpc.r, tmpc.g, tmpc.b, 0.2f);
+                    _combo3Img[2].color = new Color(tmpc.r, tmpc.g, tmpc.b, 0.4f);
                 }
                 tmpc = _combo3Img[2].color;
-                _combo3Img[2].color = new Color(tmpc.r, tmpc.g, tmpc.b, 0.2f);
+                _combo3Img[2].color = new Color(tmpc.r, tmpc.g, tmpc.b, 0.4f);
             }
         }
         if (_combo4Active)
@@ -473,22 +473,22 @@ public class MasterScript : MonoBehaviour {
                     _scoreText.text = score.ToString();
                     Shoot(0);
                     tmpc = _combo4Img[0].color;
-                    _combo4Img[0].color = new Color(tmpc.r, tmpc.g, tmpc.b, 0.2f);
+                    _combo4Img[0].color = new Color(tmpc.r, tmpc.g, tmpc.b, 0.4f);
                     tmpc = _combo4Img[1].color;
-                    _combo4Img[1].color = new Color(tmpc.r, tmpc.g, tmpc.b, 0.2f);
+                    _combo4Img[1].color = new Color(tmpc.r, tmpc.g, tmpc.b, 0.4f);
                     tmpc = _combo4Img[2].color;
-                    _combo4Img[2].color = new Color(tmpc.r, tmpc.g, tmpc.b, 0.2f);
+                    _combo4Img[2].color = new Color(tmpc.r, tmpc.g, tmpc.b, 0.4f);
                     tmpc = _combo4Img[3].color;
-                    _combo4Img[3].color = new Color(tmpc.r, tmpc.g, tmpc.b, 0.2f);
+                    _combo4Img[3].color = new Color(tmpc.r, tmpc.g, tmpc.b, 0.4f);
                 }
                 tmpc = _combo4Img[0].color;
-                _combo4Img[0].color = new Color(tmpc.r, tmpc.g, tmpc.b, 0.2f);
+                _combo4Img[0].color = new Color(tmpc.r, tmpc.g, tmpc.b, 0.4f);
                 tmpc = _combo4Img[1].color;
-                _combo4Img[1].color = new Color(tmpc.r, tmpc.g, tmpc.b, 0.2f);
+                _combo4Img[1].color = new Color(tmpc.r, tmpc.g, tmpc.b, 0.4f);
                 tmpc = _combo4Img[2].color;
-                _combo4Img[2].color = new Color(tmpc.r, tmpc.g, tmpc.b, 0.2f);
+                _combo4Img[2].color = new Color(tmpc.r, tmpc.g, tmpc.b, 0.4f);
                 tmpc = _combo4Img[3].color;
-                _combo4Img[3].color = new Color(tmpc.r, tmpc.g, tmpc.b, 0.2f);
+                _combo4Img[3].color = new Color(tmpc.r, tmpc.g, tmpc.b, 0.4f);
             }
             if (_combo[4] == _combo4[1] && _combo[3] == _combo4[0])
             {
@@ -501,11 +501,11 @@ public class MasterScript : MonoBehaviour {
             else
             {
                 tmpc = _combo4Img[1].color;
-                _combo4Img[1].color = new Color(tmpc.r, tmpc.g, tmpc.b, 0.2f);
+                _combo4Img[1].color = new Color(tmpc.r, tmpc.g, tmpc.b, 0.4f);
                 tmpc = _combo4Img[2].color;
-                _combo4Img[2].color = new Color(tmpc.r, tmpc.g, tmpc.b, 0.2f);
+                _combo4Img[2].color = new Color(tmpc.r, tmpc.g, tmpc.b, 0.4f);
                 tmpc = _combo4Img[3].color;
-                _combo4Img[3].color = new Color(tmpc.r, tmpc.g, tmpc.b, 0.2f);
+                _combo4Img[3].color = new Color(tmpc.r, tmpc.g, tmpc.b, 0.4f);
                 if (combo4Done)
                 {
                     combo4Done = false;
@@ -518,13 +518,13 @@ public class MasterScript : MonoBehaviour {
                     _scoreText.text = score.ToString();
                     Shoot(1);
                     tmpc = _combo4Img[0].color;
-                    _combo4Img[0].color = new Color(tmpc.r, tmpc.g, tmpc.b, 0.2f);
+                    _combo4Img[0].color = new Color(tmpc.r, tmpc.g, tmpc.b, 0.4f);
                     tmpc = _combo4Img[1].color;
-                    _combo4Img[1].color = new Color(tmpc.r, tmpc.g, tmpc.b, 0.2f);
+                    _combo4Img[1].color = new Color(tmpc.r, tmpc.g, tmpc.b, 0.4f);
                     tmpc = _combo4Img[2].color;
-                    _combo4Img[2].color = new Color(tmpc.r, tmpc.g, tmpc.b, 0.2f);
+                    _combo4Img[2].color = new Color(tmpc.r, tmpc.g, tmpc.b, 0.4f);
                     tmpc = _combo4Img[3].color;
-                    _combo4Img[3].color = new Color(tmpc.r, tmpc.g, tmpc.b, 0.2f);
+                    _combo4Img[3].color = new Color(tmpc.r, tmpc.g, tmpc.b, 0.4f);
                 }
             }
             if (_combo[4] == _combo4[2] && _combo[3] == _combo4[1] && _combo[2] == _combo4[0])
@@ -540,9 +540,9 @@ public class MasterScript : MonoBehaviour {
             else
             {
                 tmpc = _combo4Img[2].color;
-                _combo4Img[2].color = new Color(tmpc.r, tmpc.g, tmpc.b, 0.2f);
+                _combo4Img[2].color = new Color(tmpc.r, tmpc.g, tmpc.b, 0.4f);
                 tmpc = _combo4Img[3].color;
-                _combo4Img[3].color = new Color(tmpc.r, tmpc.g, tmpc.b, 0.2f);
+                _combo4Img[3].color = new Color(tmpc.r, tmpc.g, tmpc.b, 0.4f);
                 if (combo4Done)
                 {
                     combo4Done = false;
@@ -555,13 +555,13 @@ public class MasterScript : MonoBehaviour {
                     _scoreText.text = score.ToString();
                     Shoot(1);
                     tmpc = _combo4Img[0].color;
-                    _combo4Img[0].color = new Color(tmpc.r, tmpc.g, tmpc.b, 0.2f);
+                    _combo4Img[0].color = new Color(tmpc.r, tmpc.g, tmpc.b, 0.4f);
                     tmpc = _combo4Img[1].color;
-                    _combo4Img[1].color = new Color(tmpc.r, tmpc.g, tmpc.b, 0.2f);
+                    _combo4Img[1].color = new Color(tmpc.r, tmpc.g, tmpc.b, 0.4f);
                     tmpc = _combo4Img[2].color;
-                    _combo4Img[2].color = new Color(tmpc.r, tmpc.g, tmpc.b, 0.2f);
+                    _combo4Img[2].color = new Color(tmpc.r, tmpc.g, tmpc.b, 0.4f);
                     tmpc = _combo4Img[3].color;
-                    _combo4Img[3].color = new Color(tmpc.r, tmpc.g, tmpc.b, 0.2f);
+                    _combo4Img[3].color = new Color(tmpc.r, tmpc.g, tmpc.b, 0.4f);
                 }
             }
             if (_combo[4] == _combo4[3] && _combo[3] == _combo4[2] && _combo[2] == _combo4[1] && _combo[1] == _combo4[0])
@@ -591,16 +591,16 @@ public class MasterScript : MonoBehaviour {
                     _scoreText.text = score.ToString();
                     Shoot(1);
                     tmpc = _combo4Img[0].color;
-                    _combo4Img[0].color = new Color(tmpc.r, tmpc.g, tmpc.b, 0.2f);
+                    _combo4Img[0].color = new Color(tmpc.r, tmpc.g, tmpc.b, 0.4f);
                     tmpc = _combo4Img[1].color;
-                    _combo4Img[1].color = new Color(tmpc.r, tmpc.g, tmpc.b, 0.2f);
+                    _combo4Img[1].color = new Color(tmpc.r, tmpc.g, tmpc.b, 0.4f);
                     tmpc = _combo4Img[2].color;
-                    _combo4Img[2].color = new Color(tmpc.r, tmpc.g, tmpc.b, 0.2f);
+                    _combo4Img[2].color = new Color(tmpc.r, tmpc.g, tmpc.b, 0.4f);
                     tmpc = _combo4Img[3].color;
-                    _combo4Img[3].color = new Color(tmpc.r, tmpc.g, tmpc.b, 0.2f);
+                    _combo4Img[3].color = new Color(tmpc.r, tmpc.g, tmpc.b, 0.4f);
                 }
                 tmpc = _combo4Img[3].color;
-                _combo4Img[3].color = new Color(tmpc.r, tmpc.g, tmpc.b, 0.2f);
+                _combo4Img[3].color = new Color(tmpc.r, tmpc.g, tmpc.b, 0.4f);
             }
         }
         if (_combo5Active)
@@ -625,27 +625,27 @@ public class MasterScript : MonoBehaviour {
                     _scoreText.text = score.ToString();
                     Shoot(2);
                     tmpc = _combo5Img[0].color;
-                    _combo5Img[0].color = new Color(tmpc.r, tmpc.g, tmpc.b, 0.2f);
+                    _combo5Img[0].color = new Color(tmpc.r, tmpc.g, tmpc.b, 0.4f);
                     tmpc = _combo5Img[1].color;
-                    _combo5Img[1].color = new Color(tmpc.r, tmpc.g, tmpc.b, 0.2f);
+                    _combo5Img[1].color = new Color(tmpc.r, tmpc.g, tmpc.b, 0.4f);
                     tmpc = _combo5Img[2].color;
-                    _combo5Img[2].color = new Color(tmpc.r, tmpc.g, tmpc.b, 0.2f);
+                    _combo5Img[2].color = new Color(tmpc.r, tmpc.g, tmpc.b, 0.4f);
                     tmpc = _combo5Img[3].color;
-                    _combo5Img[3].color = new Color(tmpc.r, tmpc.g, tmpc.b, 0.2f);
+                    _combo5Img[3].color = new Color(tmpc.r, tmpc.g, tmpc.b, 0.4f);
                     tmpc = _combo5Img[4].color;
-                    _combo5Img[4].color = new Color(tmpc.r, tmpc.g, tmpc.b, 0.2f);
+                    _combo5Img[4].color = new Color(tmpc.r, tmpc.g, tmpc.b, 0.4f);
                 }
 
                 tmpc = _combo5Img[0].color;
-                _combo5Img[0].color = new Color(tmpc.r, tmpc.g, tmpc.b, 0.2f);
+                _combo5Img[0].color = new Color(tmpc.r, tmpc.g, tmpc.b, 0.4f);
                 tmpc = _combo5Img[1].color;
-                _combo5Img[1].color = new Color(tmpc.r, tmpc.g, tmpc.b, 0.2f);
+                _combo5Img[1].color = new Color(tmpc.r, tmpc.g, tmpc.b, 0.4f);
                 tmpc = _combo5Img[2].color;
-                _combo5Img[2].color = new Color(tmpc.r, tmpc.g, tmpc.b, 0.2f);
+                _combo5Img[2].color = new Color(tmpc.r, tmpc.g, tmpc.b, 0.4f);
                 tmpc = _combo5Img[3].color;
-                _combo5Img[3].color = new Color(tmpc.r, tmpc.g, tmpc.b, 0.2f);
+                _combo5Img[3].color = new Color(tmpc.r, tmpc.g, tmpc.b, 0.4f);
                 tmpc = _combo5Img[4].color;
-                _combo5Img[4].color = new Color(tmpc.r, tmpc.g, tmpc.b, 0.2f);
+                _combo5Img[4].color = new Color(tmpc.r, tmpc.g, tmpc.b, 0.4f);
             }
             if (_combo[4] == _combo5[1] && _combo[3] == _combo5[0])
             {
@@ -670,24 +670,24 @@ public class MasterScript : MonoBehaviour {
                     _scoreText.text = score.ToString();
                     Shoot(2);
                     tmpc = _combo5Img[0].color;
-                    _combo5Img[0].color = new Color(tmpc.r, tmpc.g, tmpc.b, 0.2f);
+                    _combo5Img[0].color = new Color(tmpc.r, tmpc.g, tmpc.b, 0.4f);
                     tmpc = _combo5Img[1].color;
-                    _combo5Img[1].color = new Color(tmpc.r, tmpc.g, tmpc.b, 0.2f);
+                    _combo5Img[1].color = new Color(tmpc.r, tmpc.g, tmpc.b, 0.4f);
                     tmpc = _combo5Img[2].color;
-                    _combo5Img[2].color = new Color(tmpc.r, tmpc.g, tmpc.b, 0.2f);
+                    _combo5Img[2].color = new Color(tmpc.r, tmpc.g, tmpc.b, 0.4f);
                     tmpc = _combo5Img[3].color;
-                    _combo5Img[3].color = new Color(tmpc.r, tmpc.g, tmpc.b, 0.2f);
+                    _combo5Img[3].color = new Color(tmpc.r, tmpc.g, tmpc.b, 0.4f);
                     tmpc = _combo5Img[4].color;
-                    _combo5Img[4].color = new Color(tmpc.r, tmpc.g, tmpc.b, 0.2f);
+                    _combo5Img[4].color = new Color(tmpc.r, tmpc.g, tmpc.b, 0.4f);
                 }
                 tmpc = _combo5Img[1].color;
-                _combo5Img[1].color = new Color(tmpc.r, tmpc.g, tmpc.b, 0.2f);
+                _combo5Img[1].color = new Color(tmpc.r, tmpc.g, tmpc.b, 0.4f);
                 tmpc = _combo5Img[2].color;
-                _combo5Img[2].color = new Color(tmpc.r, tmpc.g, tmpc.b, 0.2f);
+                _combo5Img[2].color = new Color(tmpc.r, tmpc.g, tmpc.b, 0.4f);
                 tmpc = _combo5Img[3].color;
-                _combo5Img[3].color = new Color(tmpc.r, tmpc.g, tmpc.b, 0.2f);
+                _combo5Img[3].color = new Color(tmpc.r, tmpc.g, tmpc.b, 0.4f);
                 tmpc = _combo5Img[4].color;
-                _combo5Img[4].color = new Color(tmpc.r, tmpc.g, tmpc.b, 0.2f);
+                _combo5Img[4].color = new Color(tmpc.r, tmpc.g, tmpc.b, 0.4f);
             }
             if (_combo[4] == _combo5[2] && _combo[3] == _combo5[1] && _combo[2] == _combo5[0])
             {
@@ -713,22 +713,22 @@ public class MasterScript : MonoBehaviour {
                     _scoreText.text = score.ToString();
                     Shoot(2);
                     tmpc = _combo5Img[0].color;
-                    _combo5Img[0].color = new Color(tmpc.r, tmpc.g, tmpc.b, 0.2f);
+                    _combo5Img[0].color = new Color(tmpc.r, tmpc.g, tmpc.b, 0.4f);
                     tmpc = _combo5Img[1].color;
-                    _combo5Img[1].color = new Color(tmpc.r, tmpc.g, tmpc.b, 0.2f);
+                    _combo5Img[1].color = new Color(tmpc.r, tmpc.g, tmpc.b, 0.4f);
                     tmpc = _combo5Img[2].color;
-                    _combo5Img[2].color = new Color(tmpc.r, tmpc.g, tmpc.b, 0.2f);
+                    _combo5Img[2].color = new Color(tmpc.r, tmpc.g, tmpc.b, 0.4f);
                     tmpc = _combo5Img[3].color;
-                    _combo5Img[3].color = new Color(tmpc.r, tmpc.g, tmpc.b, 0.2f);
+                    _combo5Img[3].color = new Color(tmpc.r, tmpc.g, tmpc.b, 0.4f);
                     tmpc = _combo5Img[4].color;
-                    _combo5Img[4].color = new Color(tmpc.r, tmpc.g, tmpc.b, 0.2f);
+                    _combo5Img[4].color = new Color(tmpc.r, tmpc.g, tmpc.b, 0.4f);
                 }
                 tmpc = _combo5Img[2].color;
-                _combo5Img[2].color = new Color(tmpc.r, tmpc.g, tmpc.b, 0.2f);
+                _combo5Img[2].color = new Color(tmpc.r, tmpc.g, tmpc.b, 0.4f);
                 tmpc = _combo5Img[3].color;
-                _combo5Img[3].color = new Color(tmpc.r, tmpc.g, tmpc.b, 0.2f);
+                _combo5Img[3].color = new Color(tmpc.r, tmpc.g, tmpc.b, 0.4f);
                 tmpc = _combo5Img[4].color;
-                _combo5Img[4].color = new Color(tmpc.r, tmpc.g, tmpc.b, 0.2f);
+                _combo5Img[4].color = new Color(tmpc.r, tmpc.g, tmpc.b, 0.4f);
             }
             if (_combo[4] == _combo5[3] && _combo[3] == _combo5[2] && _combo[2] == _combo5[1] && _combo[1] == _combo5[0])
             {
@@ -756,20 +756,20 @@ public class MasterScript : MonoBehaviour {
                     _scoreText.text = score.ToString();
                     Shoot(2);
                     tmpc = _combo5Img[0].color;
-                    _combo5Img[0].color = new Color(tmpc.r, tmpc.g, tmpc.b, 0.2f);
+                    _combo5Img[0].color = new Color(tmpc.r, tmpc.g, tmpc.b, 0.4f);
                     tmpc = _combo5Img[1].color;
-                    _combo5Img[1].color = new Color(tmpc.r, tmpc.g, tmpc.b, 0.2f);
+                    _combo5Img[1].color = new Color(tmpc.r, tmpc.g, tmpc.b, 0.4f);
                     tmpc = _combo5Img[2].color;
-                    _combo5Img[2].color = new Color(tmpc.r, tmpc.g, tmpc.b, 0.2f);
+                    _combo5Img[2].color = new Color(tmpc.r, tmpc.g, tmpc.b, 0.4f);
                     tmpc = _combo5Img[3].color;
-                    _combo5Img[3].color = new Color(tmpc.r, tmpc.g, tmpc.b, 0.2f);
+                    _combo5Img[3].color = new Color(tmpc.r, tmpc.g, tmpc.b, 0.4f);
                     tmpc = _combo5Img[4].color;
-                    _combo5Img[4].color = new Color(tmpc.r, tmpc.g, tmpc.b, 0.2f);
+                    _combo5Img[4].color = new Color(tmpc.r, tmpc.g, tmpc.b, 0.4f);
                 }
                 tmpc = _combo5Img[3].color;
-                _combo5Img[3].color = new Color(tmpc.r, tmpc.g, tmpc.b, 0.2f);
+                _combo5Img[3].color = new Color(tmpc.r, tmpc.g, tmpc.b, 0.4f);
                 tmpc = _combo5Img[4].color;
-                _combo5Img[4].color = new Color(tmpc.r, tmpc.g, tmpc.b, 0.2f);
+                _combo5Img[4].color = new Color(tmpc.r, tmpc.g, tmpc.b, 0.4f);
             }
             if (_combo[4] == _combo5[4] && _combo[3] == _combo5[3] && _combo[2] == _combo5[2] && _combo[1] == _combo5[1] && _combo[0] == _combo5[0])
             {
@@ -800,18 +800,18 @@ public class MasterScript : MonoBehaviour {
                     _scoreText.text = score.ToString();
                     Shoot(2);
                     tmpc = _combo5Img[0].color;
-                    _combo5Img[0].color = new Color(tmpc.r, tmpc.g, tmpc.b, 0.2f);
+                    _combo5Img[0].color = new Color(tmpc.r, tmpc.g, tmpc.b, 0.4f);
                     tmpc = _combo5Img[1].color;
-                    _combo5Img[1].color = new Color(tmpc.r, tmpc.g, tmpc.b, 0.2f);
+                    _combo5Img[1].color = new Color(tmpc.r, tmpc.g, tmpc.b, 0.4f);
                     tmpc = _combo5Img[2].color;
-                    _combo5Img[2].color = new Color(tmpc.r, tmpc.g, tmpc.b, 0.2f);
+                    _combo5Img[2].color = new Color(tmpc.r, tmpc.g, tmpc.b, 0.4f);
                     tmpc = _combo5Img[3].color;
-                    _combo5Img[3].color = new Color(tmpc.r, tmpc.g, tmpc.b, 0.2f);
+                    _combo5Img[3].color = new Color(tmpc.r, tmpc.g, tmpc.b, 0.4f);
                     tmpc = _combo5Img[4].color;
-                    _combo5Img[4].color = new Color(tmpc.r, tmpc.g, tmpc.b, 0.2f);
+                    _combo5Img[4].color = new Color(tmpc.r, tmpc.g, tmpc.b, 0.4f);
                 }
                 tmpc = _combo5Img[4].color;
-                _combo5Img[4].color = new Color(tmpc.r, tmpc.g, tmpc.b, 0.2f);
+                _combo5Img[4].color = new Color(tmpc.r, tmpc.g, tmpc.b, 0.4f);
             }
         }
         
@@ -825,11 +825,11 @@ public class MasterScript : MonoBehaviour {
             score += combo3Reward;
             Shoot(0);
             tmpc = _combo3Img[0].color;
-            _combo3Img[0].color = new Color(tmpc.r, tmpc.g, tmpc.b, 0.2f);
+            _combo3Img[0].color = new Color(tmpc.r, tmpc.g, tmpc.b, 0.4f);
             tmpc = _combo3Img[1].color;
-            _combo3Img[1].color = new Color(tmpc.r, tmpc.g, tmpc.b, 0.2f);
+            _combo3Img[1].color = new Color(tmpc.r, tmpc.g, tmpc.b, 0.4f);
             tmpc = _combo3Img[2].color;
-            _combo3Img[2].color = new Color(tmpc.r, tmpc.g, tmpc.b, 0.2f);
+            _combo3Img[2].color = new Color(tmpc.r, tmpc.g, tmpc.b, 0.4f);
         }
 
         if (possibru == 2 && combo4Done)
@@ -842,13 +842,13 @@ public class MasterScript : MonoBehaviour {
             score += combo4Reward;
             Shoot(1);
             tmpc = _combo4Img[0].color;
-            _combo4Img[0].color = new Color(tmpc.r, tmpc.g, tmpc.b, 0.2f);
+            _combo4Img[0].color = new Color(tmpc.r, tmpc.g, tmpc.b, 0.4f);
             tmpc = _combo4Img[1].color;
-            _combo4Img[1].color = new Color(tmpc.r, tmpc.g, tmpc.b, 0.2f);
+            _combo4Img[1].color = new Color(tmpc.r, tmpc.g, tmpc.b, 0.4f);
             tmpc = _combo4Img[2].color;
-            _combo4Img[2].color = new Color(tmpc.r, tmpc.g, tmpc.b, 0.2f);
+            _combo4Img[2].color = new Color(tmpc.r, tmpc.g, tmpc.b, 0.4f);
             tmpc = _combo4Img[3].color;
-            _combo4Img[3].color = new Color(tmpc.r, tmpc.g, tmpc.b, 0.2f);
+            _combo4Img[3].color = new Color(tmpc.r, tmpc.g, tmpc.b, 0.4f);
         }
 
         if (possibru == 4 && combo5Done)
@@ -861,13 +861,13 @@ public class MasterScript : MonoBehaviour {
             score += combo5Reward;
             Shoot(2);
             tmpc = _combo5Img[0].color;
-            _combo5Img[0].color = new Color(tmpc.r, tmpc.g, tmpc.b, 0.2f);
+            _combo5Img[0].color = new Color(tmpc.r, tmpc.g, tmpc.b, 0.4f);
             tmpc = _combo5Img[1].color;
-            _combo5Img[1].color = new Color(tmpc.r, tmpc.g, tmpc.b, 0.2f);
+            _combo5Img[1].color = new Color(tmpc.r, tmpc.g, tmpc.b, 0.4f);
             tmpc = _combo5Img[2].color;
-            _combo5Img[2].color = new Color(tmpc.r, tmpc.g, tmpc.b, 0.2f);
+            _combo5Img[2].color = new Color(tmpc.r, tmpc.g, tmpc.b, 0.4f);
             tmpc = _combo5Img[3].color;
-            _combo5Img[3].color = new Color(tmpc.r, tmpc.g, tmpc.b, 0.2f);
+            _combo5Img[3].color = new Color(tmpc.r, tmpc.g, tmpc.b, 0.4f);
         }
     }
 

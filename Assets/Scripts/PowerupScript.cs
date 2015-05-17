@@ -112,26 +112,26 @@ public class PowerupScript : MonoBehaviour
                 {
                     case PowerType.SpeedUp:
                         _masterScript.powerSpeed(4.0f);
-                        tmp.text = "Speed UP!";
+                        tmp.text = "Speed" + Environment.NewLine + "Up";
                         break;
                     case PowerType.SpeedDown:
                         _masterScript.powerSlow(4.0f);
-                        tmp.text = "Slow down";
+                        tmp.text = "Slow" + Environment.NewLine + "down";
                         break;
                     case PowerType.Hp:
                         _masterScript.powerHp(5.0f);
-                        tmp.text = "Position Reset";
+                        tmp.text = "Position" + Environment.NewLine + "Reset";
                         break;
                     case PowerType.EndlessPoop:
                         _masterScript.powerPoop(5.0f);
                         break;
                     case PowerType.ColorRetard:
                         _masterScript.powerRetard(6.0f);
-                        tmp.text = "Easy colors";
+                        tmp.text = "Easy" + Environment.NewLine + "colors";
                         break;
                     case PowerType.ColorChaos:
                         _masterScript.powerChaos(6.0f);
-                        tmp.text = "RAINBOW!";
+                        tmp.text = "Rainbow";
                         break;
                     case PowerType.TierOne:
                         _masterScript.setCombo3();
