@@ -70,6 +70,10 @@ public class MasterScript : MonoBehaviour {
     private Image[] _combo4Img;
     private Image[] _combo5Img;
 
+    bool combo3Done = false;
+    bool combo4Done = false;
+    bool combo5Done = false;
+
     void testCd()
     {
         if ((retardCheck)&&(retardCd <= 0.0f))
@@ -152,8 +156,8 @@ public class MasterScript : MonoBehaviour {
         _diffText.text = diffRange.ToString();
 
         setCombo3();
-        //setCombo4();
-        //setCombo5();
+        setCombo4();
+        setCombo5();
         //pregen. enough cubes
     }
 
@@ -162,7 +166,7 @@ public class MasterScript : MonoBehaviour {
         if (!pause)
         {
             checkCombos();
-            _diffInc += Time.deltaTime;
+            /*_diffInc += Time.deltaTime;
             if (_diffInc > 10.0f)
             {
                 _diffInc = 0.0f;
@@ -170,7 +174,7 @@ public class MasterScript : MonoBehaviour {
                 if (diffRange > colors.Length)
                     diffRange = colors.Length;
                 _diffText.text = diffRange.ToString();
-            }
+            }*/
         }
     }
 
@@ -353,9 +357,6 @@ public class MasterScript : MonoBehaviour {
 
     private void checkCombos()
     {
-        bool combo3Done = false;
-        bool combo4Done = false;
-        bool combo5Done = false;
         /*StringBuilder sb = new StringBuilder();
         for (int i = 4; i >= 0; i--)
         {
@@ -376,10 +377,29 @@ public class MasterScript : MonoBehaviour {
             {
                 tmpc = _combo3Img[0].color;
                 _combo3Img[0].color = new Color(tmpc.r, tmpc.g, tmpc.b, 1.0f);
-                possibru += 1;
+                possibru = possibru | 1;
             }
             else
             {
+                if (combo3Done)
+                {
+                    combo3Done = false;
+                    _combo[4] = -1;
+                    _combo[3] = -1;
+                    _combo[2] = -1;
+                    _combo[1] = -1;
+                    _combo[0] = -1;
+                    _score += combo3Reward;
+                    _scoreText.text = _score.ToString();
+                    Shoot();
+                    tmpc = _combo3Img[0].color;
+                    _combo3Img[0].color = new Color(tmpc.r, tmpc.g, tmpc.b, 0.2f);
+                    tmpc = _combo3Img[1].color;
+                    _combo3Img[1].color = new Color(tmpc.r, tmpc.g, tmpc.b, 0.2f);
+                    tmpc = _combo3Img[2].color;
+                    _combo3Img[2].color = new Color(tmpc.r, tmpc.g, tmpc.b, 0.2f);
+                }
+
                 tmpc = _combo3Img[0].color;
                 _combo3Img[0].color = new Color(tmpc.r, tmpc.g, tmpc.b, 0.2f);
                 tmpc = _combo3Img[1].color;
@@ -393,10 +413,28 @@ public class MasterScript : MonoBehaviour {
                 _combo3Img[0].color = new Color(tmpc.r, tmpc.g, tmpc.b, 1.0f);
                 tmpc = _combo3Img[1].color;
                 _combo3Img[1].color = new Color(tmpc.r, tmpc.g, tmpc.b, 1.0f);
-                possibru += 1;
+                possibru = possibru | 1;
             }
             else
             {
+                if (combo3Done)
+                {
+                    combo3Done = false;
+                    _combo[4] = -1;
+                    _combo[3] = -1;
+                    _combo[2] = -1;
+                    _combo[1] = -1;
+                    _combo[0] = -1;
+                    _score += combo3Reward;
+                    _scoreText.text = _score.ToString();
+                    Shoot();
+                    tmpc = _combo3Img[0].color;
+                    _combo3Img[0].color = new Color(tmpc.r, tmpc.g, tmpc.b, 0.2f);
+                    tmpc = _combo3Img[1].color;
+                    _combo3Img[1].color = new Color(tmpc.r, tmpc.g, tmpc.b, 0.2f);
+                    tmpc = _combo3Img[2].color;
+                    _combo3Img[2].color = new Color(tmpc.r, tmpc.g, tmpc.b, 0.2f);
+                }
                 tmpc = _combo3Img[1].color;
                 _combo3Img[1].color = new Color(tmpc.r, tmpc.g, tmpc.b, 0.2f);
                 tmpc = _combo3Img[2].color;
@@ -411,12 +449,393 @@ public class MasterScript : MonoBehaviour {
                 tmpc = _combo3Img[2].color;
                 _combo3Img[2].color = new Color(tmpc.r, tmpc.g, tmpc.b, 1.0f);
                 combo3Done = true;
-                possibru += 1;
+                possibru = possibru | 1;
             }
             else
             {
+                if (combo3Done)
+                {
+                    combo3Done = false;
+                    _combo[4] = -1;
+                    _combo[3] = -1;
+                    _combo[2] = -1;
+                    _combo[1] = -1;
+                    _combo[0] = -1;
+                    _score += combo3Reward;
+                    _scoreText.text = _score.ToString();
+                    Shoot();
+                    tmpc = _combo3Img[0].color;
+                    _combo3Img[0].color = new Color(tmpc.r, tmpc.g, tmpc.b, 0.2f);
+                    tmpc = _combo3Img[1].color;
+                    _combo3Img[1].color = new Color(tmpc.r, tmpc.g, tmpc.b, 0.2f);
+                    tmpc = _combo3Img[2].color;
+                    _combo3Img[2].color = new Color(tmpc.r, tmpc.g, tmpc.b, 0.2f);
+                }
                 tmpc = _combo3Img[2].color;
                 _combo3Img[2].color = new Color(tmpc.r, tmpc.g, tmpc.b, 0.2f);
+            }
+        }
+        if (_combo4Active)
+        {
+            if (_combo[4] == _combo4[0])
+            {
+                tmpc = _combo4Img[0].color;
+                _combo4Img[0].color = new Color(tmpc.r, tmpc.g, tmpc.b, 1.0f);
+                possibru = possibru | 2;
+            }
+            else
+            {
+                if (combo4Done)
+                {
+                    combo4Done = false;
+                    _combo[4] = -1;
+                    _combo[3] = -1;
+                    _combo[2] = -1;
+                    _combo[1] = -1;
+                    _combo[0] = -1;
+                    _score += combo4Reward;
+                    _scoreText.text = _score.ToString();
+                    Shoot();
+                    tmpc = _combo4Img[0].color;
+                    _combo4Img[0].color = new Color(tmpc.r, tmpc.g, tmpc.b, 0.2f);
+                    tmpc = _combo4Img[1].color;
+                    _combo4Img[1].color = new Color(tmpc.r, tmpc.g, tmpc.b, 0.2f);
+                    tmpc = _combo4Img[2].color;
+                    _combo4Img[2].color = new Color(tmpc.r, tmpc.g, tmpc.b, 0.2f);
+                    tmpc = _combo4Img[3].color;
+                    _combo4Img[3].color = new Color(tmpc.r, tmpc.g, tmpc.b, 0.2f);
+                }
+                tmpc = _combo4Img[0].color;
+                _combo4Img[0].color = new Color(tmpc.r, tmpc.g, tmpc.b, 0.2f);
+                tmpc = _combo4Img[1].color;
+                _combo4Img[1].color = new Color(tmpc.r, tmpc.g, tmpc.b, 0.2f);
+                tmpc = _combo4Img[2].color;
+                _combo4Img[2].color = new Color(tmpc.r, tmpc.g, tmpc.b, 0.2f);
+                tmpc = _combo4Img[3].color;
+                _combo4Img[3].color = new Color(tmpc.r, tmpc.g, tmpc.b, 0.2f);
+            }
+            if (_combo[4] == _combo4[1] && _combo[3] == _combo4[0])
+            {
+                tmpc = _combo4Img[0].color;
+                _combo4Img[0].color = new Color(tmpc.r, tmpc.g, tmpc.b, 1.0f);
+                tmpc = _combo4Img[1].color;
+                _combo4Img[1].color = new Color(tmpc.r, tmpc.g, tmpc.b, 1.0f);
+                possibru = possibru | 2;
+            }
+            else
+            {
+                tmpc = _combo4Img[1].color;
+                _combo4Img[1].color = new Color(tmpc.r, tmpc.g, tmpc.b, 0.2f);
+                tmpc = _combo4Img[2].color;
+                _combo4Img[2].color = new Color(tmpc.r, tmpc.g, tmpc.b, 0.2f);
+                tmpc = _combo4Img[3].color;
+                _combo4Img[3].color = new Color(tmpc.r, tmpc.g, tmpc.b, 0.2f);
+                if (combo4Done)
+                {
+                    combo4Done = false;
+                    _combo[4] = -1;
+                    _combo[3] = -1;
+                    _combo[2] = -1;
+                    _combo[1] = -1;
+                    _combo[0] = -1;
+                    _score += combo4Reward;
+                    _scoreText.text = _score.ToString();
+                    Shoot();
+                    tmpc = _combo4Img[0].color;
+                    _combo4Img[0].color = new Color(tmpc.r, tmpc.g, tmpc.b, 0.2f);
+                    tmpc = _combo4Img[1].color;
+                    _combo4Img[1].color = new Color(tmpc.r, tmpc.g, tmpc.b, 0.2f);
+                    tmpc = _combo4Img[2].color;
+                    _combo4Img[2].color = new Color(tmpc.r, tmpc.g, tmpc.b, 0.2f);
+                    tmpc = _combo4Img[3].color;
+                    _combo4Img[3].color = new Color(tmpc.r, tmpc.g, tmpc.b, 0.2f);
+                }
+            }
+            if (_combo[4] == _combo4[2] && _combo[3] == _combo4[1] && _combo[2] == _combo4[0])
+            {
+                tmpc = _combo4Img[0].color;
+                _combo4Img[0].color = new Color(tmpc.r, tmpc.g, tmpc.b, 1.0f);
+                tmpc = _combo4Img[1].color;
+                _combo4Img[1].color = new Color(tmpc.r, tmpc.g, tmpc.b, 1.0f);
+                tmpc = _combo4Img[2].color;
+                _combo4Img[2].color = new Color(tmpc.r, tmpc.g, tmpc.b, 1.0f);
+                possibru = possibru | 2;
+            }
+            else
+            {
+                tmpc = _combo4Img[2].color;
+                _combo4Img[2].color = new Color(tmpc.r, tmpc.g, tmpc.b, 0.2f);
+                tmpc = _combo4Img[3].color;
+                _combo4Img[3].color = new Color(tmpc.r, tmpc.g, tmpc.b, 0.2f);
+                if (combo4Done)
+                {
+                    combo4Done = false;
+                    _combo[4] = -1;
+                    _combo[3] = -1;
+                    _combo[2] = -1;
+                    _combo[1] = -1;
+                    _combo[0] = -1;
+                    _score += combo4Reward;
+                    _scoreText.text = _score.ToString();
+                    Shoot();
+                    tmpc = _combo4Img[0].color;
+                    _combo4Img[0].color = new Color(tmpc.r, tmpc.g, tmpc.b, 0.2f);
+                    tmpc = _combo4Img[1].color;
+                    _combo4Img[1].color = new Color(tmpc.r, tmpc.g, tmpc.b, 0.2f);
+                    tmpc = _combo4Img[2].color;
+                    _combo4Img[2].color = new Color(tmpc.r, tmpc.g, tmpc.b, 0.2f);
+                    tmpc = _combo4Img[3].color;
+                    _combo4Img[3].color = new Color(tmpc.r, tmpc.g, tmpc.b, 0.2f);
+                }
+            }
+            if (_combo[4] == _combo4[3] && _combo[3] == _combo4[2] && _combo[2] == _combo4[1] && _combo[1] == _combo4[0])
+            {
+                tmpc = _combo4Img[0].color;
+                _combo4Img[0].color = new Color(tmpc.r, tmpc.g, tmpc.b, 1.0f);
+                tmpc = _combo4Img[1].color;
+                _combo4Img[1].color = new Color(tmpc.r, tmpc.g, tmpc.b, 1.0f);
+                tmpc = _combo4Img[2].color;
+                _combo4Img[2].color = new Color(tmpc.r, tmpc.g, tmpc.b, 1.0f);
+                tmpc = _combo4Img[3].color;
+                _combo4Img[3].color = new Color(tmpc.r, tmpc.g, tmpc.b, 1.0f);
+                combo4Done = true;
+                possibru = possibru | 2;
+            }
+            else
+            {
+                if (combo4Done)
+                {
+                    combo4Done = false;
+                    _combo[4] = -1;
+                    _combo[3] = -1;
+                    _combo[2] = -1;
+                    _combo[1] = -1;
+                    _combo[0] = -1;
+                    _score += combo4Reward;
+                    _scoreText.text = _score.ToString();
+                    Shoot();
+                    tmpc = _combo4Img[0].color;
+                    _combo4Img[0].color = new Color(tmpc.r, tmpc.g, tmpc.b, 0.2f);
+                    tmpc = _combo4Img[1].color;
+                    _combo4Img[1].color = new Color(tmpc.r, tmpc.g, tmpc.b, 0.2f);
+                    tmpc = _combo4Img[2].color;
+                    _combo4Img[2].color = new Color(tmpc.r, tmpc.g, tmpc.b, 0.2f);
+                    tmpc = _combo4Img[3].color;
+                    _combo4Img[3].color = new Color(tmpc.r, tmpc.g, tmpc.b, 0.2f);
+                }
+                tmpc = _combo4Img[3].color;
+                _combo4Img[3].color = new Color(tmpc.r, tmpc.g, tmpc.b, 0.2f);
+            }
+        }
+        if (_combo5Active)
+        {
+            if (_combo[4] == _combo5[0])
+            {
+                tmpc = _combo5Img[0].color;
+                _combo5Img[0].color = new Color(tmpc.r, tmpc.g, tmpc.b, 1.0f);
+                possibru = possibru | 4;
+            }
+            else
+            {
+                if (combo5Done)
+                {
+                    combo5Done = false;
+                    _combo[4] = -1;
+                    _combo[3] = -1;
+                    _combo[2] = -1;
+                    _combo[1] = -1;
+                    _combo[0] = -1;
+                    _score += combo5Reward;
+                    _scoreText.text = _score.ToString();
+                    Shoot();
+                    tmpc = _combo5Img[0].color;
+                    _combo5Img[0].color = new Color(tmpc.r, tmpc.g, tmpc.b, 0.2f);
+                    tmpc = _combo5Img[1].color;
+                    _combo5Img[1].color = new Color(tmpc.r, tmpc.g, tmpc.b, 0.2f);
+                    tmpc = _combo5Img[2].color;
+                    _combo5Img[2].color = new Color(tmpc.r, tmpc.g, tmpc.b, 0.2f);
+                    tmpc = _combo5Img[3].color;
+                    _combo5Img[3].color = new Color(tmpc.r, tmpc.g, tmpc.b, 0.2f);
+                    tmpc = _combo5Img[4].color;
+                    _combo5Img[4].color = new Color(tmpc.r, tmpc.g, tmpc.b, 0.2f);
+                }
+
+                tmpc = _combo5Img[0].color;
+                _combo5Img[0].color = new Color(tmpc.r, tmpc.g, tmpc.b, 0.2f);
+                tmpc = _combo5Img[1].color;
+                _combo5Img[1].color = new Color(tmpc.r, tmpc.g, tmpc.b, 0.2f);
+                tmpc = _combo5Img[2].color;
+                _combo5Img[2].color = new Color(tmpc.r, tmpc.g, tmpc.b, 0.2f);
+                tmpc = _combo5Img[3].color;
+                _combo5Img[3].color = new Color(tmpc.r, tmpc.g, tmpc.b, 0.2f);
+                tmpc = _combo5Img[4].color;
+                _combo5Img[4].color = new Color(tmpc.r, tmpc.g, tmpc.b, 0.2f);
+            }
+            if (_combo[4] == _combo5[1] && _combo[3] == _combo5[0])
+            {
+                tmpc = _combo5Img[0].color;
+                _combo5Img[0].color = new Color(tmpc.r, tmpc.g, tmpc.b, 1.0f);
+                tmpc = _combo5Img[1].color;
+                _combo5Img[1].color = new Color(tmpc.r, tmpc.g, tmpc.b, 1.0f);
+                possibru = possibru | 4;
+            }
+            else
+            {
+
+                if (combo5Done)
+                {
+                    combo5Done = false;
+                    _combo[4] = -1;
+                    _combo[3] = -1;
+                    _combo[2] = -1;
+                    _combo[1] = -1;
+                    _combo[0] = -1;
+                    _score += combo5Reward;
+                    _scoreText.text = _score.ToString();
+                    Shoot();
+                    tmpc = _combo5Img[0].color;
+                    _combo5Img[0].color = new Color(tmpc.r, tmpc.g, tmpc.b, 0.2f);
+                    tmpc = _combo5Img[1].color;
+                    _combo5Img[1].color = new Color(tmpc.r, tmpc.g, tmpc.b, 0.2f);
+                    tmpc = _combo5Img[2].color;
+                    _combo5Img[2].color = new Color(tmpc.r, tmpc.g, tmpc.b, 0.2f);
+                    tmpc = _combo5Img[3].color;
+                    _combo5Img[3].color = new Color(tmpc.r, tmpc.g, tmpc.b, 0.2f);
+                    tmpc = _combo5Img[4].color;
+                    _combo5Img[4].color = new Color(tmpc.r, tmpc.g, tmpc.b, 0.2f);
+                }
+                tmpc = _combo5Img[1].color;
+                _combo5Img[1].color = new Color(tmpc.r, tmpc.g, tmpc.b, 0.2f);
+                tmpc = _combo5Img[2].color;
+                _combo5Img[2].color = new Color(tmpc.r, tmpc.g, tmpc.b, 0.2f);
+                tmpc = _combo5Img[3].color;
+                _combo5Img[3].color = new Color(tmpc.r, tmpc.g, tmpc.b, 0.2f);
+                tmpc = _combo5Img[4].color;
+                _combo5Img[4].color = new Color(tmpc.r, tmpc.g, tmpc.b, 0.2f);
+            }
+            if (_combo[4] == _combo5[2] && _combo[3] == _combo5[1] && _combo[2] == _combo5[0])
+            {
+                tmpc = _combo5Img[0].color;
+                _combo5Img[0].color = new Color(tmpc.r, tmpc.g, tmpc.b, 1.0f);
+                tmpc = _combo5Img[1].color;
+                _combo5Img[1].color = new Color(tmpc.r, tmpc.g, tmpc.b, 1.0f);
+                tmpc = _combo5Img[2].color;
+                _combo5Img[2].color = new Color(tmpc.r, tmpc.g, tmpc.b, 1.0f);
+                possibru = possibru | 4;
+            }
+            else
+            {
+                if (combo5Done)
+                {
+                    combo5Done = false;
+                    _combo[4] = -1;
+                    _combo[3] = -1;
+                    _combo[2] = -1;
+                    _combo[1] = -1;
+                    _combo[0] = -1;
+                    _score += combo5Reward;
+                    _scoreText.text = _score.ToString();
+                    Shoot();
+                    tmpc = _combo5Img[0].color;
+                    _combo5Img[0].color = new Color(tmpc.r, tmpc.g, tmpc.b, 0.2f);
+                    tmpc = _combo5Img[1].color;
+                    _combo5Img[1].color = new Color(tmpc.r, tmpc.g, tmpc.b, 0.2f);
+                    tmpc = _combo5Img[2].color;
+                    _combo5Img[2].color = new Color(tmpc.r, tmpc.g, tmpc.b, 0.2f);
+                    tmpc = _combo5Img[3].color;
+                    _combo5Img[3].color = new Color(tmpc.r, tmpc.g, tmpc.b, 0.2f);
+                    tmpc = _combo5Img[4].color;
+                    _combo5Img[4].color = new Color(tmpc.r, tmpc.g, tmpc.b, 0.2f);
+                }
+                tmpc = _combo5Img[2].color;
+                _combo5Img[2].color = new Color(tmpc.r, tmpc.g, tmpc.b, 0.2f);
+                tmpc = _combo5Img[3].color;
+                _combo5Img[3].color = new Color(tmpc.r, tmpc.g, tmpc.b, 0.2f);
+                tmpc = _combo5Img[4].color;
+                _combo5Img[4].color = new Color(tmpc.r, tmpc.g, tmpc.b, 0.2f);
+            }
+            if (_combo[4] == _combo5[3] && _combo[3] == _combo5[2] && _combo[2] == _combo5[1] && _combo[1] == _combo5[0])
+            {
+                tmpc = _combo5Img[0].color;
+                _combo5Img[0].color = new Color(tmpc.r, tmpc.g, tmpc.b, 1.0f);
+                tmpc = _combo5Img[1].color;
+                _combo5Img[1].color = new Color(tmpc.r, tmpc.g, tmpc.b, 1.0f);
+                tmpc = _combo5Img[2].color;
+                _combo5Img[2].color = new Color(tmpc.r, tmpc.g, tmpc.b, 1.0f);
+                tmpc = _combo5Img[3].color;
+                _combo5Img[3].color = new Color(tmpc.r, tmpc.g, tmpc.b, 1.0f);
+                possibru = possibru | 4;
+            }
+            else
+            {
+                if (combo5Done)
+                {
+                    combo5Done = false;
+                    _combo[4] = -1;
+                    _combo[3] = -1;
+                    _combo[2] = -1;
+                    _combo[1] = -1;
+                    _combo[0] = -1;
+                    _score += combo5Reward;
+                    _scoreText.text = _score.ToString();
+                    Shoot();
+                    tmpc = _combo5Img[0].color;
+                    _combo5Img[0].color = new Color(tmpc.r, tmpc.g, tmpc.b, 0.2f);
+                    tmpc = _combo5Img[1].color;
+                    _combo5Img[1].color = new Color(tmpc.r, tmpc.g, tmpc.b, 0.2f);
+                    tmpc = _combo5Img[2].color;
+                    _combo5Img[2].color = new Color(tmpc.r, tmpc.g, tmpc.b, 0.2f);
+                    tmpc = _combo5Img[3].color;
+                    _combo5Img[3].color = new Color(tmpc.r, tmpc.g, tmpc.b, 0.2f);
+                    tmpc = _combo5Img[4].color;
+                    _combo5Img[4].color = new Color(tmpc.r, tmpc.g, tmpc.b, 0.2f);
+                }
+                tmpc = _combo5Img[3].color;
+                _combo5Img[3].color = new Color(tmpc.r, tmpc.g, tmpc.b, 0.2f);
+                tmpc = _combo5Img[4].color;
+                _combo5Img[4].color = new Color(tmpc.r, tmpc.g, tmpc.b, 0.2f);
+            }
+            if (_combo[4] == _combo5[4] && _combo[3] == _combo5[3] && _combo[2] == _combo5[2] && _combo[1] == _combo5[1] && _combo[0] == _combo5[0])
+            {
+                tmpc = _combo5Img[0].color;
+                _combo5Img[0].color = new Color(tmpc.r, tmpc.g, tmpc.b, 1.0f);
+                tmpc = _combo5Img[1].color;
+                _combo5Img[1].color = new Color(tmpc.r, tmpc.g, tmpc.b, 1.0f);
+                tmpc = _combo5Img[2].color;
+                _combo5Img[2].color = new Color(tmpc.r, tmpc.g, tmpc.b, 1.0f);
+                tmpc = _combo5Img[3].color;
+                _combo5Img[3].color = new Color(tmpc.r, tmpc.g, tmpc.b, 1.0f);
+                tmpc = _combo5Img[4].color;
+                _combo5Img[4].color = new Color(tmpc.r, tmpc.g, tmpc.b, 1.0f);
+                combo5Done = true;
+                possibru = possibru | 4;
+            }
+            else
+            {
+                if (combo5Done)
+                {
+                    combo5Done = false;
+                    _combo[4] = -1;
+                    _combo[3] = -1;
+                    _combo[2] = -1;
+                    _combo[1] = -1;
+                    _combo[0] = -1;
+                    _score += combo5Reward;
+                    _scoreText.text = _score.ToString();
+                    Shoot();
+                    tmpc = _combo5Img[0].color;
+                    _combo5Img[0].color = new Color(tmpc.r, tmpc.g, tmpc.b, 0.2f);
+                    tmpc = _combo5Img[1].color;
+                    _combo5Img[1].color = new Color(tmpc.r, tmpc.g, tmpc.b, 0.2f);
+                    tmpc = _combo5Img[2].color;
+                    _combo5Img[2].color = new Color(tmpc.r, tmpc.g, tmpc.b, 0.2f);
+                    tmpc = _combo5Img[3].color;
+                    _combo5Img[3].color = new Color(tmpc.r, tmpc.g, tmpc.b, 0.2f);
+                    tmpc = _combo5Img[4].color;
+                    _combo5Img[4].color = new Color(tmpc.r, tmpc.g, tmpc.b, 0.2f);
+                }
+                tmpc = _combo5Img[4].color;
+                _combo5Img[4].color = new Color(tmpc.r, tmpc.g, tmpc.b, 0.2f);
             }
         }
         
@@ -436,6 +855,46 @@ public class MasterScript : MonoBehaviour {
             _combo3Img[1].color = new Color(tmpc.r, tmpc.g, tmpc.b, 0.2f);
             tmpc = _combo3Img[2].color;
             _combo3Img[2].color = new Color(tmpc.r, tmpc.g, tmpc.b, 0.2f);
+        }
+
+        if (possibru == 2 && combo4Done)
+        {
+            _combo[4] = -1;
+            _combo[3] = -1;
+            _combo[2] = -1;
+            _combo[1] = -1;
+            _combo[0] = -1;
+            _score += combo4Reward;
+            _scoreText.text = _score.ToString();
+            Shoot();
+            tmpc = _combo4Img[0].color;
+            _combo4Img[0].color = new Color(tmpc.r, tmpc.g, tmpc.b, 0.2f);
+            tmpc = _combo4Img[1].color;
+            _combo4Img[1].color = new Color(tmpc.r, tmpc.g, tmpc.b, 0.2f);
+            tmpc = _combo4Img[2].color;
+            _combo4Img[2].color = new Color(tmpc.r, tmpc.g, tmpc.b, 0.2f);
+            tmpc = _combo4Img[3].color;
+            _combo4Img[3].color = new Color(tmpc.r, tmpc.g, tmpc.b, 0.2f);
+        }
+
+        if (possibru == 4 && combo5Done)
+        {
+            _combo[4] = -1;
+            _combo[3] = -1;
+            _combo[2] = -1;
+            _combo[1] = -1;
+            _combo[0] = -1;
+            _score += combo5Reward;
+            _scoreText.text = _score.ToString();
+            Shoot();
+            tmpc = _combo5Img[0].color;
+            _combo5Img[0].color = new Color(tmpc.r, tmpc.g, tmpc.b, 0.2f);
+            tmpc = _combo5Img[1].color;
+            _combo5Img[1].color = new Color(tmpc.r, tmpc.g, tmpc.b, 0.2f);
+            tmpc = _combo5Img[2].color;
+            _combo5Img[2].color = new Color(tmpc.r, tmpc.g, tmpc.b, 0.2f);
+            tmpc = _combo5Img[3].color;
+            _combo5Img[3].color = new Color(tmpc.r, tmpc.g, tmpc.b, 0.2f);
         }
     }
 }
