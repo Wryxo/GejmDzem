@@ -2,6 +2,7 @@
 using UnityEngine;
 using System.Collections;
 using Random = UnityEngine.Random;
+using UnityEngine.UI;
 
 public class PowerupScript : MonoBehaviour
 {
@@ -95,7 +96,7 @@ public class PowerupScript : MonoBehaviour
         //nastavit initial platform
         _platform_id = _masterScript.queue.Count-1;
         updateCurrentPlatform();
-        transform.position = new Vector3(_masterScript.queue[_platform_id].GetComponent<Transform>().position.x+1, transform.position.y, transform.position.z);
+        transform.position = new Vector3(_masterScript.queue[_platform_id].GetComponent<Transform>().position.x, transform.position.y, transform.position.z);
     }
 
     // Update is called once per frame
@@ -106,25 +107,31 @@ public class PowerupScript : MonoBehaviour
             updateCurrentPlatform();
             if (Mathf.Abs(_retard.GetComponent<Transform>().position.x - transform.position.x) < 1.0f)
             {
+                Text tmp = (GameObject.FindGameObjectWithTag("GG")).GetComponent<Text>();
                 switch (power)
                 {
                     case PowerType.SpeedUp:
                         _masterScript.powerSpeed(4.0f);
+                        tmp.text = "Speed UP!";
                         break;
                     case PowerType.SpeedDown:
                         _masterScript.powerSlow(4.0f);
+                        tmp.text = "Slow down";
                         break;
                     case PowerType.Hp:
                         _masterScript.powerHp(5.0f);
+                        tmp.text = "Position Reset";
                         break;
                     case PowerType.EndlessPoop:
                         _masterScript.powerPoop(5.0f);
                         break;
                     case PowerType.ColorRetard:
                         _masterScript.powerRetard(6.0f);
+                        tmp.text = "Easy colors";
                         break;
                     case PowerType.ColorChaos:
                         _masterScript.powerChaos(6.0f);
+                        tmp.text = "RAINBOW!";
                         break;
                     case PowerType.TierOne:
                         _masterScript.setCombo3();
