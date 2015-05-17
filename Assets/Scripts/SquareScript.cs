@@ -85,6 +85,7 @@ public class SquareScript : MonoBehaviour {
             {
                 if (Input.GetMouseButtonDown(0))
                 {
+                    Debug.Log("Left");
                     set++;
                     set = set % colorsLeft.Length;
                     childLeft.color = _masterScript.colors[colorsLeft[set]];
@@ -100,6 +101,7 @@ public class SquareScript : MonoBehaviour {
                 }
                 if (Input.GetMouseButtonDown(1))
                 {
+                    Debug.Log("Right");
                     var tmp = colorsLeft[set];
                     colorsLeft[set] = colorsRight[set];
                     colorsRight[set] = tmp;
