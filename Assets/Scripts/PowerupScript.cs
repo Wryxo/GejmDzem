@@ -157,6 +157,10 @@ public class PowerupScript : MonoBehaviour
         if (_transform.position.y < 1.0f)
         {
             //todo evaporate anim
+            if (isEvil)
+            {
+                _masterScript.score += 10;
+            }
             Destroy(gameObject);
         }
     }
