@@ -1,6 +1,4 @@
 ﻿using UnityEngine;
-using System.Collections;
-using UnityEditor;
 using UnityEngine.UI;
 
 public class PlayerScript : MonoBehaviour
@@ -32,7 +30,7 @@ public class PlayerScript : MonoBehaviour
             {
                 _masterScript.pause = true;
                 Text tmp = (GameObject.FindGameObjectWithTag("GG")).GetComponent<Text>();
-                tmp.text = "GG";
+                tmp.text = "GG" + System.Environment.NewLine + "Restart?";
             }
             if (_stuck)
             {
@@ -88,7 +86,7 @@ public class PlayerScript : MonoBehaviour
                 _masterScript.queue.Remove(ss.gameObject);
                 Destroy(ss.gameObject);
                 _masterScript.score += 1;
-                //_masterScript.Shoot();
+                //_masterScript.Shoot(Random.Range(0,3));
                 _masterScript.addNextCube();
             } 
         }
