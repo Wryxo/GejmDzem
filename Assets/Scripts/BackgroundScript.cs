@@ -14,9 +14,9 @@ public class BackgroundScript : MonoBehaviour {
 	void FixedUpdate()
     {
         transform.position += new Vector3(-Speed, 0, 0);
-        if (transform.position.x < _horzExtent*0.5)
+        if (transform.position.x < -_horzExtent)
         {
-            var pos = new Vector3(2 * _horzExtent, transform.position.y, transform.position.z);
+            var pos = new Vector3(3 * _horzExtent, transform.position.y, transform.position.z);
             transform.position = pos;
            
         }
