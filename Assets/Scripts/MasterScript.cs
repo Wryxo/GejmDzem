@@ -17,12 +17,14 @@ public class MasterScript : MonoBehaviour {
     public Color[] colors = new Color[] { Color.red, Color.green, Color.blue, Color.magenta, Color.yellow, Color.cyan };
     public int diffRange = 6;
     public int diffCount = 20;
-    public int combo3Reward = 50;
-    public int combo4Reward = 100;
-    public int combo5Reward = 200;
+    public int combo3Reward = 15;
+    public int combo4Reward = 50;
+    public int combo5Reward = 150;
+    public int score;
+    public float _leftBound;
+    private int _lastScore;
 
     private int _cubeCount;
-    private float _leftBound;
     private int _sanityLeft;
     private int _sanityRight;
 
@@ -42,6 +44,9 @@ public class MasterScript : MonoBehaviour {
     private float slowCd = 0.0f;
     private float poopCd = 0.0f;
 
+    private float countCd = 0.0f;
+    private float rangeCd = 0.0f;
+
     private bool retardCheck = false;
     private bool chaosCheck = false;
     private bool hpCheck = false;
@@ -56,9 +61,7 @@ public class MasterScript : MonoBehaviour {
 
     private Text _scoreText;
     private Text _diffText;
-    private int _score;
     private List<int> _combo = new List<int>();
-    private float _diffInc = 0.0f;
 
     private bool _combo3Active = false;
     private bool _combo4Active = false;
@@ -126,16 +129,9 @@ public class MasterScript : MonoBehaviour {
     void FixedUpdate () {
         if (!pause)
         {
+            speed += 0.01f*Time.deltaTime;
             checkCombos();
-            /*_diffInc += Time.deltaTime;
-            if (_diffInc > 10.0f)
-            {
-                _diffInc = 0.0f;
-                diffRange++;
-                if (diffRange > colors.Length)
-                    diffRange = colors.Length;
-                _diffText.text = diffRange.ToString();
-            }*/
+            _scoreText.text = score.ToString();
         }
     }
 
@@ -174,11 +170,12 @@ public class MasterScript : MonoBehaviour {
         cube.GetComponent<Transform>().localScale = new Vector3(cubeSize, cubeSize, 0);
         queue.Add(cube);
         cube = (GameObject)Instantiate(Resources.Load("Prefabs/Square", typeof(GameObject)));
-        ssc = cube.GetComponent<SquareScript>();
-        ssc.colorsLeft = new int[size];
-        ssc.colorsRight = new int[size];
-        right.CopyTo(ssc.colorsLeft, 0);
-        left.CopyTo(ssc.colorsRight, 0);
+        SquareScript ssc2 = cube.GetComponent<SquareScript>();
+        ssc2.predecessor = ssc;
+        ssc2.colorsLeft = new int[size];
+        ssc2.colorsRight = new int[size];
+        right.CopyTo(ssc2.colorsLeft, 0);
+        left.CopyTo(ssc2.colorsRight, 0);
         cube.GetComponent<Transform>().position = new Vector3(1.5f + (2 * ssc.childLeft.bounds.size.x), 0, 0);
         cube.GetComponent<Transform>().localScale = new Vector3(cubeSize, cubeSize, 0);
         queue.Add(cube);
@@ -356,8 +353,8 @@ public class MasterScript : MonoBehaviour {
                     _combo[2] = -1;
                     _combo[1] = -1;
                     _combo[0] = -1;
-                    _score += combo3Reward;
-                    _scoreText.text = _score.ToString();
+                    score += combo3Reward;
+                    _scoreText.text = score.ToString();
                     Shoot();
                     tmpc = _combo3Img[0].color;
                     _combo3Img[0].color = new Color(tmpc.r, tmpc.g, tmpc.b, 0.2f);
@@ -392,8 +389,8 @@ public class MasterScript : MonoBehaviour {
                     _combo[2] = -1;
                     _combo[1] = -1;
                     _combo[0] = -1;
-                    _score += combo3Reward;
-                    _scoreText.text = _score.ToString();
+                    score += combo3Reward;
+                    _scoreText.text = score.ToString();
                     Shoot();
                     tmpc = _combo3Img[0].color;
                     _combo3Img[0].color = new Color(tmpc.r, tmpc.g, tmpc.b, 0.2f);
@@ -428,8 +425,8 @@ public class MasterScript : MonoBehaviour {
                     _combo[2] = -1;
                     _combo[1] = -1;
                     _combo[0] = -1;
-                    _score += combo3Reward;
-                    _scoreText.text = _score.ToString();
+                    score += combo3Reward;
+                    _scoreText.text = score.ToString();
                     Shoot();
                     tmpc = _combo3Img[0].color;
                     _combo3Img[0].color = new Color(tmpc.r, tmpc.g, tmpc.b, 0.2f);
@@ -460,8 +457,8 @@ public class MasterScript : MonoBehaviour {
                     _combo[2] = -1;
                     _combo[1] = -1;
                     _combo[0] = -1;
-                    _score += combo4Reward;
-                    _scoreText.text = _score.ToString();
+                    score += combo4Reward;
+                    _scoreText.text = score.ToString();
                     Shoot();
                     tmpc = _combo4Img[0].color;
                     _combo4Img[0].color = new Color(tmpc.r, tmpc.g, tmpc.b, 0.2f);
@@ -505,8 +502,8 @@ public class MasterScript : MonoBehaviour {
                     _combo[2] = -1;
                     _combo[1] = -1;
                     _combo[0] = -1;
-                    _score += combo4Reward;
-                    _scoreText.text = _score.ToString();
+                    score += combo4Reward;
+                    _scoreText.text = score.ToString();
                     Shoot();
                     tmpc = _combo4Img[0].color;
                     _combo4Img[0].color = new Color(tmpc.r, tmpc.g, tmpc.b, 0.2f);
@@ -542,8 +539,8 @@ public class MasterScript : MonoBehaviour {
                     _combo[2] = -1;
                     _combo[1] = -1;
                     _combo[0] = -1;
-                    _score += combo4Reward;
-                    _scoreText.text = _score.ToString();
+                    score += combo4Reward;
+                    _scoreText.text = score.ToString();
                     Shoot();
                     tmpc = _combo4Img[0].color;
                     _combo4Img[0].color = new Color(tmpc.r, tmpc.g, tmpc.b, 0.2f);
@@ -578,8 +575,8 @@ public class MasterScript : MonoBehaviour {
                     _combo[2] = -1;
                     _combo[1] = -1;
                     _combo[0] = -1;
-                    _score += combo4Reward;
-                    _scoreText.text = _score.ToString();
+                    score += combo4Reward;
+                    _scoreText.text = score.ToString();
                     Shoot();
                     tmpc = _combo4Img[0].color;
                     _combo4Img[0].color = new Color(tmpc.r, tmpc.g, tmpc.b, 0.2f);
@@ -612,8 +609,8 @@ public class MasterScript : MonoBehaviour {
                     _combo[2] = -1;
                     _combo[1] = -1;
                     _combo[0] = -1;
-                    _score += combo5Reward;
-                    _scoreText.text = _score.ToString();
+                    score += combo5Reward;
+                    _scoreText.text = score.ToString();
                     Shoot();
                     tmpc = _combo5Img[0].color;
                     _combo5Img[0].color = new Color(tmpc.r, tmpc.g, tmpc.b, 0.2f);
@@ -657,8 +654,8 @@ public class MasterScript : MonoBehaviour {
                     _combo[2] = -1;
                     _combo[1] = -1;
                     _combo[0] = -1;
-                    _score += combo5Reward;
-                    _scoreText.text = _score.ToString();
+                    score += combo5Reward;
+                    _scoreText.text = score.ToString();
                     Shoot();
                     tmpc = _combo5Img[0].color;
                     _combo5Img[0].color = new Color(tmpc.r, tmpc.g, tmpc.b, 0.2f);
@@ -700,8 +697,8 @@ public class MasterScript : MonoBehaviour {
                     _combo[2] = -1;
                     _combo[1] = -1;
                     _combo[0] = -1;
-                    _score += combo5Reward;
-                    _scoreText.text = _score.ToString();
+                    score += combo5Reward;
+                    _scoreText.text = score.ToString();
                     Shoot();
                     tmpc = _combo5Img[0].color;
                     _combo5Img[0].color = new Color(tmpc.r, tmpc.g, tmpc.b, 0.2f);
@@ -743,8 +740,8 @@ public class MasterScript : MonoBehaviour {
                     _combo[2] = -1;
                     _combo[1] = -1;
                     _combo[0] = -1;
-                    _score += combo5Reward;
-                    _scoreText.text = _score.ToString();
+                    score += combo5Reward;
+                    _scoreText.text = score.ToString();
                     Shoot();
                     tmpc = _combo5Img[0].color;
                     _combo5Img[0].color = new Color(tmpc.r, tmpc.g, tmpc.b, 0.2f);
@@ -787,8 +784,8 @@ public class MasterScript : MonoBehaviour {
                     _combo[2] = -1;
                     _combo[1] = -1;
                     _combo[0] = -1;
-                    _score += combo5Reward;
-                    _scoreText.text = _score.ToString();
+                    score += combo5Reward;
+                    _scoreText.text = score.ToString();
                     Shoot();
                     tmpc = _combo5Img[0].color;
                     _combo5Img[0].color = new Color(tmpc.r, tmpc.g, tmpc.b, 0.2f);
@@ -813,8 +810,7 @@ public class MasterScript : MonoBehaviour {
             _combo[2] = -1;
             _combo[1] = -1;
             _combo[0] = -1;
-            _score += combo3Reward;
-            _scoreText.text = _score.ToString();
+            score += combo3Reward;
             Shoot();
             tmpc = _combo3Img[0].color;
             _combo3Img[0].color = new Color(tmpc.r, tmpc.g, tmpc.b, 0.2f);
@@ -831,8 +827,7 @@ public class MasterScript : MonoBehaviour {
             _combo[2] = -1;
             _combo[1] = -1;
             _combo[0] = -1;
-            _score += combo4Reward;
-            _scoreText.text = _score.ToString();
+            score += combo4Reward;
             Shoot();
             tmpc = _combo4Img[0].color;
             _combo4Img[0].color = new Color(tmpc.r, tmpc.g, tmpc.b, 0.2f);
@@ -851,8 +846,7 @@ public class MasterScript : MonoBehaviour {
             _combo[2] = -1;
             _combo[1] = -1;
             _combo[0] = -1;
-            _score += combo5Reward;
-            _scoreText.text = _score.ToString();
+            score += combo5Reward;
             Shoot();
             tmpc = _combo5Img[0].color;
             _combo5Img[0].color = new Color(tmpc.r, tmpc.g, tmpc.b, 0.2f);
@@ -900,6 +894,14 @@ public class MasterScript : MonoBehaviour {
             Instantiate(Resources.Load("Prefabs/GenericPowerup", typeof(GameObject)));
             powerCd = Random.Range(15.0f, 20.0f);
         }
+        if (countCd > 0.0f)
+        {
+            countCd -= Time.deltaTime;
+        }
+        if (rangeCd > 0.0f)
+        {
+            rangeCd -= Time.deltaTime;
+        }
         if ((retardCheck) && (retardCd <= 0.0f))
         {
             retardCheck = false;
@@ -938,6 +940,16 @@ public class MasterScript : MonoBehaviour {
             poopCd = 0.0f;
             //todo
         }
+        if (countCd <= 0.0f)
+        {
+            diffCount = (diffCount + 1)%(diffRange*diffRange);
+            countCd = 5.0f;
+        }
+        if (rangeCd <= 0.0f)
+        {
+            diffRange = diffRange % 6;
+            rangeCd = 20.0f;
+        }
     }
 
     //block of powers
@@ -945,7 +957,7 @@ public class MasterScript : MonoBehaviour {
     public void powerSpeed(float t)
     {
         origSpeed = speed;
-        speed = 4.0f;
+        speed = 1.5f;
         speedCd = t;
         speedCheck = true;
     }

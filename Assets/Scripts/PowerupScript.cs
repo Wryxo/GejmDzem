@@ -86,7 +86,6 @@ public class PowerupScript : MonoBehaviour
     void Update()
     {
         updateCurrentPlatform();
-
         if (Mathf.Abs(_retard.GetComponent<Transform>().position.x - transform.position.x) < 1.0f)
         {
             switch (power)
@@ -150,6 +149,7 @@ public class PowerupScript : MonoBehaviour
     {
         //if null pointers its from this
         int i = _platform_id -1;
+        if (i < 0) return;
         Transform nextTrans = _masterScript.queue[i].GetComponent<Transform>();
         Transform currentTrans = _masterScript.queue[_platform_id].GetComponent<Transform>();
         _masterScript.queue[_platform_id].GetComponent<SquareScript>().power = null;
