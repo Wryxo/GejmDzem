@@ -99,6 +99,7 @@ public class MasterScript : MonoBehaviour {
         {
             tmp[i].GetComponent<Transform>().position = new Vector3(70 + i * 40, tmp[i].GetComponent<Transform>().position.y);
             _combo3Img[i] = tmp[i].GetComponent<Image>();
+            _combo3Img[i].color = new Color(_combo3Img[i].color.r, _combo3Img[i].color.g, _combo3Img[i].color.b, 0.0f);
         }
 
         tmp = (GameObject.FindGameObjectsWithTag("4combo"));
@@ -107,6 +108,7 @@ public class MasterScript : MonoBehaviour {
         {
             tmp[i].GetComponent<Transform>().position = new Vector3(70 + i * 40, tmp[i].GetComponent<Transform>().position.y);
             _combo4Img[i] = tmp[i].GetComponent<Image>();
+            _combo4Img[i].color = new Color(_combo4Img[i].color.r, _combo4Img[i].color.g, _combo4Img[i].color.b, 0.0f);
         }
 
         tmp = (GameObject.FindGameObjectsWithTag("5combo"));
@@ -115,6 +117,7 @@ public class MasterScript : MonoBehaviour {
         {
             tmp[i].GetComponent<Transform>().position = new Vector3(70 + i * 40, tmp[i].GetComponent<Transform>().position.y);
             _combo5Img[i] = tmp[i].GetComponent<Image>();
+            _combo5Img[i].color = new Color(_combo5Img[i].color.r, _combo5Img[i].color.g, _combo5Img[i].color.b, 0.0f);
         }
 
         for (int i = 0; i < 5; i++)
@@ -943,12 +946,14 @@ public class MasterScript : MonoBehaviour {
             rangeCd -= Time.deltaTime;
         }
 
+        Text tmp = (GameObject.FindGameObjectWithTag("GG")).GetComponent<Text>();
         if ((retardCheck) && (retardCd <= 0.0f))
         {
             retardCheck = false;
             retardCd = 0.0f;
             diffRange = origRange;
             diffCount = origCount;
+            tmp.text = "";
         }
         if ((chaosCheck) && (chaosCd <= 0.0f))
         {
@@ -956,30 +961,35 @@ public class MasterScript : MonoBehaviour {
             chaosCd = 0.0f;
             diffRange = origRange;
             diffCount = origCount;
+            tmp.text = "";
         }
         if ((hpCheck) && (hpCd <= 0.0f))
         {
             hpCheck = false;
             hpCd = 0.0f;
             healingSpeed = 0.0f;
+            tmp.text = "";
         }
         if ((speedCheck) && (speedCd <= 0.0f))
         {
             speedCheck = false;
             speedCd = 0.0f;
             speed = origSpeed;
+            tmp.text = "";
         }
         if ((slowCheck) && (slowCd <= 0.0f))
         {
             slowCheck = false;
             slowCd = 0.0f;
             speed = origSpeed;
+            tmp.text = "";
         }
         if ((poopCheck) && (poopCd <= 0.0f))
         {
             poopCheck = false;
             poopCd = 0.0f;
             //todo
+            tmp.text = "";
         }
         if (countCd <= 0.0f)
         {
@@ -987,6 +997,7 @@ public class MasterScript : MonoBehaviour {
             if (diffCount > (diffRange * diffRange))
                 diffCount = diffRange * diffRange;
             countCd = 5.0f;
+            tmp.text = "";
         }
         if (rangeCd <= 0.0f)
         {
@@ -994,6 +1005,7 @@ public class MasterScript : MonoBehaviour {
             if (diffRange > 6)
                 diffRange = 6;
             rangeCd = 20.0f;
+            tmp.text = "";
         }
     }
 
@@ -1002,7 +1014,7 @@ public class MasterScript : MonoBehaviour {
     public void powerSpeed(float t)
     {
         origSpeed = speed;
-        speed = 1.5f;
+        speed = speed * 1.2f;
         speedCd = t;
         speedCheck = true;
     }
@@ -1010,7 +1022,7 @@ public class MasterScript : MonoBehaviour {
     public void powerSlow(float t)
     {
         origSpeed = speed;
-        speed = 0.8f;
+        speed = speed * 0.8f;
         slowCd = t;
         slowCheck = true;
     }
