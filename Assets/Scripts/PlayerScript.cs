@@ -88,7 +88,7 @@ public class PlayerScript : MonoBehaviour
                 _masterScript.queue.Remove(ss.gameObject);
                 Destroy(ss.gameObject);
                 _masterScript.score += 1;
-                _masterScript.Shoot();
+                //_masterScript.Shoot();
                 _masterScript.addNextCube();
             } 
         }
