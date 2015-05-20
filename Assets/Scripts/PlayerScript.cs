@@ -90,6 +90,11 @@ public class PlayerScript : MonoBehaviour
                 _masterScript.score += 1;
                 //_masterScript.Shoot(Random.Range(0,3));
                 _masterScript.addNextCube();
+            } else
+            {
+                SpriteRenderer sr = other.gameObject.GetComponent<SpriteRenderer>();
+                if (sr != null)
+                    sr.color = new Color(1.0f, 1.0f, 1.0f, 0.0f);
             } 
         }
     }
