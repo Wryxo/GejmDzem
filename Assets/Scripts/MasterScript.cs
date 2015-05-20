@@ -921,27 +921,27 @@ public class MasterScript : MonoBehaviour {
         if (powerCd <= 0.0f)
         {
             Instantiate(Resources.Load("Prefabs/GenericPowerup", typeof(GameObject)));
-            powerCd = Random.Range(15.0f, 20.0f);
+            powerCd = Random.Range(7.0f, 12.0f);
         }
-        else if ((powerCd > 5.0f) && (tierCd <= 0.0f))
+        else if ((powerCd > 2.0f) && (tierCd <= 0.0f))
         {
             if (!_combo3Active)
             {
                 GameObject gp = (GameObject) Instantiate(Resources.Load("Prefabs/GenericPowerup", typeof (GameObject)));
                 gp.GetComponent<PowerupScript>().power = PowerupScript.PowerType.TierOne;
-                tierCd = 20.0f;
+                tierCd = 10.0f;
             }
             else if (!_combo4Active)
             {
                 GameObject gp = (GameObject) Instantiate(Resources.Load("Prefabs/GenericPowerup", typeof (GameObject)));
                 gp.GetComponent<PowerupScript>().power = PowerupScript.PowerType.TierTwo;
-                tierCd = 40.0f;
+                tierCd = 20.0f;
             }
             else if (!_combo5Active)
             {
                 GameObject gp = (GameObject) Instantiate(Resources.Load("Prefabs/GenericPowerup", typeof (GameObject)));
                 gp.GetComponent<PowerupScript>().power = PowerupScript.PowerType.TierThree;
-                tierCd = 60.0f;
+                tierCd = 30.0f;
             }
             else
             {
@@ -1016,7 +1016,7 @@ public class MasterScript : MonoBehaviour {
             diffRange++;
             if (diffRange > 6)
                 diffRange = 6;
-            rangeCd = 15.0f;
+            rangeCd = 5.0f;
         }
     }
 
