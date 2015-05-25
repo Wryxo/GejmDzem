@@ -1,33 +1,21 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class BackgroundScript : MonoBehaviour {
-    public float Speed = 0.05f;
-    private MasterScript _masterScript;
-    private float _horzExtent;
+public class BackgroundScript : MonoBehaviour
+{
+    public float scrollSpeed;
+    public float tileSizeZ;
 
-    // Use this for initialization
-    public float GetHorzExtent()
+    private Vector3 startPosition;
+
+    void Start()
     {
-        return Camera.main.orthographicSize * Screen.width / Screen.height;
+        startPosition = transform.position;
     }
 
-    void Start () {        
-        _horzExtent = GetHorzExtent();
-    }
-	void FixedUpdate()
+    void Update()
     {
-        transform.position += new Vector3(-Speed, 0, 0);
-        if (transform.position.x < -_horzExtent)
-        {
-            var pos = new Vector3(3 * _horzExtent, transform.position.y, transform.position.z);
-            transform.position = pos;
-           
-        }
+        float newPosition = Mathf.Repeat(Time.time * scrollSpeed, tileSizeZ);
+        transform.position = startPosition + Vector3.left * newPosition;
     }
-
-	// Update is called once per frame
-	void Update () {
-	
-	}
 }
