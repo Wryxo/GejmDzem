@@ -23,6 +23,8 @@ public class SquareScript : MonoBehaviour {
 
     private bool clicked;
 
+    private bool fix_mouse_over=false;
+
     // Use this for initialization
     void Start () {
         _transform = GetComponent<Transform>();
@@ -46,6 +48,28 @@ public class SquareScript : MonoBehaviour {
         {
             Debug.Log(colorsRight.Length);
         }*/
+        if (fix_mouse_over && Input.GetMouseButton(0)) clicked = true;
+        if (fix_mouse_over && !zamok && !_masterScript.pause)
+        {
+            if (Input.GetMouseButtonDown(1))
+            {
+                var tmp = colorsLeft[set];
+                colorsLeft[set] = colorsRight[set];
+                colorsRight[set] = tmp;
+
+                var tmpc = childLeft.color;
+                childLeft.color = childRight.color;
+                childRight.color = tmpc;
+
+                checkWalkable();
+                ancestor.checkWalkable();
+
+                /*if (power != null)
+                {
+                    power.checkPlatform();
+                }*/
+            }
+        }
     }
 
     void FixedUpdate()
@@ -82,6 +106,7 @@ public class SquareScript : MonoBehaviour {
 
     void OnMouseExit()
     {
+        fix_mouse_over = false;
         if (clicked) {
             clicked = false;
             var tmp = colorsLeft[set];
@@ -104,6 +129,7 @@ public class SquareScript : MonoBehaviour {
 
     void OnMouseOver()
     {
+        fix_mouse_over = true;
         if (!_masterScript.pause)
         {
             if (!zamok)
@@ -128,24 +154,24 @@ public class SquareScript : MonoBehaviour {
                 {
                     clicked = true;
                 }
-                if (Input.GetMouseButtonDown(1))
-                {
-                    var tmp = colorsLeft[set];
-                    colorsLeft[set] = colorsRight[set];
-                    colorsRight[set] = tmp;
+                /* if (Input.GetMouseButtonDown(1))
+                 {
+                     var tmp = colorsLeft[set];
+                     colorsLeft[set] = colorsRight[set];
+                     colorsRight[set] = tmp;
 
-                    var tmpc = childLeft.color;
-                    childLeft.color = childRight.color;
-                    childRight.color = tmpc;
+                     var tmpc = childLeft.color;
+                     childLeft.color = childRight.color;
+                     childRight.color = tmpc;
 
-                    checkWalkable();
-                    ancestor.checkWalkable();
+                     checkWalkable();
+                     ancestor.checkWalkable();
 
-                    /*if (power != null)
-                    {
-                        power.checkPlatform();
-                    }*/
-                }
+                     /*if (power != null)
+                     {
+                         power.checkPlatform();
+                     }
+                 }*/
             }
         }
     }

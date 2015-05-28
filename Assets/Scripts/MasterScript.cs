@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Text;
 using UnityEngine;
 using System.Collections.Generic;
@@ -79,6 +80,8 @@ public class MasterScript : MonoBehaviour {
     bool combo4Done = false;
     bool combo5Done = false;
     private Sprite[] _animalsSprites;
+
+    private List<int> validColors=new List<int>(); 
 
     public void LoadScene(string scene)
     {
@@ -203,6 +206,7 @@ public class MasterScript : MonoBehaviour {
         cube.GetComponent<Transform>().position = new Vector3(1.5f + (2 * ssc.childLeft.bounds.size.x), 0, 0);
         cube.GetComponent<Transform>().localScale = new Vector3(cubeSize, cubeSize, 0);
         queue.Add(cube);
+        validColors.Add(ssc2.colorsRight[0]);
         for (int i = 0; i < _cubeCount / 2; i++)
         {
             addNextCube();
@@ -239,11 +243,25 @@ public class MasterScript : MonoBehaviour {
             left[i] = l;
             right[i] = r;
         }
+        /*
         left[Random.Range(0, size)] = _sanityLeft;
         right[Random.Range(0, size)] = _sanityRight;
         _sanityLeft = left[Random.Range(0, size)];
         _sanityRight = right[Random.Range(0, size)];
-
+        */
+        //valid colors check
+        List<int> newValidColors=new List<int>(); //could be hashset but for sizes up to 16 or so list has smaller overhead
+        for (int i=0;i<left.Length;i++)
+        {
+            if (validColors.Contains(left[i])) newValidColors.Add(right[i]);
+            if (validColors.Contains(right[i])) newValidColors.Add(left[i]);
+        }
+        if (newValidColors.Count == 0)
+        {
+            right[0] = validColors[0];
+            newValidColors.Add(left[0]);
+        }
+        validColors = newValidColors;
         GameObject cube = (GameObject) Instantiate(Resources.Load("Prefabs/Square", typeof (GameObject)));
         SquareScript ssc = cube.GetComponent<SquareScript>();
         ssc.colorsLeft = new int[size];
